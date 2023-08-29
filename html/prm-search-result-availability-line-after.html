@@ -1,0 +1,46 @@
+<div ng-if="vm.hathiTrustItem.orig" class="hvdHathiViewOnline_div">
+    <a ng-if="vm.hathiTrustItem.fullview && !vm.isSerial" href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvdHathiViewOnline hvd_hathi_ft_stats">
+        <span>Online Access</span>
+    </a>
+    <!-- since serials may be only partially digitzed, don't display Online Access even if some volumes are online; instead display Limited search -->
+    <a ng-if="vm.hathiTrustItem.fullview && vm.isSerial" href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvd_hathi_lim_stats">
+        <span>Limited search in HathiTrust</span>
+    </a>
+    <a ng-if="!vm.hathiTrustItem.fullview" href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvd_hathi_lim_stats">        
+        <span ng-if="!vm.hathiTrustItem.fullview">Limited search in HathiTrust</span>  
+    </a>
+</div>
+
+<div ng-if="vm.TOC.display" class="hvd_TOC_link">
+    <a href="https://secure.syndetics.com/index.aspx?isbn={{vm.TOC.isbn}}/TOC.HTML&client=harvard&type=rn12" target="_blank" class="hvd_TOC_stats">
+        <span>Table of Contents</span>        
+    </a>
+</div>
+
+<div ng-if="vm.OpenLib.display" class="hvd_OL_link">
+    <a href="{{vm.OpenLib.previewURL}}" target="_blank" class="hvd_OL_stats">
+        <span>READ ONLINE (1 HOUR LOAN)</span>        
+    </a>
+</div>
+
+<div ng-if="vm.parentCtrl.isFullView && vm.itemPNX.pnx.display.lds40">
+    <div class="bold-text">Geographic coverage</div>
+    <div id="hglMap12" class="customMap"></div>
+</div>
+
+<!-- this is a custom directive written by Stack Map for us to support Map It link for multiple libraries  -->
+<prm-sm-more-records parent-ctrl="vm.parentCtrl"></prm-sm-more-records> 
+
+
+<div ng-if="vm.FAlink" class="hvd_EAD_link">
+    <a href="{{vm.FAlink}}" class="hvd_EAD_stats">
+        <img src="/primo-explore/custom/01HVD_INST-HVD2/img/folder_open_white_24dp.svg" aria-label="Finding Aid"></img>
+        <span>Finding Aid</span>        
+    </a>
+</div>
+
+<!-- start browzine code from vendor
+see custom-browzine.js for controller details
+--> 
+<browzine parent-ctrl="vm.parentCtrl"></browzine>
+<!-- end browzine code from vendor --> 
