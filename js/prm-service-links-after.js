@@ -82,7 +82,7 @@
         bindings:{parentCtrl:'<'},
         controller: 'prmServiceLinksAfterCtrl',
         controllerAs:'vm',
-        templateUrl:'/primo-explore/custom/HVD2/html/prm-service-links-after.html'
+        templateUrl:'/discovery/custom/01HVD_INST-HVD2/html/prm-service-links-after.html'
     });
 
 })();

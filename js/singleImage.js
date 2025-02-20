@@ -6,7 +6,7 @@
 
 angular.module('viewCustom')
     .component('singleImage', {
-        templateUrl:'/primo-explore/custom/HVD2/html/singleImage.html',
+        templateUrl:'/discovery/custom/01HVD_INST-HVD2/html/singleImage.html',
         bindings: {
           src:'<',
           imgtitle: '<',
@@ -90,7 +90,7 @@ angular.module('viewCustom')
                 var params={'vid':'','targetURL':''};
                 params.vid=vm.params.vid;
                 params.targetURL=$window.location.href;
-                var url='/primo-explore/login?from-new-ui=1&authenticationProfile='+auth.authenticationMethods[0].profileName+'&search_scope=default_scope&tab=default_tab';
+                var url='/discovery/login?from-new-ui=1&authenticationProfile='+auth.authenticationMethods[0].profileName+'&search_scope=default_scope&tab=default_tab';
                 //url+='&Institute='+auth.authenticationService.userSessionManagerService.userInstitution+'&vid='+params.vid;
                 url+='&Institute='+auth.userSessionManagerService.userInstitution+'&vid='+params.vid;
                 if(vm.params.offset) {

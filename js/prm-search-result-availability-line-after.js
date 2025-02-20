@@ -206,7 +206,7 @@ angular.module('viewCustom')
                             zoomInTitle: 'Zoom in',
                             zoomOutText: '<i class="iconMapFontSize">-</i>',
                             zoomOutTitle: 'Zoom out',
-                            zoomHomeText: '<img class="iconHome" src="/primo-explore/custom/HVD2/img/ic_home_black_18px.svg"/>',
+                            zoomHomeText: '<img class="iconHome" src="/discovery/custom/01HVD_INST-HVD2/img/ic_home_black_18px.svg"/>',
                             zoomHomeTitle: 'Zoom home'
                         },
 
@@ -318,5 +318,5 @@ angular.module('viewCustom')
         bindings:{parentCtrl:'<'},
         controller: 'prmSearchResultAvailabilityLineAfterCtrl',
         controllerAs:'vm',
-        templateUrl:'/primo-explore/custom/HVD2/html/prm-search-result-availability-line-after.html'
+        templateUrl:'/discovery/custom/01HVD_INST-HVD2/html/prm-search-result-availability-line-after.html'
     });
