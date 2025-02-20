@@ -6,7 +6,7 @@
 
 angular.module('viewCustom')
     .component('singleImage', {
-        templateUrl:'/discovery/custom/01HVD_INST-HVD2/html/singleImage.html',
+        templateUrl:'/primo-explore/custom/HVD2/html/singleImage.html',
         bindings: {
           src:'<',
           imgtitle: '<',
@@ -40,7 +40,30 @@ angular.module('viewCustom')
                 
                 vm.localScope={'imgClass':'','loading':true,'hideLockIcon':false};
                 if(vm.src && vm.showImage) {
-                    const url = sv.getHttps(vm.src) + '?buttons=Y';
+                    vm.items={};
+                    vm.urn = vm.src.split('/').pop();
+                    const restUrl = 'https://embed.lib.harvard.edu/api/nrs'
+                    var params={'urn':vm.urn,'prod':1}
+                    sv.getAjax(restUrl,params,'get')
+                    .then(function (result) {
+                        vm.items=result.data;
+                        vm.iframeHtml = vm.items.html;
+                        const doc = new DOMParser().parseFromString(vm.iframeHtml, 'text/html');
+                        const element = doc.body.children[0];
+                        vm.iframeAttributes = {};
+                        for (var i = 0; i < element.attributes.length; i++) {
+                            var attrib = element.attributes[i];
+                            if (attrib.name == 'src') {
+                                vm.iframeAttributes[attrib.name] = $sce.trustAsResourceUrl(attrib.value);
+                            }
+                            else {
+                                vm.iframeAttributes[attrib.name] = attrib.value;  
+                            }
+                        }                 
+                    },function (err) {
+                        console.log(err);
+                    });
+                    const url = sv.getHttps(vm.src) + '?buttons=y';
                     vm.imageUrl = $sce.trustAsResourceUrl(url);
                 }
                 vm.localScope.loading=false;
@@ -67,7 +90,7 @@ angular.module('viewCustom')
                 var params={'vid':'','targetURL':''};
                 params.vid=vm.params.vid;
                 params.targetURL=$window.location.href;
-                var url='/discovery/login?from-new-ui=1&authenticationProfile='+auth.authenticationMethods[0].profileName+'&search_scope=default_scope&tab=default_tab';
+                var url='/primo-explore/login?from-new-ui=1&authenticationProfile='+auth.authenticationMethods[0].profileName+'&search_scope=default_scope&tab=default_tab';
                 //url+='&Institute='+auth.authenticationService.userSessionManagerService.userInstitution+'&vid='+params.vid;
                 url+='&Institute='+auth.userSessionManagerService.userInstitution+'&vid='+params.vid;
                 if(vm.params.offset) {

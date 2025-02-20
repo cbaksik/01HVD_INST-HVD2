@@ -13,7 +13,7 @@
 
         vm.$onChanges=function () {
             // re-construct json obj if lds41 is existed
-            console.log(vm.item.pnx.display);
+            //console.log(vm.item.pnx.display);
             if(vm.item.pnx.display.lds41) {
                 let lds41=vm.item.pnx.display.lds41;
                 for(let i=0; i < lds41.length; i++){

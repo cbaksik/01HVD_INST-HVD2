@@ -1,6 +1,7 @@
 /**
  * Created by samsan on 10/13/17.
  */
+
 angular.module('viewCustom')
     .service('customMapXmlValues',[function () {
         var serviceObj = {};
@@ -28,55 +29,89 @@ angular.module('viewCustom')
 
 
         // get associatedName value
-        serviceObj.getAssociatedName=function (nodeValue) {
-            var str='';
-            var name='';
-            var dates='';
-            var role='';
-            var keys = Object.keys(nodeValue);
-            for(var i=0; i < keys.length; i++) {
-                var nodeKey=keys[i];
-                var values=nodeValue[nodeKey];
-                if(values) {
-                    var nodeKeys = Object.keys(values);
-                    var index = nodeKeys.indexOf('nameElement');
-                    var index2 = nodeKeys.indexOf('dates');
-                    var index3 = nodeKeys.indexOf('role');
-                    if (index !== -1) {
-                        name = values['nameElement'];
-                        if (Array.isArray(name)) {
-                            name = name[0]['_text'];
-                        }
-
+        serviceObj.getAssociatedName = function (nodeValue) {
+            var result = '';
+        
+            function processNodeValues(values) {
+                var name = Array.isArray(values.nameElement) ? values.nameElement[0]._text : values.nameElement;
+                var dates = Array.isArray(values.dates) ? ', ' + values.dates[0]._text : values.dates;
+                var role = Array.isArray(values.role) ? ' [' + values.role[0]._text + ']' : values.role;
+        
+                return name + (dates || '') + (role || '') + '<br/>';
+            }
+        
+            if (nodeValue && typeof nodeValue === 'object') {
+                if (Array.isArray(nodeValue)) {
+                    for (var i = 0; i < nodeValue.length; i++) {
+                        result += processNodeValues(nodeValue[i]);
                     }
-
-                    if (index2 !== -1) {
-                        dates = values['dates'];
-                        if (Array.isArray(dates)) {
-                            dates = dates[0]['_text'];
-                        }
-                        if (dates) {
-                            dates = ', ' + dates;
-                        }
-
-                    }
-
-                    if (index3 !== -1) {
-                        role = values['role'];
-                        if (Array.isArray(role)) {
-                            role = ' [' + role[0]['_text'] + ']';
-                        }
-                        str += name + dates + role + '<br/>';
-                    } else {
-                        str += name + dates + '<br/>';
-                    }
+                } else {
+                    result += processNodeValues(nodeValue);
                 }
+            }
+        
+            if (result) {
+                result = result.replace(/<br\/>$/, '');
+            }
+        
+            return result;
+        };
+        
+        // get hvd_SubjectName
+        serviceObj.getHvdSubjectName = function (nodeValue) {
+            var result = '';
+            console.log("getHvdSubjectName");
+        
+            function processNodeValues(values) {
+                var name = Array.isArray(values.nameElement) ? values.nameElement[0]._text : values.nameElement;
+                var dates = Array.isArray(values.dates) ? ', ' + values.dates[0]._text : values.dates;
+                var place = Array.isArray(values.place) ? ' [' + values.place[0]._text + ']' : values.place;
+        
+                return name + (dates || '') + (place || '') + '<br/>';
+            }
+        
+            if (nodeValue && typeof nodeValue === 'object') {
+                if (Array.isArray(nodeValue)) {
+                    for (var i = 0; i < nodeValue.length; i++) {
+                        result += processNodeValues(nodeValue[i]);
+                    }
+                } else {
+                    result += processNodeValues(nodeValue);
+                }
+            }
+        
+            if (result) {
+                result = result.replace(/<br\/>$/, '');
+            }
+        
+            return result;
+        };
 
+        // get hvd_SubjectPlace
+        serviceObj.getHvdSubjectPlace = function (nodeValue) {
+            var result = '';
+        
+            function processNodeValues(values) {
+                var place = Array.isArray(values.place) ? values.place[0]._text : values.place;
+        
+                return place + '<br/>';
             }
-            if(str) {
-                str=str.replace(/<br\/>$/,'');
+        
+            if (nodeValue && typeof nodeValue === 'object') {
+                if (Array.isArray(nodeValue)) {
+                    for (var i = 0; i < nodeValue.length; i++) {
+                        result += processNodeValues(nodeValue[i]);
+                    }
+                } else {
+                    result += processNodeValues(nodeValue);
+                }
             }
-            return str;
+        
+            if (result) {
+                result = result.replace(/<br\/>$/, '');
+            }
+        
+            return result;
         };
 
         // get image ID
@@ -251,6 +286,12 @@ angular.module('viewCustom')
                     case 'associatedName':
                         text = serviceObj.getAssociatedName(values);
                         break;
+                    case 'hvd_subjectName':
+                        text = serviceObj.getHvdSubjectName(values);
+                        break;                       
+                    case 'hvd_subjectPlace': 
+                        text = serviceObj.getHvdSubjectPlace(values);
+                        break;   
                     case '_attr':
                         text = serviceObj.getAttr(values);
                         break;
@@ -263,7 +304,7 @@ angular.module('viewCustom')
                         text = serviceObj.getTopic(values);
                         break;
                     case 'notes':
-                    case 'workType':    
+                    case 'workType':       
                     case 'description':    
                         text = serviceObj.getNotesEtc(values);
                         break;
@@ -416,9 +457,8 @@ angular.module('viewCustom')
             } else {
                 text=obj;
             }
-
             return text;
-        };
 
+        };
         return serviceObj;
     }]);
