@@ -1536,10 +1536,10 @@ prm-search-result-frbr-line .button-content span.prm-notice span[translate='nui.
 prm-search-result-frbr-line button > prm-icon > md-icon {
     display:none;
 }
-prm-search-result-thumbnail-container img.fan-img-2[src="custom/HVD2/img/icon_versions.png"] {
+prm-search-result-thumbnail-container img.fan-img-2[src="custom/01HVD_INST-HVD2/img/icon_versions.png"] {
     display:none;
 }
-prm-search-result-thumbnail-container img.fan-img-3[src="custom/HVD2/img/icon_versions.png"] {
+prm-search-result-thumbnail-container img.fan-img-3[src="custom/01HVD_INST-HVD2/img/icon_versions.png"] {
     display:none;
 }
 /* this line has upper case -Versions-, which controls opened cluster list*/
