@@ -206,9 +206,9 @@ div.search-actions > .md-button.button-confirm:hover {
     color:#000000;
 }
 /* hide switch to adv search from basic, b/c in top bar now */
-.search-switch-buttons .switch-to-advanced {
+/* .search-switch-buttons .switch-to-advanced {
     display:none;
-}
+} */
 prm-search-bookmark-filter .md-button {
     background-color:#44707b;
 }

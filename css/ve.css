@@ -1,7 +1,6 @@
 /* LOCAL BANNER */
-prm-explore-main::before {
+/* prm-explore-main::before {
     content: "This site has not been configured for Harvard. It is not ready for review.";
-    /* display: inline-block; */
     z-index: 9999;
     background: #ddff00;
     text-align: center;
@@ -15,7 +14,6 @@ prm-explore-main::before {
 }
 prm-full-view-page::before {
     content: "This site has not been configured for Harvard. It is not ready for review.";
-    /* display: inline-block; */
     z-index: 9999;
     background: #ddff00;
     text-align: center;
@@ -26,7 +24,7 @@ prm-full-view-page::before {
     font-size:30px;
     position:fixed;
     top: 0px;
-}
+} */
 /* END local banner */
 /* for alma digital viewer */
 prm-alma-viewer prm-topbar > div.top-nav-bar {
