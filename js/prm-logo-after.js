@@ -9,7 +9,7 @@ angular.module('viewCustom')
         var brokenLink = [];        
         var currentURL = '';
         //var pageTitle = '';
-        vm.$onInit=function () {
+        /* vm.$onInit=function () {
             brokenLink = document.querySelectorAll("a[href^='https://asklib-its-harvard.libanswers.com/form?queue_id=6017']");
             //pageTitle = document.getElementById('ogTitle').getAttribute('content');            
             //console.log(brokenLink[0].href);
@@ -17,7 +17,7 @@ angular.module('viewCustom')
             //pageTitle = encodeURIComponent(window.document.title);
             //console.log(pageTitle);
             brokenLink[0].href = brokenLink[0].href + '&referrer=' + currentURL;
-        };
+        }; */
 
     }]);
 

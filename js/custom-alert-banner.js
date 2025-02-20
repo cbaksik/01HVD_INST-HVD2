@@ -2,6 +2,7 @@
  * Created by mferrarini on 2/19/22.
  * This custom alert banner component is used to display general alerts for the library (i.e. snow closings)
  * If you need to turn off or on, just set status in json file to on or off
+ * 
  */
 
 (function () {

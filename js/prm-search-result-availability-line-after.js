@@ -33,7 +33,7 @@ angular.module('viewCustom')
                 //console.log("test for toc");
                 param.isbn = vm.itemPNX.pnx.addata.isbn[0];
                  /* fetch chained response to get data (first response is not actual data yet) */
-                    fetch(tocUrl+param.isbn+'/xml.xml&client=harvard&type=xw10', {                        
+                    fetch(tocUrl+param.isbn+'/toc.xml&client=harvard&type=xw10', {                        
                         method: 'GET',
                         headers: {
                             'Accept': '*/*'
@@ -48,8 +48,8 @@ angular.module('viewCustom')
                             //console.log(response.headers); 
                             return response.text();
                         })
-                        .then(function (data) {                                                      
-                            if (data.substr(0,5) == '<?xml') {                                
+                        .then(function (data) {  
+                            if (data.substr(0,7) == '<USMARC') {                                
                                 vm.TOC.display = true;
                                 vm.TOC.isbn = param.isbn;
                             }
@@ -65,7 +65,11 @@ angular.module('viewCustom')
             if (vm.itemPNX.pnx.display.type[0] === vm.OpenLib.rtype && vm.itemPNX.pnx.addata.isbn) {
                 var param={'isbn':'','hasData':false};
                 param.isbn = vm.itemPNX.pnx.addata.isbn[0];
-                    fetch(openLibUrl+param.isbn+'&format=json&jscmd=viewapi', {                        
+                var ourTitle = vm.itemPNX.pnx.addata.btitle[0].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g,"").toLowerCase().substring(0,10);
+                //console.log('ours: '+ourTitle);
+                    //fetch(openLibUrl+param.isbn+'&format=json&jscmd=viewapi', {                        
+                // trying jscmd = details to get title in addition to borrow status so i can perform remedial check that it's the same title before presenting link; sometimes the isbn request returns the wrong book b/c openLib is also searching 020$z
+                    fetch(openLibUrl+param.isbn+'&format=json&jscmd=details', {                        
                         method: 'GET',
                         headers: {
                             'Accept': '*/*'
@@ -78,14 +82,16 @@ angular.module('viewCustom')
                             var objKey = (Object.keys(data)); 
                             var objKeyValue = objKey[0]; 
                             var openLibPreview = data[objKeyValue].preview;                                              
-                            if (openLibPreview === 'borrow') {
+                            var openLibTitle = data[objKeyValue].details.title.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g,"").toLowerCase().substring(0,10); 
+                            //console.log('openlib: '+openLibTitle);                                             
+                            if (openLibPreview === 'borrow' && openLibTitle === ourTitle) {
                                 vm.OpenLib.display = true;
                                 vm.OpenLib.infoURL = data[objKeyValue].info_url;
                                 vm.OpenLib.previewURL = data[objKeyValue].preview_url;   
                             } 
                         })
                         .catch(function (err) {
-                            console.log("Open Library call did  not work", err);
+                            //console.log("Open Library call did  not work", err);
                         });
           }
         };
@@ -171,13 +177,13 @@ angular.module('viewCustom')
             } else {
                 vm.isSerial=false;
             }
-            console.log(vm.isSerial);
+            //console.log(vm.isSerial);
             if(vm.itemPNX.pnx.display.lds40 && vm.parentCtrl.isFullView) {
                 $timeout(function () {
                     vm.coordinates = cs.buildCoordinatesArray(vm.itemPNX.pnx.display.lds40[0]);
                     vm.centerLongitude = (vm.coordinates[0] + vm.coordinates[1]) / 2;
                     vm.centerLatitude = (vm.coordinates[2] + vm.coordinates[3]) / 2;
-                    console.log(vm.coordinates);
+                    //console.log(vm.coordinates);
 
                     var zoom=3;
                     map=L.map('hglMap12',{center:[vm.centerLatitude, vm.centerLongitude],
@@ -200,7 +206,7 @@ angular.module('viewCustom')
                             zoomInTitle: 'Zoom in',
                             zoomOutText: '<i class="iconMapFontSize">-</i>',
                             zoomOutTitle: 'Zoom out',
-                            zoomHomeText: '<img class="iconHome" src="/discovery/custom/01HVD_INST-HVD2/img/ic_home_black_18px.svg"/>',
+                            zoomHomeText: '<img class="iconHome" src="/primo-explore/custom/HVD2/img/ic_home_black_18px.svg"/>',
                             zoomHomeTitle: 'Zoom home'
                         },
 
@@ -312,5 +318,5 @@ angular.module('viewCustom')
         bindings:{parentCtrl:'<'},
         controller: 'prmSearchResultAvailabilityLineAfterCtrl',
         controllerAs:'vm',
-        templateUrl:'/discovery/custom/01HVD_INST-HVD2/html/prm-search-result-availability-line-after.html'
+        templateUrl:'/primo-explore/custom/HVD2/html/prm-search-result-availability-line-after.html'
     });

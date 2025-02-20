@@ -5,13 +5,13 @@
  */
 
 
-(function() {
+// (function() {
 
-    var chat = document.createElement('script'); chat.type = 'text/javascript'; chat.async = 'true';
+//     var chat = document.createElement('script'); chat.type = 'text/javascript'; chat.async = 'true';
 
-    chat.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ask.library.harvard.edu/load_chat.php?hash=10372f999a1c3953ffde50858ead4611';
+//     chat.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ask.library.harvard.edu/load_chat.php?hash=10372f999a1c3953ffde50858ead4611';
 
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(chat, s);
+//     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(chat, s);
 
-    })();
+//     })();
 

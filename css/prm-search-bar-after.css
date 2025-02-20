@@ -1,6 +1,5 @@
 /* search bar padding */
 prm-search-bar > div:first-child > div:first-child > div:first-child,
-prm-search-bar .search-switch-buttons,
 prm-search-bar .search-wrapper > div:last-child {
   display: none !important;
 }
