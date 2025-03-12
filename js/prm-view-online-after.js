@@ -21,14 +21,13 @@
         vm.photo = {}; // single image
         vm.jp2 = false;
         vm.imageTitle = '';
-        vm.auth = sv.getAuth();
         vm.gridColumn='3'; // default print view size
         vm.pnxControlSourceId='HVD_VIA'; // display only pnx control sourceid of HVD_VIA
         vm.pnxControlSourceIdFlag=false;
         //console.log("prm-view-online-after.js");
 
         vm.$onInit=function() {
-            vm.isLoggedIn=sv.getLogInID();
+            
            // get item data from service
            itemData=sv.getItem();
            vm.item=itemData.item;
@@ -49,7 +48,6 @@
                    vm.singleImageFlag=true;
                    if (vm.item.mis1Data.image) {
                        vm.photo=vm.item.mis1Data.image[0];
-                       vm.jp2=sv.findJP2(vm.photo); // check to see if the image is jp2 or not
                    }
                    if(vm.item.mis1Data.title) {
                        vm.imageTitle = vm.item.mis1Data.title[0].textElement[0]._text;
