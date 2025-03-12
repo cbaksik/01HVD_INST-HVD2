@@ -10,7 +10,7 @@
         .controller('customAlertBannerCtrl',['customService','$scope', '$document', function (customService, $scope, $document) {
             let vm=this;
             let cs=customService;
-            vm.apiUrl={};
+            // vm.apiUrl={};
             vm.alertBannerMsg={};
 
             $scope.class = "showAlert"
@@ -20,21 +20,21 @@
                 alertBanner.remove();;
             };
 
-            vm.$onInit=()=> {
-                vm.apiUrl=cs.getApi();
-                $scope.$watch('vm.apiUrl.alertBannerUrl',()=>{
-                   if(vm.apiUrl.alertBannerUrl) {
-                       cs.getAjax(vm.apiUrl.alertBannerUrl,'','get')
-                           .then((res)=>{
-                                vm.alertBannerMsg = res.data;
-                           },
-                               (err)=>{
-                                    console.log(err);
-                               }
-                           )
-                   }
-                });
-            };
+            // vm.$onInit=()=> {
+            //     vm.apiUrl=cs.getApi();
+            //     $scope.$watch('vm.apiUrl.alertBannerUrl',()=>{
+            //        if(vm.apiUrl.alertBannerUrl) {
+            //            cs.getAjax(vm.apiUrl.alertBannerUrl,'','get')
+            //                .then((res)=>{
+            //                     vm.alertBannerMsg = res.data;
+            //                },
+            //                    (err)=>{
+            //                         console.log(err);
+            //                    }
+            //                )
+            //        }
+            //     });
+            // };
             
         }]);
 

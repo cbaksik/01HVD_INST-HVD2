@@ -4,10 +4,9 @@
 
 
 angular.module('viewCustom')
-    .controller('prmSearchResultAvailabilityLineAfterCtrl',['customMapService','$timeout','customHathiTrustService','customService','$q','prmSearchService',function (customMapService,$timeout, customHathiTrustService,customService, $q, prmSearchService) {
+    .controller('prmSearchResultAvailabilityLineAfterCtrl',['$timeout','customHathiTrustService','customService','$q','prmSearchService',function ($timeout, customHathiTrustService,customService, $q, prmSearchService) {
         var vm=this;
         var custService=customService;
-        var cs=customMapService;
         var chts=customHathiTrustService;
         var prmsv=prmSearchService;
         // display of table of content
@@ -95,16 +94,16 @@ angular.module('viewCustom')
         };
 
         // find if pnx had EAD finding aid link
-        vm.findFindingAid=function () {
-            var ead = '';
-            var eadURN = '';
-            if (vm.itemPNX.pnx.links.linktofa) {
-                ead = vm.itemPNX.pnx.links.linktofa[0];
-                ead=ead.slice(3);
-                eadURN = ead.replace(' $$Elinktofa','');
-                vm.FAlink=eadURN;
-          }
-        };
+        // vm.findFindingAid=function () {
+        //     var ead = '';
+        //     var eadURN = '';
+        //     if (vm.itemPNX.pnx.links.linktofa) {
+        //         ead = vm.itemPNX.pnx.links.linktofa[0];
+        //         ead=ead.slice(3);
+        //         eadURN = ead.replace(' $$Elinktofa','');
+        //         vm.FAlink=eadURN;
+        //   }
+        // };
 
 
         // hathitrust, this is also used for openlibrary since it needs same identifiers, isbn and oclcid
@@ -127,7 +126,7 @@ angular.module('viewCustom')
             // get table of content
             vm.findTOC();
             vm.findOpenLib();
-            vm.findFindingAid();
+            // vm.findFindingAid();
             if(vm.itemPNX.pnx.display.type[0] == 'journal') {
                 vm.isSerial=true;
             } else {
@@ -137,11 +136,11 @@ angular.module('viewCustom')
 
 
             // validate Hathi Trust to see if it is existed
-            vm.hathiTrust=chts.validateHathiTrust(vm.itemPNX);
-            vm.hathiTrustItem={};
-            if(vm.hathiTrust.flag) {
-                vm.getHathiTrustData();
-            }
+            // vm.hathiTrust=chts.validateHathiTrust(vm.itemPNX);
+            // vm.hathiTrustItem={};
+            // if(vm.hathiTrust.flag) {
+            //     vm.getHathiTrustData();
+            // }
 
         };
 

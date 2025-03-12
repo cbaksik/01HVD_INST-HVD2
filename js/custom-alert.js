@@ -9,24 +9,24 @@
         .controller('customAlertCtrl',['customService','$scope',function (customService, $scope) {
             let vm=this;
             let cs=customService;
-            vm.apiUrl={};
+            // vm.apiUrl={};
             vm.alertMsg={};
 
-            vm.$onInit=()=> {
-                vm.apiUrl=cs.getApi();
-                $scope.$watch('vm.apiUrl.alertUrl',()=>{
-                   if(vm.apiUrl.alertUrl) {
-                       cs.getAjax(vm.apiUrl.alertUrl,'','get')
-                           .then((res)=>{
-                                vm.alertMsg = res.data;
-                           },
-                               (err)=>{
-                                    console.log(err);
-                               }
-                           )
-                   }
-                });
-            };
+            // vm.$onInit=()=> {
+            //     vm.apiUrl=cs.getApi();
+            //     $scope.$watch('vm.apiUrl.alertUrl',()=>{
+            //        if(vm.apiUrl.alertUrl) {
+            //            cs.getAjax(vm.apiUrl.alertUrl,'','get')
+            //                .then((res)=>{
+            //                     vm.alertMsg = res.data;
+            //                },
+            //                    (err)=>{
+            //                         console.log(err);
+            //                    }
+            //                )
+            //        }
+            //     });
+            // };
             
         }]);
 

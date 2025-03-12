@@ -42,21 +42,21 @@ angular.module('viewCustom')
         };
 
         /* test whether we want to call Hathi API, and if so, grab params we want to send */
-        serviceObj.validateHathiTrust=function (pnxItem) {
-          var item={'flag':false,'isbn':'','oclcid':'','data':{}};
-          if(pnxItem.pnx.control.sourceid && pnxItem.pnx.delivery.deliveryCategory && pnxItem.pnx.addata) {
-              if (pnxItem.pnx.control.sourceid[0] === '01HVD_ALMA' && pnxItem.pnx.delivery.delcategory[0] !== 'Online Resource' && pnxItem.pnx.delivery.delcategory[0] !== 'Alma-E' && pnxItem.pnx.delivery.delcategory[0] !== 'Alma-D') {
-                  item.flag = true;
-                  if(pnxItem.pnx.addata.oclcid) {
-                      item.oclcid=pnxItem.pnx.addata.oclcid[0];
-                  }
-                  if(pnxItem.pnx.addata.isbn){
-                      item.isbn=pnxItem.pnx.addata.isbn[0];
-                  }
-              }
-          }
-          return item;
-        };
+        // serviceObj.validateHathiTrust=function (pnxItem) {
+        //   var item={'flag':false,'isbn':'','oclcid':'','data':{}};
+        //   if(pnxItem.pnx.control.sourceid && pnxItem.pnx.delivery.deliveryCategory && pnxItem.pnx.addata) {
+        //       if (pnxItem.pnx.control.sourceid[0] === '01HVD_ALMA' && pnxItem.pnx.delivery.delcategory[0] !== 'Online Resource' && pnxItem.pnx.delivery.delcategory[0] !== 'Alma-E' && pnxItem.pnx.delivery.delcategory[0] !== 'Alma-D') {
+        //           item.flag = true;
+        //           if(pnxItem.pnx.addata.oclcid) {
+        //               item.oclcid=pnxItem.pnx.addata.oclcid[0];
+        //           }
+        //           if(pnxItem.pnx.addata.isbn){
+        //               item.isbn=pnxItem.pnx.addata.isbn[0];
+        //           }
+        //       }
+        //   }
+        //   return item;
+        // };
 
         // validate if orig data is harvard, if so, present our copy, otherwise present any full-view, else limited search
         serviceObj.validateHarvard=function (arrList) {
