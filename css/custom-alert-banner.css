@@ -1,4 +1,52 @@
 /* SITE ALERT BANNER */
+
+/* using alma banner feature */
+prm-banner-card-content {
+	font-family: "Trueno", sans-serif;
+	background-color: #f8c21c;
+	font-size: 15px;
+}
+prm-banner-card-content a:hover, 
+prm-banner-card-content a:focus {
+	background-image:none;
+	box-shadow: inset 0 -3px 0 0 rgba(30,30,30,0.5);
+	text-decoration: none;
+}
+.__gt-sm prm-banner-card-content a:hover .banner-subhead {
+	display:block;
+}
+prm-banner-card-content .banner-content md-card-title-text .bigger-title {
+	display:none;
+ }
+prm-banner-card-content .banner-content md-card-title md-card-title-text span {
+	color: #1e1e1e;
+	background-color:transparent;
+	line-height: 1.5em;
+	font-weight: 700;
+}
+prm-banner-card-content .banner-content md-card-title md-card-title-text span.banner-display-name  {
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 2.14px;
+}
+prm-banner-card-content .banner-content .url-text {
+	height: auto;
+	width: auto;
+	max-width: 185px;
+	position: relative;
+	right: 5px;
+	bottom: 15px;
+	padding: 5px 7px;
+	color: #1e1e1e;
+	background-color: transparent;
+	font-size: 15px;
+}
+prm-banner-card-content .banner-content .url-text prm-icon {
+	color:#1e1e1e;
+}
+/* end alma banner feature */
+
+
 .hl__site-alert-banner {
 	font-family: "Trueno", sans-serif;
   background-color: #f8c21c;

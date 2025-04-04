@@ -9,7 +9,7 @@
     .config(function ($stateProvider) {
         $stateProvider            
             .state('exploreMain.viewallcomponentdata', {
-                    url: '/viewallcomponentmetadata/:context/:docid',
+                    url: '/viewallcomponentmetadata/L/:docid',
                     views:{
                         '': {
                             template: `<custom-view-all-component-metadata parent-ctrl="$ctrl"></custom-view-all-component-metadata>`
@@ -19,7 +19,7 @@
 
             )
             .state('exploreMain.viewcomponent', {
-                    url:'/viewcomponent/:context/:docid',
+                    url:'/viewcomponent/L/:docid',
                     views:{
                         '':{
                             template:`<custom-view-component parent-ctrl="$ctrl" item="$ctrl.item" services="$ctrl.services" params="$ctrl.params"></custom-view-component>`
@@ -29,7 +29,7 @@
 
             )
             .state('exploreMain.printPage', {
-                    url: '/printPage/:context/:docid',
+                    url: '/printPage/L/:docid',
                     views:{
                         '': {
                             template: `<custom-print-page parent-ctrl="$ctrl"></custom-print-page>`
