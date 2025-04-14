@@ -431,6 +431,19 @@ prm-brief-result-container prm-snippet mark {
 prm-brief-result-container div.peer-reviewed-mark, prm-brief-result-container div.open-access-mark {
     display:none;
 }
+.hvd_TOC_link {
+	color:#414141;
+	position:relative;
+	margin-top: 6px;
+}
+.hvd_TOC_link svg {
+	margin-left: -3px;
+	vertical-align: bottom;
+	/* margin-top: -2px; */
+}
+/* .hvd_TOC_link span {
+	vertical-align: top;
+} */
 /* button changes per Feb 2022 redesign */
 prm-search-result-availability-line .md-button.neutralized-button {
     text-transform:uppercase;
@@ -565,7 +578,6 @@ prm-search-result-availability-line button prm-icon[icon-definition*="open-in-ne
 prm-search-result-availability-line button prm-icon[icon-definition*="chevron-right"] md-icon {
     display:none;
 }
-/* ...-after element applies syndetics TOC, hahti limited search */
 prm-search-result-availability-line-after div {
     margin: 10px 0;
     padding-bottom: 0em;
@@ -1119,6 +1131,28 @@ prm-full-view-service-container prm-view-online a prm-icon {
 prm-full-view-service-container prm-view-online a.arrow-link [link-arrow] {
     display:none;
 }
+/* line spacing between marc elements in VE */
+.full-view-section-content prm-service-details .section-body .spaced-rows>div {
+	margin-bottom: .4em;
+}
+.full-view-section-content prm-service-details .section-body .item-details-element div[role='listitem'] {
+	margin-bottom: 0.2em;
+}
+/* hvd-toc-fields refers to MARC 505 field in full bib display */
+.full-view-section-content div:has(+ span.hvd-toc-fields) {
+	margin-left:2px;
+}
+.full-view-section-content span.hvd-toc-fields:before {
+	content:"- ";
+	margin-left:-8px;
+}
+.full-view-section-content span.hvd-toc-fields {
+	margin-bottom: 0.4em;
+}
+.full-view-section-content span.hvd-toc-chapter:after {
+	content:"- ";
+	margin-left:-8px;
+}
 /* ava line at top */
 prm-full-view div.full-view-container prm-full-view-service-container prm-search-result-availability-line {
     display:block;
@@ -1182,7 +1216,7 @@ prm-action-list>md-nav-bar .md-nav-item .md-button {
 /* prm-action-list>md-nav-bar .md-nav-item .md-button prm-icon {
     min-width:100px;
 } */
-button#textsms, button#reportProb {
+button#reportProb {
     font-size: 10px;
     line-height: 14px;
     font-weight: 600;
@@ -1195,24 +1229,8 @@ button#textsms, button#reportProb {
     color:rgba(58,58,58,.8);
     width: 105px;
 }
-button#textsms:hover,button#textsms:focus,
 button#reportProb:hover,button#reportProb:focus {
     color:#fff;
-}
-md-card#textsms {
-    background-color:#f8f8f8;
-}
-md-card#textsms md-input-container {
-    margin-left:30px;
-    font-size:18px;
-    padding-bottom:10px
-}
-md-card#textsms md-list#smsLocation {
-    margin-left:20px;
-}
-p.textsms-danger {
-    color:red;
-    padding-bottom:10px;
 }
 button#PrintButtonFullView, button#PrintButton {
     margin-left:10px;
@@ -1326,7 +1344,6 @@ prm-search-bar .advanced-search-wrapper prm-advanced-search .search-string .stri
     background-repeat: no-repeat;
     background-position: bottom 4px right 4px;
     background-size:25px;
-
 }
 prm-advanced-search .advanced-search-output button.button-confirm {
     color:white;
@@ -1768,6 +1785,10 @@ prm-search-result-tool-bar md-toolbar .main-checkbox {
     margin-left: 7px;
 }
 /* resource recommender */
+/* hide OTB main banner at top of search results */
+prm-resource-recommender .main-banner-content {
+	display:none;
+}
 md-dialog.prm-resource-recommendations-fullview.md-transition-in {
     background-color:#fff;
 }
