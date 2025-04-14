@@ -14,11 +14,12 @@
     </a>
 </div>
 
-<div ng-if="vm.TOC.display" class="hvd_TOC_link">
-    <a href="https://secure.syndetics.com/index.aspx?isbn={{vm.TOC.isbn}}/TOC.HTML&client=harvard&type=rn12" target="_blank" class="hvd_TOC_stats">
-        <span>Table of Contents</span>        
-    </a>
-</div>
+<!-- when prm-brief-result-container:focus 
+ .list-item-wrapper:focus-within .list-item-primary-content:before gets
+ opacity:1
+ and the contents of prm....ava line after disappears
+-->
+<!-- <div ng-if="vm.hasTOC" class="hvd_TOC_link"><span>Includes Table of Contents</span></div> -->
 
 <div ng-if="vm.OpenLib.display" class="hvd_OL_link">
     <a href="{{vm.OpenLib.previewURL}}" target="_blank" class="hvd_OL_stats">

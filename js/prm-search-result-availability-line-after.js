@@ -9,53 +9,17 @@ angular.module('viewCustom')
         var custService=customService;
         var chts=customHathiTrustService;
         var prmsv=prmSearchService;
-        // display of table of content
-        vm.TOC = {'type':'01HVD_ALMA','isbn':[],'display':false};
         vm.OpenLib = {'rtype':'book','isbn':[],'display':false};
         vm.itemPNX={};
+	   vm.hasTOC='';
         vm.hathiTrust={};
-        vm.FAlink='';
         vm.isSerial='';
         var map;
-        var tocUrl = 'https://secure.syndetics.com/index.aspx?isbn=';
         var openLibUrl = 'https://openlibrary.org/api/books?bibkeys=ISBN:';
         //var tocUrl = 'https://secure.syndetics.com/index.aspx?isbn=9780674055360/xml.xml&client=harvard&type=xw10';
         // for testing : var tocUrlBad = 'https://secure.syndetics.com/index.aspx?isbn=2939848394/xml.xml&client=harvard&type=xw10';
 
 
-        // find if pnx has table of content
-        vm.findTOC=function () {
-            if (vm.itemPNX.pnx.control.sourceid[0] === vm.TOC.type && vm.itemPNX.pnx.addata.isbn) {
-                var param={'isbn':'','hasData':false};
-                //console.log("test for toc");
-                param.isbn = vm.itemPNX.pnx.addata.isbn[0];
-                 /* fetch chained response to get data (first response is not actual data yet) */
-                    fetch(tocUrl+param.isbn+'/toc.xml&client=harvard&type=xw10', {                        
-                        method: 'GET',
-                        headers: {
-                            'Accept': '*/*'
-                            //'Content-Type': 'text/xml; charset=UTF-8',
-                            // 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',                           
-                            //'Access-Control-Allow-Origin': '*/*' ,     
-                            //'Access-Control-Request-Headers': '*/*'
-                          }
-                    })
-                        .then(function (response) {
-                            //console.log(response);
-                            //console.log(response.headers); 
-                            return response.text();
-                        })
-                        .then(function (data) {  
-                            if (data.substr(0,7) == '<USMARC') {                                
-                                vm.TOC.display = true;
-                                vm.TOC.isbn = param.isbn;
-                            }
-                        })
-                        .catch(function (err) {
-                            console.log("Syndetics call did not work", err);
-                        });
-          }
-        };
 
         // see if book is in open library
         vm.findOpenLib=function () {            
@@ -93,18 +57,6 @@ angular.module('viewCustom')
           }
         };
 
-        // find if pnx had EAD finding aid link
-        // vm.findFindingAid=function () {
-        //     var ead = '';
-        //     var eadURN = '';
-        //     if (vm.itemPNX.pnx.links.linktofa) {
-        //         ead = vm.itemPNX.pnx.links.linktofa[0];
-        //         ead=ead.slice(3);
-        //         eadURN = ead.replace(' $$Elinktofa','');
-        //         vm.FAlink=eadURN;
-        //   }
-        // };
-
 
         // hathitrust, this is also used for openlibrary since it needs same identifiers, isbn and oclcid
         vm.getHathiTrustData=function () {
@@ -123,10 +75,11 @@ angular.module('viewCustom')
 
         vm.$onInit=function() {
             vm.itemPNX=vm.parentCtrl.result;
-            // get table of content
-            vm.findTOC();
+		  if (vm.itemPNX.pnx.display.contents) {
+			vm.hasTOC = 'true';
+		  }
+		  console.log(vm.itemPNX.pnx.display.contents);
             vm.findOpenLib();
-            // vm.findFindingAid();
             if(vm.itemPNX.pnx.display.type[0] == 'journal') {
                 vm.isSerial=true;
             } else {
@@ -135,12 +88,6 @@ angular.module('viewCustom')
             //console.log(vm.isSerial);
 
 
-            // validate Hathi Trust to see if it is existed
-            // vm.hathiTrust=chts.validateHathiTrust(vm.itemPNX);
-            // vm.hathiTrustItem={};
-            // if(vm.hathiTrust.flag) {
-            //     vm.getHathiTrustData();
-            // }
 
         };
 
