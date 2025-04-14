@@ -18,10 +18,11 @@
         vm.docid=$stateParams.docid; // eg alma99158322666803941
         vm.recordid='';
         vm.filename = vm.params.imageId; // eg urn-3:DOAK.LIB:3205217
+        vm.filenameURL = 'https://nrs.harvard.edu/' + vm.filename;
         vm.index=''; // this is used for scrolling feature (x of y images)
         vm.photo={};
         vm.flexsize=80;
-        vm.total=0;
+        vm.total=0; // number of components, used for image X of Y
         vm.itemData={};
         vm.imageNav=true;
         vm.xmldata={};
@@ -37,7 +38,6 @@
 	   vm.viewComponentB={};
 	   vm.viewComponentE={};
 	   vm.viewComponentF={};
-	   vm.viewComponentU={};
 	   vm.viewComponentR={};
 	   vm.viewComponentH={};
 	   vm.viewComponentS={};
@@ -61,45 +61,32 @@
           }
         };
 
-        // find index of component array based on filename (URN)
-	   // sending vm.componentData, vm.filename
-     //    vm.findFilenameIndex=function (arrList,filename) {
-	// 	console.log("findFilenameIndex fx fx");
-	// 	console.log("testing new log");
-     //        var k= -1;
-     //        for(var i=0; i < arrList.length; i++){
-     //            var entry=arrList[i];
-	// 		 console.log(i);
-	// 		 console.log("entry value from findFilenameIndex fx");
-	// 		 console.log(entry);
-	// 		 console.log("preparts");
-	// 		 var parts = entry.split('==');
-	// 		 console.log("parts");
-	// 		 console.log(parts);
-     //            for (let part of parts) {
-	// 			console.log(part.substring(1).trim());
-	// 			if (part.charAt(0) === 'U' && part.toLowerCase().includes(filename.toLowerCase())) {
-	// 				console.log("i");
-	// 				console.log(i);
-	// 				return i;
-	// 			}
-	// 		 }
-     //        }
-		  // ***  write section here for returning attribute if no image exists ****
-            //return null; // Return null if the filename is not found
-       // };
-
-	   /* ai fx to modify arrow for html page */
-	//    vm.convertToKeyValuePairs=function (array) {
-	// 	return array
-	// 	    .filter(str => str.trim())
-	// 	    .map(str => ({ 
-	// 		   key: str.charAt(0), 
-	// 		   value: str.substring(1).trim() 
-	// 	    }));
-	//  }
-	   /* end ai  */
-
+	   // mps embed function as written by phil for single-image.js
+        vm.mpsEmbed=function () {
+		if (vm.filename.startsWith("urn-3:")) {
+			const restUrl = 'https://embed.lib.harvard.edu/api/nrs'
+			var params={'urn':vm.filename,'prod':1}
+			sv.getAjax(restUrl,params,'get')
+			.then(function (result) {
+			    vm.items=result.data;
+			    vm.iframeHtml = vm.items.html;
+			    const doc = new DOMParser().parseFromString(vm.iframeHtml, 'text/html');
+			    const element = doc.body.children[0];
+			    vm.iframeAttributes = {};
+			    for (var i = 0; i < element.attributes.length; i++) {
+				   var attrib = element.attributes[i];
+				   if (attrib.name == 'src') {
+					  vm.iframeAttributes[attrib.name] = $sce.trustAsResourceUrl(attrib.value);
+				   }
+				   else {
+					  vm.iframeAttributes[attrib.name] = attrib.value;  
+				   }
+			    }                 
+			},function (err) {
+			    console.log(err);
+			});
+		  }
+	   };	   
 
 	   /* example ajax call http://localhost:8003/primaws/rest/pub/pnxs/L/alma99158322666803941?vid=01HVD_INST:HVD2&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&lang=en */
 
@@ -185,11 +172,11 @@
 					console.log("vm.viewComponent test");
 					console.log(vm.viewComponent);
 					
-					vm.viewComponentU= vm.viewComponent.filter(item => item.key === 'U').map(item => item.value);
 					vm.viewComponentT= vm.viewComponent.filter(item => item.key === 'T').map(item => item.value);
 					vm.viewComponentW= vm.viewComponent.filter(item => item.key === 'W').map(item => item.value);
 					vm.viewComponentX= vm.viewComponent.filter(item => item.key === 'X').map(item => item.value);
-
+					vm.viewComponentA= vm.viewComponent.filter(item => item.key === 'A').map(item => item.value);
+					console.log(vm.viewComponentA);
 
 				}
 			}
@@ -203,7 +190,9 @@
             } else if($mdMedia('xs')) {
                 vm.flexsize=100;
             }
-            // call ajax and display data
+		  // call local embed service to get iframe attributes
+		  vm.mpsEmbed();
+            // call ajax and display component data
             vm.getData();
             // initialize label for image component page
             vm.parentCtrl.bannerTitle='FULL IMAGE DETAIL';
