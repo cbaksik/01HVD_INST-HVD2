@@ -1,50 +1,55 @@
 <!-- prm-alma-viewit-items-after.html -->
-<h2>VE TESTING HERE</h2>
 
-<!-- i removed the section for single images for now -->
+<!-- single image -->
 
-<!-- temporarily commented this out -->
-<!-- <div ng-if="$ctrl.viewAllComponetMetadataFlag && !$ctrl.item.pnx.display.lds41 && $ctrl.pnxControlSourceIdFlag" class="hvfullsize">
+<div ng-if="vm.singleImageFlag">
+
+	<!-- so users have another option if restricted image doesn't display -->
+	<div style="margin-bottom: 25px;margin-top: 25px;text-align: center;">
+		<a target="_blank" href="{{vm.iframeAttributes.src}}?buttons=Y">Open image in new tab</a>
+	</div>
+	
+	<!-- <img ng-if="vm.restricted" src="custom/HVD2/img/icon_lock25.png" class="hvdSingleImgLock" alt="Restricted to HarvardKey" aria-label="Restricted to HarvardKey" title="Restricted to HarvardKey"/> -->
+	<div layout="column" layout-align="center center" class="hvd-via-full-image">
+		<iframe id="iframe" name="{{vm.iframeAttributes.name}}" src="{{vm.iframeAttributes.src}}"
+			height="{{vm.iframeAttributes.height}}" width="{{vm.iframeAttributes.width}}"
+			title="{{vm.iframeAttributes.title}}" frameborder="{{vm.iframeAttributes.frameborder}}"
+			marginwidth="{{vm.iframeAttributes.marginwidth}}"
+			marginheight="{{vm.iframeAttributes.marginheight}}" scrolling="{{vm.iframeAttributes.scrolling}}"
+			allowfullscreen="{{vm.iframeAttributes.allowfullscreen}}">
+		</iframe>
+	</div>
+
+</div>
+
+
+<!-- view all metadata button  -->
+<!-- <div ng-if="vm.viewAllComponetMetadataFlag && !vm.item.pnx.display.lds41 && vm.pnxControlSourceIdFlag" class="hvfullsize">
     <div layout="column" layout-align="center center">
-     <md-button class="md-raised md-primary btn-margin-bottom" (click)="$ctrl.viewAllComponentMetaData()" tabindex="0">
+     <md-button class="md-raised md-primary btn-margin-bottom" (click)="vm.viewAllComponentMetaData()" tabindex="0">
         VIEW ALL COMPONENT METADATA
      </md-button>
      </div> -->
 
-<!-- list thumbnail images -->
 
-<!-- original code for latere -->
-<!-- <md-grid-list md-row-height="210px" md-cols="{{$ctrl.gridColumn}}" ng-if="$ctrl.item.mis1Data.length > 1" tabindex="-1">
-    <md-grid-tile ng-if="$ctrl.item.mis1Data.length > 1" ng-repeat="item in $ctrl.item.mis1Data track by $index" ng-click="$ctrl.gotoFullPhoto($event,item,$index)" tabindex="0">
-        <multiple-thumbnail itemdata="item" searchdata="$ctrl.searchData"></multiple-thumbnail>
-    </md-grid-tile>
-    </md-grid-list> -->
+<!-- multiple images -->
+<div class="hvd-via-record-page-grid" ng-if="vm.componentJSON.length > 1">
 
-<!-- simplified for proof of concept -->
-
-<md-grid-list md-row-height="210px" md-cols="3" ng-if="$ctrl.componentJSON.length > 1">
-	<md-grid-tile ng-repeat="item in $ctrl.componentJSON track by $index" ng-click="$ctrl.gotoFullPhoto($event,item,$index)">
-		<md-card class="hv-md-card">
-			<md-card-content class="imageBox">
-				<a class="thumbnail" title="{{$ctrl.componentJSON[$index].T[0]}}">
-					<img ng-src="{{$ctrl.componentJSON[$index].U[0]}}?width=150&height=150" class="md-card-image" alt="{{$ctrl.componentJSON[$index].T[0]}}"/>
-					<!-- THIS PART NOT REDONE - STILL OLD CODE -->
-					<!-- <div ng-if="" class="nophoto">
-						Image not digitized
-					</div> -->
-					<div class="lockIcon" ng-if="vm.localScope.hideLockIcon" tabindex="-1">
-						<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar"
-							alt="Restricted to HarvardKey" aria-label="Restricted to HarvardKey"
-							title="Restricted to HarvardKey" />
-					</div>
-				</a>
-			</md-card-content>
-			<md-card-footer class="nospace">
-				<div class="imageTitle">{{$ctrl.componentJSON[$index].T[0]|truncatefilter}}</div>
-			</md-card-footer>
-		</md-card>
-	</md-grid-tile>
-</md-grid-list>
+	<md-grid-list md-row-height="210px" md-cols="3">
+		<md-grid-tile ng-repeat="item in vm.componentJSON track by $index" ng-click="vm.gotoFullPhoto($event,item,$index)">
+			<md-card class="hv-md-card">
+				<md-card-content class="imageBox">
+					<a title="{{vm.componentJSON[$index].T[0]}}">
+						<img ng-src="{{vm.componentJSON[$index].U[0]}}?width=150&height=150" class="md-card-image" alt="{{vm.componentJSON[$index].T[0]}}"/>
+						<div class="lockIcon" ng-if="vm.localScope.hideLockIcon" tabindex="-1">
+							<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
+						</div>
+					</a>
+					<div class="imageTitle">{{vm.componentJSON[$index].T[0]|truncatefilter}}</div>
+				</md-card-content>
+			</md-card>
+		</md-grid-tile>
+	</md-grid-list>
 
 </div>
 
