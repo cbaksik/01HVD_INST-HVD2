@@ -1,7 +1,49 @@
+/* via pages header */
 
+#via-page-header .metadataHeader {
+    display: inline-block;
+    font-size:120%;
+    white-space: nowrap;
+    color:#e4e4e4;
+    padding-top:15px;
+    line-height:50px;
+    margin-left:10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#via-page-header .banner {
+    background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
+    color: #ffffff;
+    height:65px;
+    padding-right:20px;
+    padding-left:20px;
+}
+#via-page-header .logo {
+    padding-left:10px;
+}
+#via-page-header .logo h1 {
+    font-family: "Trueno";
+    font-size: 42px;
+    vertical-align: top;
+    padding-left: 10px;
+    padding-top:20px;
+}
+/* end via pages header */
+
+/* thumbnail grid on full record page */
 .hvd-via-record-page-grid md-grid-tile {
 	background-color:transparent;
 	box-shadow:none;
+}
+
+.hvd-via-record-page-grid md-card-content a:hover
+.hvd-via-record-page-grid md-card-content a:focus {
+	box-shadow:hone;
+}
+
+.hvd-via-record-page-grid md-grid-tile:focus md-card-content a>img,
+.hvd-via-record-page-grid md-grid-tile:hover md-card-content a>img {
+	border-bottom:3px solid rgba(5, 121, 184, 0.3);
 }
 
 .hvfullsize {
@@ -17,7 +59,6 @@
     padding-left:0px !important;
     background: transparent !important;
 }
-
 .imageBox {
     height:150px;
     display: table-cell;
@@ -76,6 +117,42 @@
     margin-right: auto;
     margin-left: auto;
 }
+/* end thumbnail grid on full record page */
+
+/* large image  page */
+.hvd-via-full-image #iframe {
+	width: 100%;
+	height: 80vh;
+	border: 1px solid lightgrey;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+/* go to main page button for users from curiosity */
+div.parentImageLinkWrapper {
+	margin-left:-10%;
+ }
+ .hvdImgComponentView .full-view-inner-container  {
+	margin-left:10%;
+ }
+ .hvdImgComponentViewMD {
+	margin-top:20px;
+	width:90%;
+ }
+ /* didn't finish css for below button, class not applied yet in prm-view-online-after.html */
+ /* button to view all component metadata, from primo details page */
+ .hvdImgGroupAllMetadata {
+	color:#fff;
+	background-color:#0579b8;
+	font-weight:600px;
+	border-radius:4px;
+ }
+ .hvdImgGroupAllMetadata:hover,
+ .hvdImgGroupAllMetadata:focus {
+	background-color:#2a5280;
+ }
+
+
 @media print {
 
     .hvfullsize {
