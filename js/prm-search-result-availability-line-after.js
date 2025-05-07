@@ -78,7 +78,6 @@ angular.module('viewCustom')
 		  if (vm.itemPNX.pnx.display.contents) {
 			vm.hasTOC = 'true';
 		  }
-		  console.log(vm.itemPNX.pnx.display.contents);
             vm.findOpenLib();
             if(vm.itemPNX.pnx.display.type[0] == 'journal') {
                 vm.isSerial=true;

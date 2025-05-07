@@ -8,7 +8,6 @@
 		 var vm=this;
 		 vm.$onInit=function () {
 			vm.parentCtrl.showTabsAndScopes = true;
-			console.log("prmSearchBarAfterCtrl");
 		 };
 
  }]);
