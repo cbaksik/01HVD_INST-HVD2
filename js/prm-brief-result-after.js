@@ -5,13 +5,10 @@ created to display TOC presence in search results
 angular.module('viewCustom')
 .controller('prmBriefResultAfterCtrl',[function () {
 	var vm=this;
-	console.log("prmBriefResultAfterCtrl");
-	console.log(vm);
 	vm.itemPNX={};
 	vm.hasTOC='';
 
 	vm.$onInit=function() {
-		console.log(vm);
 		vm.itemPNX=vm.parentCtrl.item;
 		if (vm.itemPNX.pnx.display.contents) {
 			vm.hasTOC = 'true';
