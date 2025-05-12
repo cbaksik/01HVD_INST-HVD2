@@ -170,45 +170,6 @@ prm-topbar > div.top-nav-bar {
     height:50px;
     line-height:50px;
 }
-
-.customMenu {
-    text-align: right;
-}
-
-.customMenu a {
-    margin-right:15px;
-}
-
-.paddingleft15 {
-    padding-left:15px;
-}
-
-.paddingleft35 {
-    padding-left:35px;
-}
-
-
-.marginRight20 {
-    margin-right:20px;
-}
-
-
-div.search-actions > .md-button.button-confirm:hover {
-    color:#a51c30;
-}
-
-.hv-menu {
-    color:#000000;
-    padding:5px;
-}
-
-.hv-menu:hover {
-    color:#000000;
-}
-/* hide switch to adv search from basic, b/c in top bar now */
-/* .search-switch-buttons .switch-to-advanced {
-    display:none;
-} */
 prm-search-bookmark-filter .md-button {
     background-color:#44707b;
 }
