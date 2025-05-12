@@ -54,54 +54,10 @@ a:hover, a:focus {
 
 /* START search bar area */
 
-/* magnify glass search in search box */
-prm-icon md-icon svg[id^=magnifying-glass] {
-    color:#a51c30;
-}
-prm-search-bar .search-actions .md-button.button-confirm:hover:not([disabled]),
-prm-search-bar .search-actions .md-button.button-confirm:focus:not([disabled]) {
-    color:#fff;
-    background-color:#e9e9e9;
-}
-prm-search-bar .search-switch-buttons .md-button.switch-to-advanced, 
-prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
-	font-weight: 600;
-}
-md-autocomplete-parent-scope md-icon {
-    opacity:0.4;
-}
-md-autocomplete-parent-scope svg[id^=magnifying-glass] {
-    color:#212121 !important;
-}
-
-.md-autocomplete-suggestions .highlight:hover {
-    color:#000;
-}
-.md-autocomplete-suggestions .suggestion-scope:hover {
-    color:#000;
-}
-ul.md-autocomplete-suggestions li.selected {
-    text-decoration:underline;
-}
-@media only screen and (max-width: 900px) {
-    .browse-button {
-        margin-top:30px;
-    }
-
-}
-prm-tabs-and-scopes-selector md-input-container:hover,
-prm-tabs-and-scopes-selector md-input-container:focus {
-    background-color: #e5e5e5;
-}
-prm-tabs-and-scopes-selector md-input-container:hover .md-text,
-prm-tabs-and-scopes-selector md-input-container:focus .md-text {
-    text-decoration: underline;
-}
-md-option.md-focused {
-    text-decoration: underline;
-}
+/* see hvd_search_bar.css */
 
 /* END search bar area (there may be additional css later in file */
+
 /* hide the page number in the upper left corner of the result list; it duplicates page number in toolbar */
 #searchResultsContainer .md-subheader > .md-subheader-inner > .md-subheader-content > span.tiny-uppercase-text {
     display:none;
