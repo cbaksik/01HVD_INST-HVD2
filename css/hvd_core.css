@@ -1632,22 +1632,6 @@ prm-search-result-tool-bar  .search-toolbar-title .tiny-uppercase-text {
     top:0px;
     margin-right:50px;
 }
-prm-search-result-tool-bar prm-personalize-results-button .md-button.button-as-link.link-alt-color {
-    color:#0579b8;
-    font-family:"Source Sans Pro", Arial,sans-serfic;
-    opacity:1;
-}
-prm-search-result-tool-bar prm-personalize-results-button .md-button.button-as-link.link-alt-color:hover:not([disabled]),
-prm-search-result-tool-bar prm-personalize-results-button .md-button.button-as-link.link-alt-color:focus:not([disabled]) {
-    background-color:#2a5280;
-    border-radius: 4px;
-}
-prm-search-result-list prm-personalize-results-button .md-button {
-    top:-6px;
-}
-prm-search-result-list prm-personalize-results-button .md-button md-switch {
-    height:25px;
-}
 prm-add-query-to-saved-searches .md-button.button-as-link.link-alt-color {
     color:#187474;
     opacity:1;
@@ -1906,7 +1890,8 @@ prm-library-card-menu .md-button.button-with-icon > prm-icon,
 prm-authentication .md-button.button-with-icon > prm-icon {
     display: none;
 }
-/************ view it get it - formerly mash-up ****************/
+/************ BEGIN view it get it - formerly mash-up ****************/
+/* view it */
 prm-alma-viewit-items .record-status-text .item-title {
 	font-size: 15px;
 }
@@ -1940,3 +1925,239 @@ prm-alma-viewit-items ._md-secondary-container .md-button.button-link {
 	background-color: transparent;
 	text-transform: uppercase
 }
+/* GET IT */
+ /* note: 
+ prm-locations is list of multiple holdings;
+ prm-location is list of single holding;
+ prm-location-items is expanded single location with items;
+ all have different elements and classes */
+/* prm-opac {
+	background-color:green;
+}
+prm-opac prm-location {
+	background-color:aqua;
+}
+prm-opac prm-location-items {
+	color:purple;
+} */
+prm-opac .md-button.button-as-link ,
+prm-opac .md-button.button-link.link-alt-color, 	
+prm-opac .md-button.button-as-link.link-alt-color { 	
+	color: #0579b8; 
+}
+prm-opac .md-button.button-as-link:focus:not([disabled]),
+prm-opac .md-button.button-as-link:hover:not([disabled]),
+prm-opac .md-button.button-as-link.link-alt-color:focus:not([disabled]),
+prm-opac .md-button.button-as-link.link-alt-color:hover:not([disabled]),
+prm-opac .md-button.button-link.link-alt-color:focus:not([disabled]),
+prm-opac .md-button.button-link.link-alt-color:hover:not([disabled]) {
+	color:#0579b8;
+	border-bottom:1px solid #0579b8;
+	border-radius:0px;
+	background-color:transparent;
+}
+prm-opac prm-alert-bar .bar.alert-bar {
+	background-color: #f7eda3;
+	border-bottom: none;
+}
+ /* list of libraries */
+prm-opac prm-locations>div.layout-row {
+	background-color: #e4e4e4;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+prm-opac prm-locations>div.layout-row:before {
+	content:"Select a location below or use the item filter to find a specific volume";
+	font-weight: 600;
+	padding-left: 10px;
+}
+prm-opac prm-locations .separate-list-items md-list-item {
+	border-bottom:1px solid #e4e4e4;
+}
+/* filter button */
+prm-opac prm-locations button.md-button.md-mini,
+prm-opac prm-location-items button.md-button.md-mini {
+	/* width:200px; */
+	background-color:#0579b8;
+}
+prm-opac prm-locations button.md-button:hover:not([disabled]),
+prm-opac prm-locations button.md-button:focus:not([disabled]) {
+	background-color:#2a5280;
+}
+prm-opac prm-locations button.md-button.md-mini prm-icon md-icon.md-primoExplore-theme svg,
+prm-opac prm-location-items button.md-button.md-mini prm-icon md-icon.md-primoExplore-theme svg {
+	color:#fff;
+}
+prm-opac prm-locations prm-locations-filter span[translate="nui.aria.locationItems.filters"],
+prm-opac prm-location-items prm-locations-filter span[translate="nui.aria.locationItems.filters"] {
+	display:none;
+}
+prm-opac prm-locations prm-locations-filter .filter-bar md-input-container,
+prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container {
+	border:1px solid #3a3a3a;
+	margin-right: .5em;
+}
+prm-opac prm-locations prm-locations-filter .filter-bar md-input-container md-select,
+prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container md-select {
+	margin-top:0px;
+	padding-left: 10px;
+}
+.separate-list-items md-list-item .md-list-item-text {
+	padding-left:0em;
+}
+prm-opac prm-location .separate-list-items md-list-item .md-list-item-text {
+	padding: .75em 0em;
+}
+prm-opac h3,
+prm-opac md-list-item.md-2-line .md-list-item-text h3 {
+	font-weight:600;
+	font-size:18px;
+}
+prm-opac prm-location-items .tab-content-header h6.md-title
+{
+	font-weight:600;
+	padding-bottom: 5px;
+	font-size:18px;
+}
+/* add space under location call number  */
+prm-opac prm-location h3+p {
+	padding-bottom: 15px;
+}
+prm-opac prm-location-items h6.md-title+p {
+	padding-bottom:5px;
+}
+/* this is the  x copy, x avail, x requests line under loc in hol-items  */
+prm-opac prm-location-items h6.md-title+p+p {
+	font-size:14px;
+	font-weight:400;
+}
+prm-opac prm-location .layout-row>.flex-70 {
+	max-width:100%;
+}
+/* location name and call number, from prm-location, doesn't work if you add prm-opac */
+md-list-item.md-2-line .md-list-item-text p {
+	font-size: 16px;
+}
+/* location name and call number */
+prm-opac prm-location-items p
+{
+	font-size: 16px;
+}
+/* avail text plus comma after */
+prm-opac prm-location p>span.availability-status,
+prm-opac prm-location p>span.availability-status+span {
+	display:none;
+}
+/* items display */
+/* avail text plus comma after */
+prm-opac prm-location-items h6+p>span.availability-status,
+prm-opac prm-location-items h6+p>span.availability-status+span  {
+	display:none;
+}
+/* this is where I'm trying shenanigans to move filter etc */
+prm-opac prm-location-items .tab-content-header {
+	display:block;
+}
+prm-opac prm-location-items .tab-content-header div.layout-column+div.layout-row {
+	display:block;
+	flex-grow: 1;
+}
+/* filter and expand buttons when viewing a holding and its items */
+prm-opac prm-location-items:has(md-list-item) .tab-content-header div.layout-column+div.layout-row {
+	/* background-color:#e4e4e4; */
+}
+/* prm-opac prm-location-items .tab-content-header>div.layout-column {
+	min-width: 800px;
+} */
+/* begin holding notes */
+prm-opac prm-location-holdings  {
+	margin-top:15px;
+	margin-left:0px;
+}
+prm-opac prm-location-holdings .weak-text {
+	color:#3a3a3a;
+}
+prm-opac prm-location-holdings div.layout-row {
+	margin-bottom: 5px;
+}
+prm-opac prm-location-holdings .summary-brief-header {
+	font-weight:600;
+}
+/* link to expand/collapse holding notes */
+
+prm-opac prm-location-holdings .md-button.button-as-link { 	
+	margin-left:0px; padding-left:0em; 
+}
+/* end link to expand/collapse holding notes */
+/* end holding notes */
+/* this is the down caret to expand items */
+/* hide for now in favor of just leaving the expand all */
+prm-opac prm-location-items .md-secondary-container button.item-expand-button {
+	display:none;
+}
+ /* don't need to do this - can use NOT_DEFINED in code table to omit label */
+/* prm-opac prm-location-items md-list-item div.md-list-item-text div span[translate*="nui"] {
+	display:none;
+} */
+/* box around item list */
+prm-opac prm-location-items md-list.separate-list-items {
+	border: 1px solid #E4E4E4;
+	box-shadow:none;
+}
+prm-opac prm-location-items md-list.separate-list-items md-list-item {
+	border-bottom: 1px solid #e4e4e4;
+}
+prm-opac prm-location-items md-list.separate-list-items md-list-item:last-of-type {
+	box-shadow:none;
+	border-bottom: none;
+}
+/* each container item */
+prm-opac prm-location-items md-list.separate-list-items md-list-item  .md-list-item-text {
+	padding: .3em 0em 0em .3em;
+	/* border-bottom: 1px solid #E4E4E4; */
+}
+prm-opac prm-location-items md-list.separate-list-items md-list-item  .md-list-item-textt>div:not(:last-of-type) {
+	padding-right: 2.5em;
+ }
+/* the line height here is to make them consistent across columns when you expand an item  */
+prm-opac prm-location-items md-list.separate-list-items md-list-item  .md-list-item-text div {
+	/* background-color:pink; */
+	margin-bottom: 5px;
+	line-height: 1.2em;
+}
+prm-opac prm-location-items md-list.separate-list-items md-list-item  .md-list-item-text div .item-status {
+	font-size: 15px;
+}
+ /* weak-text is exl class for 2nd column of item data */
+prm-opac prm-location-items md-list.separate-list-items md-list-item.md-2-line  .md-list-item-text .weak-text p {
+	font-size: 15px;
+	font-weight: 400;
+	letter-spacing: .01em;
+	line-height: 1.2em;
+	color:#3a3a3a;
+}
+prm-opac prm-location-items md-list.separate-list-items md-list-item prm-service-button .md-button.button-as-link {
+	color: #0579b8;
+	padding: .5em .5em;
+}
+prm-opac prm-location-items md-list.separate-list-items md-list-item prm-service-button .md-button.button-as-link:focus:not([disabled]), 
+prm-opac prm-location-items md-list.separate-list-items md-list-item prm-service-button .md-button.button-as-link:hover:not([disabled]) {
+	background-color: #0579b8;
+}
+/* remove icon indicating external link */
+prm-opac prm-service-button prm-icon {
+	display:none;
+}
+/* hiding hours info button for now - placement is too problematic */
+/* need both references to override otb css */
+prm-opac prm-stack-map,
+prm-location .stack-map {
+	display:none;
+}
+prm-opac prm-stack-map .md-button.button-with-icon>prm-icon md-icon {
+	height: 16px;
+	width: 16px;
+	min-height: 16px;
+	min-width: 16px;
+}
+/************ END view it get it - formerly mash-up ****************/
