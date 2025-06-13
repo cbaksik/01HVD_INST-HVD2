@@ -1,6 +1,17 @@
 /* for alma digital viewer */
+prm-alma-viewer prm-top-bar-before,
+prm-alma-viewer prm-logo-after,
+prm-alma-viewer prm-main-menu .top-nav-bar-links  {
+	display:none;
+}
+primo-explore:has(prm-alma-viewer) prm-explore-footer {
+	display:none;
+}
+body:has(prm-alma-viewer) #lcs_slide_out-10171 {
+	display:none;
+}
 prm-alma-viewer prm-topbar > div.top-nav-bar {
-    background-color:#000;
+    background-color:#1e1e1e;
     padding: 0px 0 0px;
     margin-top: 0px;
 }
