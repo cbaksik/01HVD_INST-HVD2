@@ -63,17 +63,211 @@ a:hover, a:focus {
 
 /* START search bar area */
 
-/* see hvd_search_bar.css */
+/* see hvd_search_bar....css for view specific code */
+
+prm-search-bar > div:first-child > div:first-child > div:first-child {
+    display: block;
+}
+
+div.product-logo {
+    display: none;
+}
+#hvd-beta-sticker {
+	 max-height: 50px;
+	 margin-left: -4px;
+	 vertical-align: middle;
+}
+#hvd-beta-badge {
+    text-align: end;
+    margin-top: -5px;
+    transform: rotate(-15deg);
+    margin-right: -21px;
+}
+#hvd-beta-badge span {
+    padding: 0px 6px;
+    color:#0579b8;
+    font-weight: 700;
+    border: 3px solid #0579b8;
+    opacity: .8;
+    font-size: large;    
+    text-transform: uppercase;
+}
+
+
+prm-browse-search-bar {
+    background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
+}
+prm-browse-search-bar .classic-input .search-scope {
+    background-color: #f3f3f3;
+}
+prm-browse-search-bar md-select ._md-select-icon {
+    color:#0579b8;
+    font-size:150%;
+    size:10px;
+}
+
+@media (max-width: 599px) {
+    prm-search-bar #searchBar {
+        border: 2px solid grey;
+    }
+    .lcs_slide_out { display: none;}
+}
+
+@media (max-width: 768px) {
+    .lcs_slide_out { display: none;}
+}
+
+/* changes to align with HL site and switch to VE adv search button placement change */
+prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm {
+	background-color: #0579b8;
+	color: white;
+	font-family: "Trueno",sans-serif;
+	padding: 1px 25px 0px 25px; 
+	border:8px solid #fff;
+	border-radius: 12px;
+}
+prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm:after {
+	content:"Search";
+}
+prm-search-bar .search-actions .md-button.button-confirm:hover:not([disabled]),
+prm-search-bar .search-actions .md-button.button-confirm:focus:not([disabled]) {
+	background-color: #2a5280;
+}
+prm-search-bar .search-switch-buttons .md-button.switch-to-advanced, 
+prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
+	font-weight: 600;
+}
+prm-search-bar .search-switch-buttons {
+	padding-top:0em;
+}
+prm-search-bar .search-switch-buttons .md-button.switch-to-advanced {
+	width: 100%;
+	height: 60px;
+	background-color:transparent;
+}
+prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
+	height:36px;
+}
+prm-search-bar .search-switch-buttons .md-button.switch-to-advanced span.layout-align-start-center {
+	background-color:rgba(58, 58, 58, 0.15);
+	padding: 4px 12px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):hover:not([disabled]):hover:not([disabled]),
+prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):focus:not([disabled]):focus:not([disabled]) {
+	background-color:#a51c30;
+	border: 1px solid #eb001b;
+	color:#fff
+}
+prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm prm-icon {
+	display:none;
+}
+
+@media (max-width: 599px) {
+  prm-search-bar .search-element-inner {
+    background: transparent;
+  }
+  prm-tabs-and-scopes-selector,
+  prm-search-bar .search-actions,
+  prm-search-bar md-autocomplete-wrap {
+    background: #fff;
+  }
+  prm-search-bar #searchBar,
+  prm-tabs-and-scopes-selector {
+      border: none;
+  }
+  prm-tabs-and-scopes-selector {
+    border-radius: 3px 3px 0 0;
+  }
+  prm-search-bar .simple-search-wrapper md-autocomplete-wrap {
+    border-radius: 0 3px 3px 3px;
+  }
+  prm-search-bar .search-element-inner {
+    border-radius: 3px;
+  }
+  prm-search-bar .simple-search-wrapper .search-actions {
+    border-radius: 0 3px 3px 0;
+  }
+  prm-search-bar .simple-search-wrapper .search-actions .md-button:last-child {
+    width: auto;
+    min-width: auto;
+    padding: 8px;
+   }
+   prm-search-bar .simple-search-wrapper .search-options::after {
+     background-color: transparent;
+   }
+   prm-search-bar .simple-search-wrapper .search-options prm-tabs-and-scopes-selector {
+     border-bottom: 1px solid #e4e4e4;
+     padding-top: 5px;
+   }
+   
+}
+/* magnify glass search in search box */
+prm-icon md-icon svg[id^=magnifying-glass] {
+	color:#a51c30;
+ }
+ md-autocomplete-parent-scope md-icon {
+	opacity:0.4;
+ }
+ md-autocomplete-parent-scope svg[id^=magnifying-glass] {
+	color:#000 !important;
+ }
+ 
+ .md-autocomplete-suggestions .highlight:hover {
+	color:#000;
+ }
+ .md-autocomplete-suggestions .suggestion-scope:hover {
+	color:#000;
+ }
+ ul.md-autocomplete-suggestions li.selected {
+	text-decoration:underline;
+ }
+ @media only screen and (max-width: 900px) {
+	.browse-button {
+	    margin-top:30px;
+	}
+ 
+ }
+
+ prm-tabs-and-scopes-selector md-input-container:hover,
+ prm-tabs-and-scopes-selector md-input-container:focus {
+	background-color: #e4e4e4;
+ }
+ prm-tabs-and-scopes-selector md-input-container:hover .md-text,
+ prm-tabs-and-scopes-selector md-input-container:focus .md-text {
+	text-decoration: underline;
+ }
+
+
+ prm-tabs-and-scopes-selector md-divider.skewed-divider:nth-child(1) {
+	display: none;
+ }
+ prm-tabs-and-scopes-selector md-input-container.zero-margin:nth-child(2) {
+	padding-left: 10px;
+ }
+ md-option.md-focused {
+	text-decoration: underline;
+ }
+
+/* give search dropdown hover/focus the same treatmeant as nav links */
+md-input-container md-select .md-select-value {
+    padding: 2px;
+}
+prm-search-bar .simple-search-wrapper .search-options prm-tabs-and-scopes-selector.is-displayed md-input-container.md-input-focused {
+    background: #e4e4e4;
+}
+prm-search-bar .simple-search-wrapper .search-options prm-tabs-and-scopes-selector.is-displayed md-input-container.md-input-focused .md-text {
+    text-decoration: underline;
+}
+md-input-container:after {
+    height: 0;
+}
+
 
 /* END search bar area (there may be additional css later in file */
 
-/* hide the page number in the upper left corner of the result list; it duplicates page number in toolbar */
-#searchResultsContainer .md-subheader > .md-subheader-inner > .md-subheader-content > span.tiny-uppercase-text {
-    display:none;
-}
-prm-brief-result-container .list-item-primary-content:before {
-    background-color: #f3f3f3;
-}
+
 md-backdrop.md-opaque {
     background: rgba(56,56,61);
 }
@@ -135,10 +329,6 @@ md-card-title-text .alumhat {
     opacity: 0.5;
     display: inline;
     vertical-align: bottom;    
-}
-prm-back-to-search-results-button md-toolbar.md-primoExplore-theme.default-toolbar .md-toolbar-tools button.md-button:hover,
-prm-back-to-search-results-button md-toolbar.md-primoExplore-theme.default-toolbar .md-toolbar-tools button.md-button:focus {
-    color:#fff;
 }
 /* MY FAVORITES */
 /* my favorites global action icons disabled */
@@ -379,6 +569,21 @@ prm-alert-bar .dismiss-alert-button.md-button.button-with-icon>prm-icon {
 /* ************** */
 /* SEARCH RESULTS SECTION / BRIEF RECORD */
 /* ************** */
+
+/* hide the page number in the upper left corner of the result list; it duplicates page number in toolbar */
+#searchResultsContainer .md-subheader > .md-subheader-inner > .md-subheader-content > span.tiny-uppercase-text {
+    display:none;
+}
+
+prm-back-to-search-results-button md-toolbar.md-primoExplore-theme.default-toolbar .md-toolbar-tools button.md-button:hover,
+prm-back-to-search-results-button md-toolbar.md-primoExplore-theme.default-toolbar .md-toolbar-tools button.md-button:focus {
+    color:#fff;
+}
+
+prm-brief-result-container .list-item-primary-content:before {
+    background-color: #f3f3f3;
+}
+
 /* title hover handling */
 prm-brief-result.result-item-details h3.item-title a:hover,
 prm-brief-result.result-item-details h3.item-title a:focus {
@@ -1243,12 +1448,22 @@ prm-permalink div.form-focus{
 .full-view-section#searchWithinJournal {
 	display:none;
 }
+/* begin section to hide fast headings if lcsh is present */
+prm-service-details #item-details:has(.hvd-lc600) div[role="listitem"]:has(.hvd-fast600),
+prm-service-details #item-details:has(.hvd-lc610) div[role="listitem"]:has(.hvd-fast610),
+prm-service-details #item-details:has(.hvd-lc611) div[role="listitem"]:has(.hvd-fast611),
+prm-service-details #item-details:has(.hvd-lc648) div[role="listitem"]:has(.hvd-fast648),
+prm-service-details #item-details:has(.hvd-lc650) div[role="listitem"]:has(.hvd-fast650),
+prm-service-details #item-details:has(.hvd-lc651) div[role="listitem"]:has(.hvd-fast651)
+{
+	display:none;
+}
 /* end full display page, detail view    */
 /* --------------------    */
 /*    ADVANCED SEARCH      */
 /* --------------------    */
 @media (max-width: 599px) {
-    prm-advanced-search md-divider {
+    prm-advanced-search md-divider  {
         display:none;
     }
     /* Feb 2020 release added an Adv Search button to OTB overlay menu but it duplicates our menu option so we need to hide it to avoid redundant option -- CB */
@@ -1276,18 +1491,61 @@ md-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item:not([di
 /* prm-advanced-search md-ink-bar {
     display:none;
 } */
-/* prm-advanced-search .collapsed-button.md-button:focus:not([disabled]), prm-advanced-search .collapsed-button.md-button:hover:not([disabled])
+prm-advanced-search .collapsed-button {
+	background-color:#0579b8;
+	height: 40px;
+	margin-right: 5px;
+}
+prm-advanced-search .collapsed-button prm-icon {
+	color:#fff;
+}
+prm-advanced-search .collapsed-button.md-button:focus:not([disabled]), prm-advanced-search .collapsed-button.md-button:hover:not([disabled])
 {
     background-color:#2a5280;
     color:#fff;
-} */
-/* prm-advanced-search .collapsed-button.md-button:hover:not([disabled]) prm-icon,
+}
+prm-advanced-search .collapsed-button.md-button:hover:not([disabled]) prm-icon,
 prm-advanced-search .collapsed-button.md-button:focus:not([disabled]) prm-icon {
     color:#fff;
-} */
+}
 /* md-radio-group.layout-row md-radio-button {
     border-bottom:1px solid transparent;
 } */
+/* this part is to overwrite OTB, so that when cursor is in text input field, the bottom line doesn't disappear */
+prm-advanced-search md-input-container.underlined-input:not(.md-input-invalid).md-input-focused .md-input, 
+prm-advanced-search md-input-container.underlined-input:not(.md-input-invalid).md-input-focused input
+{
+border-bottom: 1px solid rgba(0, 0, 0, .54);
+}
+
+prm-search-bar .advanced-search-tabs .advanced-drop-downs {
+	border-left:1px solid #e4e4e4;
+	padding-top:1.5em;
+}
+prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] {
+	padding-top: 25px;
+}
+prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] label {
+	text-transform:uppercase;
+	font-weight: 600;
+    font-size: 14px;
+}
+prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] {
+	padding-top: 25px;
+}
+prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] md-select  {
+	letter-spacing: -0.02em;
+}
+prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] md-input-container:not(:last-of-type)  {
+	letter-spacing: -0.02em;
+	margin-right:5px;
+}
+prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] md-input-container input[name$="Year"]{
+	font-weight:600;
+}
+prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] md-input-container .md-select-value .md-select-icon {
+	width: 10px;
+}
 md-radio-group.layout-row md-radio-button:hover,
 md-radio-group.layout-row md-radio-button:focus {
     border-bottom:1px solid #44707b;
@@ -1327,6 +1585,12 @@ prm-advanced-search .search-string md-select span {
     text-decoration:underline;
     color:#0579b8;
 }
+prm-search-bar .advanced-search-wrapper .search-string .string-block {
+	margin-bottom:5px;
+}
+prm-advanced-search .search-string .complex-rows {
+	border-bottom:none;
+}
 prm-search-bar .advanced-search-wrapper prm-advanced-search .search-string .string-field.bold-text input {
     background-color:white;
     box-shadow: inset 0 0 2px rgb(114, 114, 112);
@@ -1357,9 +1621,6 @@ prm-advanced-search .md-button.md-primary:focus:not([disabled]) {
 prm-advanced-search prm-icon md-icon svg[id^=magnifying-glass] {
     color:#fff;
 }
-/* prm-advanced-search .advanced-drop-downs .date-range-inputs md-input-container.md-input-has-value {
-	display:none;
-} */
 
 /* BROWSE  */
 prm-browse-search md-list.has-list-nav {
@@ -1924,6 +2185,10 @@ prm-full-view-service-container prm-alert-bar .bar.alert-bar {
     background-color: #f7eda3;
     border-bottom: none;
 }
+prm-alma-viewit-items .scrolling-area {
+    max-height: 1000px;
+    overflow-y: visible;
+}
 prm-alma-viewit-items .record-status-text .item-title {
 	font-size: 15px;
 }
@@ -1964,8 +2229,13 @@ prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[t
 prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[translate$='show_license']):focus {
 	background-color: #e4e4e4;
 }
-prm-alma-viewit-items .license md-list-item.md-3-line .md-list-item-text p span:before {
-	content:"- ";
+prm-alma-viewit-items md-list-item .in-element-dialog-context:has(span[translate$='hide_license']) p span:not(:first-child):before {
+	content:"‣ ";
+	margin-left: -10px;
+}
+prm-alma-viewit-items md-list-item .in-element-dialog-context:has(span[translate$='hide_license']) p span:not(:first-child) {
+	padding-left: 12px;
+	display: block;
 }
 /* show more items button in view it */
 prm-alma-viewit-items .md-button.button-link[translate="fulldisplay.representations.showmore"] {
@@ -2118,17 +2388,19 @@ prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container 
 	border:1px solid #3a3a3a;
 	margin-right: .5em;
 }
-/* show more items button */
-prm-opac prm-location-items .md-button.button-link.link-alt-color.zero-margin:has(span[translate="fulldisplay.locations.showmore"]) {
+/* show more location button and show more items button */
+prm-opac .md-button.button-link.link-alt-color.zero-margin:has(span[translate$="showmore"])
+{
 	color:#fff;
 	background-color: #0579b8; 
 	border-radius:4px;
-	margin-left:15px !important;
-	/* min-height: 26px;
-	line-height: 18px; */
 }
-prm-opac prm-location-items .md-button.button-link.link-alt-color.zero-margin:has(span[translate="fulldisplay.locations.showmore"]):hover,
-prm-opac prm-location-items .md-button.button-link.link-alt-color.zero-margin:has(span[translate="fulldisplay.locations.showmore"]):focus {
+prm-opac prm-location-items .md-button.button-link.link-alt-color.zero-margin:has(span[translate$="showmore"])
+{
+	margin-left:15px !important;
+}
+prm-opac .md-button.button-link.link-alt-color.zero-margin:has(span[translate$="showmore"]):hover,
+prm-opac .md-button.button-link.link-alt-color.zero-margin:has(span[translate$="showmore"]):focus {
 	background-color: #2a5280; 
 }
 /* end show more items button */

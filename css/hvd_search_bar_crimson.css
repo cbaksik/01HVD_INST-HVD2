@@ -1,3 +1,25 @@
+/* crimson search bar for HOLLIS primary view */
+
+/* advanced search code is in hvd_core.css */
+
+/* they are separate b/c HOLLIS Images has different search bar coding */
+
+prm-search-bar {
+    background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
+}
+
+/* reorder searchbar */
+prm-search-bar .search-element-inner .search-input {
+    order: 2;
+}
+prm-search-bar .search-element-inner .search-options {
+    order: 1;
+}
+prm-search-bar .search-element-inner .search-actions {
+   order: 3;
+}
+   
+
 /* search bar padding */
 prm-search-bar > div:first-child > div:first-child > div:first-child,
 prm-search-bar .search-wrapper > div:last-child {
@@ -51,44 +73,3 @@ prm-search-bar .layout-fill {
 
 
  
-
-
-@media (max-width: 599px) {
-  prm-search-bar .search-element-inner {
-    background: transparent;
-  }
-  prm-tabs-and-scopes-selector,
-  prm-search-bar .search-actions,
-  prm-search-bar md-autocomplete-wrap {
-    background: #fff;
-  }
-  prm-search-bar #searchBar,
-  prm-tabs-and-scopes-selector {
-      border: none;
-  }
-  prm-tabs-and-scopes-selector {
-    border-radius: 3px 3px 0 0;
-  }
-  prm-search-bar .simple-search-wrapper md-autocomplete-wrap {
-    border-radius: 0 3px 3px 3px;
-  }
-  prm-search-bar .search-element-inner {
-    border-radius: 3px;
-  }
-  prm-search-bar .simple-search-wrapper .search-actions {
-    border-radius: 0 3px 3px 0;
-  }
-  prm-search-bar .simple-search-wrapper .search-actions .md-button:last-child {
-    width: auto;
-    min-width: auto;
-    padding: 8px;
-   }
-   prm-search-bar .simple-search-wrapper .search-options::after {
-     background-color: transparent;
-   }
-   prm-search-bar .simple-search-wrapper .search-options prm-tabs-and-scopes-selector {
-     border-bottom: 1px solid #e4e4e4;
-     padding-top: 5px;
-   }
-   
-}
