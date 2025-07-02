@@ -11,30 +11,24 @@
 </div>
 
 <!-- The html below is used for Digital Bookplates component -->
-    <!-- items have image and matching with $$U and $$d -->
-<!-- <ul class="serviceLink">
-    <li ng-repeat="rec in vm.itemList track by $index">
+<ul ng-if="vm.hasPlates" class="serviceLink">
+    <li ng-repeat="rec in vm.plateList track by $index">
         <md-card class="serviceLinkBox">
             <md-card-title-text class="serviceLinkSpace">
-                <a class="arrow-link md-primoExplore-theme" href="{{rec.linkURL}}" title="{{rec.displayLabel}}"
-                    target="_blank">
-                    <span>{{rec.displayLabel}}</span>
-                    <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui"
-                        icon-definition="open-in-new"></prm-icon>
-                    <prm-icon link-arrow icon-type="svg" svg-icon-set="primo-ui"
-                        icon-definition="chevron-right"></prm-icon>
+                <a class="arrow-link md-primoExplore-theme" href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank">
+                    <span>Acquired by the {{rec.label}}</span>
                 </a>
             </md-card-title-text>
             <md-card-title-media>
                 <div layout="row" layout-align="start start" class="md-media-md card-media">
-                    <a href="{{rec.linkURL}}" target="_blank" title="{{rec.displayLabel}}" class="serviceLinkImage">
-                        <img src="{{rec.linkNewURL}}" alt="{{rec.displayLabel}}" class="serviceLinkPhoto" />
+                    <a href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank" class="serviceLinkImage">
+                        <img src="https://nrs.harvard.edu/urn-3:hul.EBKPLT:{{rec.name}}" class="serviceLinkPhoto" />
                     </a>
                 </div>
             </md-card-title-media>
         </md-card>
     </li>
-</ul> -->
+</ul>
 
 <!-- Alma-D auxilliary images -->
 

@@ -7,8 +7,7 @@ angular.module('viewCustom')
     .service('customHathiTrustService',['$http',function ($http) {
         var serviceObj={};
 
-        /* bypassing primo-services app 2021-02-22, calling hathi directly */
-        serviceObj.doGet=function (isbn,oclc) {                 
+        serviceObj.doGet=function (isbn,oclc) {
             if (isbn) {
                 return $http({
                     method: 'GET',
@@ -30,33 +29,30 @@ angular.module('viewCustom')
             };
         }; 
 
-        /* the call to this function has been commented out in prm-search-result-availability-line-after.js
-            because we're now bypassing primo-services app for hathitrust  */
-        serviceObj.doPost=function (url,param) {
-            return $http({
-                'method':'post',
-                'url':url,
-                'timeout':5000,
-                'data':param
-            })
-        };
-
         /* test whether we want to call Hathi API, and if so, grab params we want to send */
-        // serviceObj.validateHathiTrust=function (pnxItem) {
-        //   var item={'flag':false,'isbn':'','oclcid':'','data':{}};
-        //   if(pnxItem.pnx.control.sourceid && pnxItem.pnx.delivery.deliveryCategory && pnxItem.pnx.addata) {
-        //       if (pnxItem.pnx.control.sourceid[0] === '01HVD_ALMA' && pnxItem.pnx.delivery.delcategory[0] !== 'Online Resource' && pnxItem.pnx.delivery.delcategory[0] !== 'Alma-E' && pnxItem.pnx.delivery.delcategory[0] !== 'Alma-D') {
-        //           item.flag = true;
-        //           if(pnxItem.pnx.addata.oclcid) {
-        //               item.oclcid=pnxItem.pnx.addata.oclcid[0];
-        //           }
-        //           if(pnxItem.pnx.addata.isbn){
-        //               item.isbn=pnxItem.pnx.addata.isbn[0];
-        //           }
-        //       }
-        //   }
-        //   return item;
-        // };
+	serviceObj.validateHathiTrust=function (pnxItem) {
+		var online = false;
+		var item={'flag':false,'isbn':'','oclcid':'','data':{}};
+		if(pnxItem.delivery.deliveryCategory) {
+			let delCat=pnxItem.delivery.deliveryCategory;
+			for(let i=0; i < delCat.length; i++){
+				let str=delCat[i];
+				if (str==='Alma-E' || str==='Alma-D' ) {
+					online = true;
+				}
+			}
+		}
+		if (!online && pnxItem.pnx.control.sourceid === 'alma') {
+			item.flag = true;
+			if(pnxItem.pnx.addata.oclcid) {
+				item.oclcid=pnxItem.pnx.addata.oclcid[0];
+			}
+			if(pnxItem.pnx.addata.isbn){
+				item.isbn=pnxItem.pnx.addata.isbn[0];
+			}
+		}
+		return item;
+	};
 
         // validate if orig data is harvard, if so, present our copy, otherwise present any full-view, else limited search
         serviceObj.validateHarvard=function (arrList) {
