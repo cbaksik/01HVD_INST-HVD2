@@ -1,8 +1,8 @@
 /**
  * Created by samsan on 8/7/17.
  * This component is used for Digital Bookplates
+ * also adds link to HT from below full bib
  * 
- * CB adding tech loan as well March 2020
  */
 (function(){
     'use strict';
@@ -10,9 +10,9 @@
     .controller('prmServiceLinksAfterCtrl',['customImagesService','$timeout','$sce',function (customImagesService, $timeout,$sce) {
         let vm=this;
         let cisv=customImagesService;
-        vm.itemList=[];
+        vm.plateList=[];
+	   vm.hasPlates = "false"; 
         vm.almaDaux='';
-        vm.recordLinks=[]; // keep track the original vm.parentCtrl.recordLinks
         vm.getData=()=> {
             // make a copy to avoid data binding
             vm.recordLinks = angular.copy(vm.parentCtrl.recordLinks);        
@@ -54,15 +54,11 @@
             //     }
             // }
 
-            // DIGITAL BOOKPLATES
-            // vm.itemList=cisv.extractImageUrl(vm.parentCtrl.item, vm.recordLinks);
-            // $timeout(()=> {
-            //     vm.recordLinks = angular.copy(vm.parentCtrl.recordLinks);                
-            //     vm.itemList=cisv.extractImageUrl(vm.parentCtrl.item, vm.recordLinks);
-            //     if(vm.recordLinks.length > 0 && vm.itemList.length > 0) {
-            //         vm.parentCtrl.recordLinks = cisv.removeMatchItems(vm.recordLinks, vm.itemList);
-            //     }
-            // },1500);
+          //   DIGITAL BOOKPLATES
+		if (vm.parentCtrl.item.pnx.display.lds06) {
+			vm.hasPlates = "true";
+			vm.plateList=cisv.extractImageUrl(vm.parentCtrl.item);
+		}
 
         };
 
