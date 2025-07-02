@@ -3,11 +3,35 @@
 /* advanced search code is in hvd_core.css */
 
 /* they are separate b/c HOLLIS Images has different search bar coding */
+#hvd-beta-sticker {
+	 max-height: 50px;
+	 margin-left: -4px;
+	 vertical-align: middle;
+}
+#hvd-beta-badge {
+    text-align: end;
+    margin-top: 6px;
+    transform: rotate(-13deg);
+    margin-right: -28px;
+}
+#hvd-beta-badge span {
+    padding: 0px 6px;
+    color:#0579b8;
+    font-weight: 700;
+    border: 3px solid #0579b8;
+    opacity: .8;
+    font-size: large;    
+    text-transform: uppercase;
+}
+
 
 prm-search-bar {
     background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
 }
 
+prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm:after {
+	content:"Search";
+}
 /* reorder searchbar */
 prm-search-bar .search-element-inner .search-input {
     order: 2;
@@ -18,7 +42,18 @@ prm-search-bar .search-element-inner .search-options {
 prm-search-bar .search-element-inner .search-actions {
    order: 3;
 }
-   
+prm-search-bar .search-switch-buttons .md-button.switch-to-advanced span.layout-align-start-center {
+	background-color:rgba(58, 58, 58, 0.15);
+	padding: 4px 12px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):hover:not([disabled]):hover:not([disabled]),
+prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):focus:not([disabled]):focus:not([disabled]) {
+	background-color:#a51c30;
+	border: 1px solid #eb001b;
+	color:#fff
+}   
 
 /* search bar padding */
 prm-search-bar > div:first-child > div:first-child > div:first-child,

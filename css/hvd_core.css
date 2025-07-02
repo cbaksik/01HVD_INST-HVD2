@@ -72,27 +72,6 @@ prm-search-bar > div:first-child > div:first-child > div:first-child {
 div.product-logo {
     display: none;
 }
-#hvd-beta-sticker {
-	 max-height: 50px;
-	 margin-left: -4px;
-	 vertical-align: middle;
-}
-#hvd-beta-badge {
-    text-align: end;
-    margin-top: -5px;
-    transform: rotate(-15deg);
-    margin-right: -21px;
-}
-#hvd-beta-badge span {
-    padding: 0px 6px;
-    color:#0579b8;
-    font-weight: 700;
-    border: 3px solid #0579b8;
-    opacity: .8;
-    font-size: large;    
-    text-transform: uppercase;
-}
-
 
 prm-browse-search-bar {
     background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
@@ -126,9 +105,6 @@ prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm 
 	border:8px solid #fff;
 	border-radius: 12px;
 }
-prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm:after {
-	content:"Search";
-}
 prm-search-bar .search-actions .md-button.button-confirm:hover:not([disabled]),
 prm-search-bar .search-actions .md-button.button-confirm:focus:not([disabled]) {
 	background-color: #2a5280;
@@ -147,18 +123,6 @@ prm-search-bar .search-switch-buttons .md-button.switch-to-advanced {
 }
 prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
 	height:36px;
-}
-prm-search-bar .search-switch-buttons .md-button.switch-to-advanced span.layout-align-start-center {
-	background-color:rgba(58, 58, 58, 0.15);
-	padding: 4px 12px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-}
-prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):hover:not([disabled]):hover:not([disabled]),
-prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):focus:not([disabled]):focus:not([disabled]) {
-	background-color:#a51c30;
-	border: 1px solid #eb001b;
-	color:#fff
 }
 prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm prm-icon {
 	display:none;
@@ -1411,6 +1375,9 @@ span[translate="nui.aria.fulldisplay.closeButton.short"] {
 prm-action-list>md-nav-bar .md-nav-item .md-button {
     border-radius:4px;
 }
+prm-action-list>md-nav-bar .md-nav-item {
+	width:95px;
+}
 /* prm-action-list>md-nav-bar .md-nav-item .md-button prm-icon {
     min-width:100px;
 } */
@@ -2208,8 +2175,8 @@ prm-alma-viewit-items .separate-list-items md-list-item .md-list-item-text {
 prm-alma-viewit-items prm-icon[icon-definition^=open-in-new] {
 	display:none;
 }
-/* show license */
-prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[translate$='show_license']) {
+/* show-hide license */
+prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[translate$='license']) {
 	border: 1px solid #e4e4e4;
 	border-radius: 3px;
 	font-size: .8em;
@@ -2222,11 +2189,12 @@ prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[t
 	display: inline-block;
 	background-color: transparent;
 	text-transform: uppercase;
+	min-width:115px;
 	/* min-height: 26px;
 	line-height: 18px; */
 }
-prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[translate$='show_license']):hover,
-prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[translate$='show_license']):focus {
+prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[translate$='license']):hover,
+prm-alma-viewit-items ._md-secondary-container .md-button.button-link:has(span[translate$='license']):focus {
 	background-color: #e4e4e4;
 }
 prm-alma-viewit-items md-list-item .in-element-dialog-context:has(span[translate$='hide_license']) p span:not(:first-child):before {
