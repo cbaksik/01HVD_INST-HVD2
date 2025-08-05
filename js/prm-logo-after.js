@@ -4,20 +4,8 @@
  */
 
 angular.module('viewCustom')
-    .controller('prmLogoAfterCtrl',[function () {
+    .controller('prmLogoAfterCtrl',['$scope', '$compile', '$sce',function ($scope, $compile, $sce) {
         var vm=this;
-        var brokenLink = [];        
-        var currentURL = '';
-        //var pageTitle = '';
-        /* vm.$onInit=function () {
-            brokenLink = document.querySelectorAll("a[href^='https://asklib-its-harvard.libanswers.com/form?queue_id=6017']");
-            //pageTitle = document.getElementById('ogTitle').getAttribute('content');            
-            //console.log(brokenLink[0].href);
-            currentURL = encodeURIComponent(window.location.href);
-            //pageTitle = encodeURIComponent(window.document.title);
-            //console.log(pageTitle);
-            brokenLink[0].href = brokenLink[0].href + '&referrer=' + currentURL;
-        }; */
 
     }]);
 
