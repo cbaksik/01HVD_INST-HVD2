@@ -44,4 +44,7 @@
         </iframe>
     </div>
 </div>
-<!-- end Alma-D auxilliary images  -->
+
+
+<!-- if VIA record, add div with custom class to use in css:has so we can hide online access link for via records  -->
+<div ng-if="vm.isVIArecord" class="hvd-hide-VIA-otb-online-button"></div>
