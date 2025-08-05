@@ -16,9 +16,13 @@
 	vm.componentJSON={};
 
 	vm.$onInit=function () {
-		if (vm.parentCtrl.item.pnx.display.lds20) {
-			vm.isVIArecord = true;
-			if (vm.parentCtrl.item.pnx.display.lds20 == '1') {
+		
+		// console.log(vm.parentCtrl.item.pnx);
+		if (vm.parentCtrl.item.pnx.display.source) {
+			if (vm.parentCtrl.item.pnx.display.source[0] == 'HVD_VIA') {
+				vm.isVIArecord = true;
+			}
+			if (vm.parentCtrl.item.pnx.display.lds20[0] == '1') {
 				vm.singleImageFlag = true;
 				if (vm.parentCtrl.item.pnx.display.lds67) { 
 					vm.filename = vm.parentCtrl.item.pnx.display.lds67[0];
@@ -26,9 +30,10 @@
 				}
 				vm.mpsEmbed(vm.filename);
 		    }
-	    }		
-		if (vm.parentCtrl.item.pnx.display.lds65) {
- 			vm.componentJSON = convertArrayToJSON(vm.parentCtrl.item.pnx.display.lds65);
+	    		
+			if (vm.parentCtrl.item.pnx.display.lds65) {
+				vm.componentJSON = convertArrayToJSON(vm.parentCtrl.item.pnx.display.lds65);
+			}
 		}
 	};
 

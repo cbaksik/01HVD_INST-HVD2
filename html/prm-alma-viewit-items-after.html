@@ -2,10 +2,10 @@
 
 <!-- single image -->
 
-<div ng-if="vm.singleImageFlag">
+<div class="via-alma-viewit" ng-if="vm.singleImageFlag">
 
 	<!-- so users have another option if restricted image doesn't display -->
-	<div style="margin-bottom: 25px;margin-top: 25px;text-align: center;">
+	<div class="hvd-img-open-in-new">
 		<a target="_blank" href="{{vm.iframeAttributes.src}}?buttons=Y">Open image in new tab</a>
 	</div>
 	
@@ -33,9 +33,9 @@
 
 
 <!-- multiple images -->
-<div class="hvd-via-record-page-grid" ng-if="vm.componentJSON.length > 1">
+<div class="hvd-via-record-page-grid via-alma-viewit" ng-if="vm.componentJSON.length > 1">
 
-	<md-grid-list md-row-height="210px" md-cols="3">
+	<md-grid-list md-row-height="230px" md-cols="4">
 		<md-grid-tile ng-repeat="item in vm.componentJSON track by $index" ng-click="vm.gotoFullPhoto($event,item,$index)">
 			<md-card class="hv-md-card">
 				<md-card-content class="imageBox">
@@ -45,7 +45,9 @@
 							<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
 						</div>
 					</a>
-					<div class="imageTitle">{{vm.componentJSON[$index].T[0]|truncatefilter}}</div>
+					<div class="imageTitle" title="{{vm.componentJSON[$index].T[0]}}">
+						<span>{{vm.componentJSON[$index].T[0]|truncatefilter}}</span>
+					</div>
 				</md-card-content>
 			</md-card>
 		</md-grid-tile>
