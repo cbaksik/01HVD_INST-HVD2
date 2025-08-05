@@ -603,16 +603,26 @@ prm-search-result-journal-indication-line {
 /* .hvd_TOC_link span {
 	vertical-align: top;
 } */
+/* hide via otb online button */
+.search-result-availability-line-wrapper:has(.hvd-hide-VIA-otb-online-button) {
+	display:none;
+}
+.search-result-availability-line-wrapper {
+	min-height:1.4em;
+}
 /* button changes per Feb 2022 redesign */
-prm-search-result-availability-line .md-button.neutralized-button {
+prm-search-result-availability-line .md-button.neutralized-button,
+.hvd-via-online-button.md-button.neutralized-button {
     text-transform:uppercase;
 }
 prm-search-result-availability-line prm-icon {
     display:none;
 }
-prm-search-result-availability-line .md-button.arrow-link-button .button-content {
+prm-search-result-availability-line .md-button.arrow-link-button .button-content,
+.hvd-via-online-button  {
     color:#0579b8;
     font-weight:600;
+    line-height:1.4;
 }
 /* this line is needed to prevent tiny right underline from appearing on button hover, focus for online access*/
 prm-search-result-availability-line .md-button.arrow-link-button .button-content:hover,
@@ -690,7 +700,8 @@ prm-search-result-availability-line .md-button.neutralized-button:focus [class*=
     border-bottom:3px solid rgba(43, 44, 44, 0.3);
 }
 /* color of button and text when online, for alma content, separate lines below for content from CDI */
-prm-search-result-availability-line button.md-button.neutralized-button span[translate*="delivery.code.not_restricted"] {
+prm-search-result-availability-line button.md-button.neutralized-button span[translate*="delivery.code.not_restricted"],
+ .hvd-via-online-button span.availability-status {
     color:white;
     padding: 3px 10px 2px 25px;
     border-radius: 4px;
@@ -706,7 +717,9 @@ prm-search-result-availability-line button.md-button.neutralized-button svg {
     color:white;
 }
 prm-search-result-availability-line button.md-button.neutralized-button:hover span[translate*="delivery.code.not_restricted"],
-prm-search-result-availability-line button.md-button.neutralized-button:focus span[translate*="delivery.code.not_restricted"] {
+prm-search-result-availability-line button.md-button.neutralized-button:focus span[translate*="delivery.code.not_restricted"],
+.hvd-via-online-button:hover span.availability-status,
+.hvd-via-online-button:focus span.availability-status {
     background-color:#2a5280;
     border-bottom:0px solid transparent;
 }
@@ -714,6 +727,7 @@ prm-search-result-availability-line button.md-button.neutralized-button:focus sp
 /* adding more variations for VE */
 prm-search-result-availability-line .fulltext,
 prm-search-result-availability-line .fulltext_multiple,
+prm-search-result-availability-line .ext_not_restricted,
 prm-search-result-availability-line .fulltext_linktorsrc_topic,
 prm-search-result-availability-line .fulltext_linktorsrc {
     color:white;
@@ -741,8 +755,14 @@ prm-search-result-availability-line button prm-icon[icon-definition*="chevron-ri
     display:none;
 }
 prm-search-result-availability-line-after div {
-    margin: 10px 0;
+    margin: 0px 0;
     padding-bottom: 0em;
+}
+prm-search-result-availability-line-after prm-sm-more-records div {
+    margin: 0;
+}
+.hvd_OL_link, .hvdHathiViewOnline_div {
+	margin-top:10px;
 }
 prm-search-result-availability-line-after a {
     text-transform: uppercase;
@@ -1019,6 +1039,19 @@ prm-page-nav-menu button:focus {
 /* end page nav */
 /*  ------------ */
 /*        FACETS          */
+/* show note if facets haven't loaded */
+/* has prm-search-result-sort-by, doesn't have prm-facet-exact */
+/* prm-facet:not(prm-facet-exact) prm-search-result-sort-by:after {
+	content:'Filters are loading...';
+} */
+/* next stanza is to prevent tall empty div from creating a bunch of white space after filters */
+prm-facet .primo-scrollbar + div {    
+    display:none;
+}
+/* next line is needed to prevent facets from overlapping footer */
+prm-facet > .primo-scrollbar { 
+	position: relative !important 
+}
 /* BEGIN FULL TEXT SWITCH (toggle for search inside fulltext CDI) */
 prm-facet .switch-results {
     transition:none;
@@ -1104,10 +1137,6 @@ prm-facet .switch-results md-switch.active:focus:not([disabled]) {
 } 
 /* END FULL TEXT SWITCH  */
 
-prm-facet .primo-scrollbar + div {    
-    display:none;
-}
-prm-facet > .primo-scrollbar { position: relative !important }
 prm-facet prm-search-result-sort-by md-select {
     padding: 5px;
     border-radius: 3px;
@@ -1277,19 +1306,11 @@ prm-full-view-service-container prm-service-header h4[translate="nui.getit.tab1_
 prm-full-view-service-container prm-service-header h4 {
     padding-bottom:15px;
 }
-prm-full-view-service-container prm-view-online div {
-    padding-bottom:25px;
-}
-prm-full-view-service-container prm-view-online div a {
+.hvd-img-open-in-new {
     text-transform:uppercase;
     font-weight:600;
     padding-bottom:3px;
-}
-prm-full-view-service-container prm-view-online a prm-icon {
-    display:none;
-}
-prm-full-view-service-container prm-view-online a.arrow-link [link-arrow] {
-    display:none;
+    margin-bottom:5px;
 }
 /* line spacing between marc elements in VE */
 /* .full-view-section-content prm-service-details .section-body .spaced-rows>div {
@@ -1494,7 +1515,6 @@ prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] {
 }
 prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] label {
 	text-transform:uppercase;
-	font-weight: 600;
     font-size: 14px;
 }
 prm-search-bar .advanced-search-tabs .advanced-drop-downs div[role="group"] {
@@ -1528,6 +1548,18 @@ div.search-switch-buttons .md-button {
 }
 prm-advanced-search legend {
     transform:scale(1.0);
+}
+/* if user has selected a value for resource type, lang, or date, display text in bold to make it easier to see that they have filled in a value there */
+prm-advanced-search .advanced-drop-downs md-select.ng-dirty md-select-value .md-text span {
+	font-weight:600;
+}
+/* if user has not chosen a valdue for the dropdown, don't show text as bold */
+prm-advanced-search .advanced-drop-downs md-select-value .md-text span[translate$='.any'],
+prm-advanced-search .advanced-drop-downs md-input-container md-select.ng-untouched,
+prm-advanced-search .advanced-drop-downs md-select-value .md-text span[translate$='day'],
+prm-advanced-search .advanced-drop-downs md-select-value .md-text span[translate$='month']
+{
+	font-weight:400;
 }
 prm-advanced-search md-select:hover, prm-advanced-search md-select:focus {
     background:#e4e4e4;
@@ -2059,7 +2091,7 @@ prm-tags-list input#own-tags-input {
 prm-tags-list input::placeholder {
     color:#1e1e1e;
 }
-/* SERVICE LINKS SECTION */
+/* SERVICE LINKS SECTION  (links under Details) */
 div#links prm-full-view-service-container prm-service-header div.layout-row md-divider {
     display:none;
 }
@@ -2077,6 +2109,10 @@ prm-service-links a prm-icon {
 }
 prm-service-links a.arrow-link [link-arrow] {
     display:none;
+}
+/* hide via otb online button */
+prm-service-links:has(.hvd-hide-VIA-otb-online-button) .spaced-rows > div > div > a {
+	display:none;
 }
 /* digital bookplates */
 .serviceLinkBox {
@@ -2141,12 +2177,25 @@ prm-library-card-menu .md-button.button-with-icon > prm-icon,
 prm-authentication .md-button.button-with-icon > prm-icon {
     display: none;
 }
-/************ BEGIN view it get it - formerly mash-up ****************/
-/* view it */
+/*                                                          */
+/************ BEGIN View it Get it - formerly mash-up ****************/
+/*                                                          */
+/*     VIEW IT                                                  */
 prm-alma-viewit {
 	display: block;
 	border: 1px solid #e4e4e4;
 	padding: 10px;
+}
+prm-alma-viewit:has(.via-alma-viewit) {
+	border: 0px;
+	padding:0px;
+}
+prm-alma-viewit:has(.via-alma-viewit) a.item-title {
+	display:none;
+}
+/* this element is empty but still takes up space on via records online section */
+prm-alma-viewit-items:has(.via-alma-viewit) .separate-list-items md-list-item {
+	display:none;
 }
 prm-full-view-service-container prm-alert-bar .bar.alert-bar {
     background-color: #f7eda3;
@@ -2219,26 +2268,29 @@ prm-alma-viewitprm-alma-viewit-items .md-button.button-link[translate="fulldispl
 prm-alma-viewit-items .md-button.button-link[translate="fulldisplay.representations.showmore"]:focus {
 	background-color: #2a5280; 
 }
-/* end show more items button in view it */
-/* --------------------------------------------------------------------------*/
+/* end VIEW IT */
+/*                                                       */
 
 /* GET IT */
 
  /* note: 
- prm-locations is list of multiple holdings;
- prm-location is list of single holding;
- prm-location-items is expanded single location with items;
- all have different elements and classes */
-/* prm-opac {
-	background-color:green;
+ prm-locations	 	= list of multiple holdings;
+ prm-location 		= list of single holding;
+ prm-location-items = expanded single location with items;
+
+ /* hiding hours info button for now - placement is too problematic */
+/* need both references to override otb css */
+prm-opac prm-stack-map,
+prm-location .stack-map {
+	display:none;
 }
-prm-opac prm-location {
-	background-color:aqua;
+prm-opac prm-stack-map .md-button.button-with-icon>prm-icon md-icon {
+	height: 16px;
+	width: 16px;
+	min-height: 16px;
+	min-width: 16px;
 }
-prm-opac prm-location-items {
-	color:purple;
-} */
-/* TITLE-LEVEL REQUEST LINKS */
+/* title-level request links */
 prm-opac prm-request-services .labeled-block .block-body {
 	display:block;
 	margin-left: -5px;
@@ -2253,7 +2305,7 @@ prm-opac prm-request-services .labeled-block .block-body prm-service-button .md-
 prm-opac prm-request-services .links-block .separated-block-item:after {
 	display:none;
 }
-/* END TITLE-LEVEL REQUEST LINKS */
+/* END title-level request links */
 /* request form */
 prm-opac prm-request #form_field_termsOfUse,
 prm-opac prm-request #form_field_notNeedAfter,
@@ -2273,6 +2325,8 @@ prm-opac prm-request #form_field_pickupLocation md-input-container md-select {
 prm-opac prm-request #form_field_pickupLocation md-input-container md-select:focus {
 	outline: auto;
 }
+/* end request form */
+/* begin 'Access options' header and alert bar  */
 prm-opac prm-opac-back-button {
 	display:block;
 	margin:10px 3px 15px 0px;
@@ -2309,7 +2363,6 @@ prm-opac .md-button.button-as-link.link-alt-color:hover:not([disabled]),
 prm-opac .md-button.button-link.link-alt-color:focus:not([disabled]),
 prm-opac .md-button.button-link.link-alt-color:hover:not([disabled]) {
 	color:#0579b8;
-	/* border-bottom:1px solid #0579b8; */
 	border-radius:0px;
 	background-color:transparent;
 	box-shadow:inset 0 -3px 0 0 rgba(5, 121, 184, 0.3);
@@ -2318,7 +2371,10 @@ prm-opac prm-alert-bar .bar.alert-bar {
 	background-color: #f7eda3;
 	border-bottom: none;
 }
- /* list of libraries */
+ /* list of libraries, incl item filter  */
+prm-opac prm-locations > .padding-left-medium {
+	padding-left:0em;
+}
 prm-opac prm-locations>div.layout-row {
 	background-color: #e4e4e4;
 	padding-top: 10px;
@@ -2332,17 +2388,47 @@ prm-opac prm-locations>div.layout-row:before {
 prm-opac prm-locations .separate-list-items md-list-item {
 	border-bottom:1px solid #e4e4e4;
 }
+/* prevent entire hol from turning grey on hover */
+/* need separate css for dialog over search results vs record in its own tab */
+md-dialog prm-opac md-list md-list-item prm-location .md-button:hover:not([disabled]).neutralized-button,
+md-dialog prm-opac md-list md-list-item prm-location .md-button:focus:not([disabled]).neutralized-button,
+prm-opac prm-location > .md-button.neutralized-button:focus,
+prm-opac prm-location > .md-button.neutralized-button:hover {
+	background-color:transparent;
+}
+/* make lib name look like active link on hover instead of entire hol */
+prm-opac prm-location > .md-button.neutralized-button:focus h3,
+prm-opac prm-location > .md-button.neutralized-button:hover h3 {
+	box-shadow: inset 0 -3px 0 0 rgba(5, 121, 184, 0.3);
+}
+/* make lib + loc + call number blue in list of all libraries only */
+prm-opac prm-locations prm-location h3 {
+	color:#0579b8;
+	padding-bottom: .2em;
+	line-height:1.6em;
+}
+prm-opac prm-locations prm-location .md-list-item.md-2-line .md-list-item-text h3 + p {
+	margin-left:10px;
+}
+/* this adding space bewteen the location name and call number */
+prm-opac prm-locations prm-location p span,
+prm-opac prm-location-items p span {
+	padding-right:15px;
+}
 /* item filter button */
+/* this is where I'm trying shenanigans to move filter etc */
+prm-opac prm-location-items .tab-content-header {
+	display:block;
+}
+prm-opac prm-location-items .tab-content-header div.layout-column+div.layout-row {
+	display:block;
+	flex-grow: 1;
+}
+/* end filter shenanigans */
 prm-opac prm-locations button.md-button.md-mini,
 prm-opac prm-location-items button.md-button.md-mini {
-	/* width:200px; */
 	background-color:#0579b8;
 }
- /* whatever this was intended for needs to be more specific, it was also applying to entire hol in hol list */
-/* prm-opac prm-locations .md-button:hover:not([disabled]),
-prm-opac prm-locations .md-button:focus:not([disabled]) {
-	background-color:#2a5280;
-} */
 prm-opac prm-locations button.md-button.md-mini prm-icon md-icon.md-primoExplore-theme svg,
 prm-opac prm-location-items button.md-button.md-mini prm-icon md-icon.md-primoExplore-theme svg {
 	color:#fff;
@@ -2356,7 +2442,7 @@ prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container 
 	border:1px solid #3a3a3a;
 	margin-right: .5em;
 }
-/* show more location button and show more items button */
+/* begin show more location button and show more items button */
 prm-opac .md-button.button-link.link-alt-color.zero-margin:has(span[translate$="showmore"])
 {
 	color:#fff;
@@ -2371,7 +2457,7 @@ prm-opac .md-button.button-link.link-alt-color.zero-margin:has(span[translate$="
 prm-opac .md-button.button-link.link-alt-color.zero-margin:has(span[translate$="showmore"]):focus {
 	background-color: #2a5280; 
 }
-/* end show more items button */
+/* END show more items button */
 prm-opac prm-locations prm-locations-filter .filter-bar md-input-container md-select,
 prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container md-select {
 	margin-top:0px;
@@ -2382,6 +2468,10 @@ prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container 
 }
 prm-opac prm-location .separate-list-items md-list-item .md-list-item-text {
 	padding: .75em 0em;
+}
+prm-opac h3,
+prm-opac h3 + p {
+	display:inline;
 }
 prm-opac h3,
 prm-opac md-list-item.md-2-line .md-list-item-text h3 {
@@ -2410,90 +2500,77 @@ prm-opac prm-location .layout-row>.flex-70 {
 	max-width:100%;
 }
 /* location name and call number, from prm-location, doesn't work if you add prm-opac */
-md-list-item.md-2-line .md-list-item-text p {
+md-list-item.md-2-line .md-list-item-text h3+p {
 	font-size: 16px;
+	margin-left: 15px;
 }
 /* location name and call number */
 prm-opac prm-location-items p
 {
 	font-size: 16px;
 }
-/* avail text plus comma after */
+/* this hides the word 'available' or other status that appears in green after name of library, as well as the comma that appears after it */
 prm-opac prm-location p>span.availability-status,
 prm-opac prm-location p>span.availability-status+span {
 	display:none;
 }
-/* items display */
+/* this hides the semicolon that appears between location and call number */
+/* in both list of libraries as well as in expanded display for single library */
+prm-opac prm-location-items p>span.availability-status+span+span+span,
+prm-opac prm-location p>span.availability-status+span+span+span {
+	display:none;
+}
 /* avail text plus comma after */
 prm-opac prm-location-items h6+p>span.availability-status,
 prm-opac prm-location-items h6+p>span.availability-status+span  {
 	display:none;
 }
-/* this is where I'm trying shenanigans to move filter etc */
-prm-opac prm-location-items .tab-content-header {
-	display:block;
-}
-prm-opac prm-location-items .tab-content-header div.layout-column+div.layout-row {
-	display:block;
-	flex-grow: 1;
-}
-/* filter and expand buttons when viewing a holding and its items */
-prm-opac prm-location-items:has(md-list-item) .tab-content-header div.layout-column+div.layout-row {
-	/* background-color:#e4e4e4; */
-}
-/* prm-opac prm-location-items .tab-content-header>div.layout-column {
-	min-width: 800px;
-} */
- /* alert about not being able to find any items to display */
- prm-opac prm-location-items .alert-bar {
-	display:none;
- }
 /* begin holding notes */
 prm-opac prm-location-holdings  {
-	margin-top:15px;
+	margin-top:5px;
 	margin-left:0px;
+	display:block;
+}
+/* link to expand/collapse holding notes */
+prm-opac prm-location-holdings .md-button.button-as-link { 	
+	margin-left:0px; 
+	padding: .3em 0em .3em 0em;
+	margin-top:5px;
 }
 prm-opac prm-location-holdings .weak-text {
 	color:#3a3a3a;
 }
-prm-opac prm-location-holdings div.layout-row {
-	margin-bottom: 5px;
-}
-prm-opac prm-location-holdings .summary-brief-header {
-	font-weight:600;
-}
-/* link to expand/collapse holding notes */
-prm-opac prm-location-holdings .md-button.button-as-link { 	
-	margin-left:0px; padding-left:0em; 
-}
- /* hide 0 of zero avail */
-
 /* spacing above each hol note field */
 prm-opac prm-location-holdings .display-block .layout-column>div {
 	margin-top:5px;
 }
-/* expanded hol notes - display note prefix inline with following subfields */
-prm-opac prm-location-holdings .display-block .layout-column div.margin-top-small {
-	display: inline;
+/* label for each hol field, collapsed form, expanded form */
+prm-opac prm-location-holdings .summary-brief-header,
+prm-opac prm-location-holdings .margin-top-small 
+{
+	font-weight:600;
+	min-width: auto;
 	padding-right: 1em;
-	min-width: 100px;
-}
-/* expanded hol notes - in a given field - display all subfields inline */
-prm-opac prm-location-holdings .display-block .layout-column div.padding-left-medium {
 	display: inline;
-	padding-left: 0.1em;
+	margin-right:0;
 }
-
+/* hol field content, expanded  */
+/* n.b. every subfield in its own div indistinguishable from fields, so only way to get all subfields in a field to display inline is to display all fields inline too, in case of repeated tags */
+prm-opac prm-location-holdings .display-block .layout-column .padding-left-medium {
+	display: inline;
+	padding-left: 0em;
+	padding-right: 0.3em;
+}
 /* end holding notes */
-/* this is the down caret to expand items */
-/* hide for now in favor of just leaving the expand all */
+/* START ITEMS */
+ /* alert about not being able to find any items to display */
+ prm-opac prm-location-items .alert-bar {
+	display:none;
+ }
+/* this is the down caret to expand items, hide for now to simplify */
 prm-opac prm-location-items .md-secondary-container button.item-expand-button {
 	display:none;
 }
- /* don't need to do this - can use NOT_DEFINED in code table to omit label */
-/* prm-opac prm-location-items md-list-item div.md-list-item-text div span[translate*="nui"] {
-	display:none;
-} */
 /* box around item list */
 prm-opac prm-location-items md-list.separate-list-items {
 	border: 1px solid #e4e4e4;
@@ -2509,14 +2586,12 @@ prm-opac prm-location-items md-list.separate-list-items md-list-item:last-of-typ
 /* each container item */
 prm-opac prm-location-items md-list.separate-list-items md-list-item  .md-list-item-text {
 	padding: .3em 0em 0em .3em;
-	/* border-bottom: 1px solid #E4E4E4; */
 }
 prm-opac prm-location-items md-list.separate-list-items md-list-item  .md-list-item-textt>div:not(:last-of-type) {
 	padding-right: 2.5em;
  }
 /* the line height here is to make them consistent across columns when you expand an item  */
 prm-opac prm-location-items md-list.separate-list-items md-list-item  .md-list-item-text div {
-	/* background-color:pink; */
 	margin-bottom: 5px;
 	line-height: 1.2em;
 }
@@ -2532,29 +2607,15 @@ prm-opac prm-location-items md-list.separate-list-items md-list-item.md-2-line  
 	color:#3a3a3a;
 }
 /* item-level request links eg aeon  */
-prm-opac prm-location-items md-list.separate-list-items md-list-item prm-service-button .md-button.button-as-link {
+prm-location-items md-list prm-service-button .md-button, 
+prm-location-items md-list prm-service-button .md-button.button-as-link {
+	padding: .5em 0em;
 	color: #0579b8;
-	/* padding: .5em .5em; */
 	margin-right:10px;
 }
-/* prm-opac prm-location-items md-list.separate-list-items md-list-item prm-service-button .md-button.button-as-link:focus:not([disabled]), 
-prm-opac prm-location-items md-list.separate-list-items md-list-item prm-service-button .md-button.button-as-link:hover:not([disabled]) {
-	background-color: #0579b8;
-} */
-/* remove icon indicating external link */
+/* remove request link icon indicating external link */
 prm-opac prm-service-button prm-icon {
 	display:none;
 }
-/* hiding hours info button for now - placement is too problematic */
-/* need both references to override otb css */
-prm-opac prm-stack-map,
-prm-location .stack-map {
-	display:none;
-}
-prm-opac prm-stack-map .md-button.button-with-icon>prm-icon md-icon {
-	height: 16px;
-	width: 16px;
-	min-height: 16px;
-	min-width: 16px;
-}
+
 /************ END view it get it - formerly mash-up ****************/
