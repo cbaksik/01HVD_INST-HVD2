@@ -7,12 +7,18 @@ angular.module('viewCustom')
 	var vm=this;
 	vm.itemPNX={};
 	vm.hasTOC='';
+	vm.isVIA='';
 
 	vm.$onInit=function() {
 		vm.itemPNX=vm.parentCtrl.item;
 		if (vm.itemPNX.pnx.display.contents) {
 			vm.hasTOC = 'true';
 		}
+		 if (vm.itemPNX.pnx.display.source) {
+			if (vm.itemPNX.pnx.display.source[0] == 'HVD_VIA') {
+				vm.isVIA=true;
+			}			
+		 }
    
 	};
 }]);
