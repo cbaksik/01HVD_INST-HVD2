@@ -9,34 +9,36 @@
 	</div>
 </div>
 
-<div layout="row" class="whiteBg hvdImgComponentView" ng-if="vm.index !== -1">
-
-	<div flex="{{vm.flexsize}}" class="full-view-inner-container whiteBg">
-
-		<!-- Link to go to parent record -- needed because Curiosity only has components and links here directly, so user needs a way to get to parent record -->
-		<div class="parentImageLinkWrapper" ng-if="vm.componentData">
+<!-- Link to go to parent record -- needed because Curiosity only has components and links here directly, so user needs a way to get to parent record -->
+		<div class="parentImageLinkWrapper hvd-img-open-in-new" ng-if="vm.componentData">
 			<a href="http://id.lib.harvard.edu/via/{{vm.recordid}}/catalog" class="parentImageLink">Go to main
 				record</a>
 		</div>
 
+<div layout="row" class="whiteBg hvdImgComponentView" ng-if="vm.index !== -1">
+
+	<div flex="{{vm.flexsize}}" class="full-view-inner-container whiteBg">
+
+		
+
 		<!-- begin scroll buttons to navigate components -->
-		<section layout="row" layout-align="center center" class="imageNav" layout-wrap ng-if="vm.total > 1">
-			<md-button class="md-fab md-raised md-primary" (click)="vm.prevPhoto()" tabindex="0"
-				aria-label="Previous photo button">
+		<section layout="row" layout-align="center center" class="imageNav container-nav-controls" layout-wrap ng-if="vm.total > 1">
+			<md-button class="nav-control md-button" (click)="vm.prevPhoto()" tabindex="0"
+				title="Previous">
 				<md-icon md-svg-icon="primo-ui:chevron-left" aria-label="chevron-left-icon"></md-icon>
 			</md-button>
 			<label class="label">
 				{{vm.index + 1}} of {{vm.total}} images
 			</label>
-			<md-button class="md-fab md-raised md-primary" (click)="vm.nextPhoto()" tabindex="0"
-				aria-label="Next photo button">
+			<md-button class="nav-control md-button" (click)="vm.nextPhoto()" tabindex="0"
+				title="Next">
 				<md-icon md-svg-icon="primo-ui:chevron-right" aria-label="chevron-right-icon"></md-icon>
 			</md-button>
 		</section>
 		<!-- end scroll buttons to navigate components -->
 
 		<!-- CB added this line 20200526 so users have another option during restricted image issue -->
-		<div style="margin-bottom: 25px;margin-top: 25px;text-align: center;">
+		<div class="hvd-img-open-in-new">
 			<a target="_blank" href="{{vm.filenameURL}}?buttons=Y">Open image in new tab</a>
 		</div>
 
@@ -67,7 +69,8 @@
 							{{ value }}
 						</div>
 						<div role="listitem" ng-if="valuesArray.length === 1" layout="column" class="word-break layout-column" >
-							{{ valuesArray[0] }}
+							<!-- {{ valuesArray[0] }} -->
+							<span ng-bind-html="valuesArray[0]"></span>
 						</div>
 					</div>
 				</div>

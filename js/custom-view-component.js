@@ -26,37 +26,78 @@
 		vm.mainInfoRender = {};	
 		vm.viewComponent={};
 
+
+		// work-level data
+		// sourceKey = PNX display element
 		const mainInfoMapping = [
-			{ sourceKey: 'title', targetKey: 'Main Title' },
-			{ sourceKey: 'subject', targetKey: 'Keywords' },
-			{ sourceKey: 'type', targetKey: 'Resource Type' },
-			{ sourceKey: 'identifier', targetKey: 'Unique ID' }
-			// Add or remove objects here to control the output
+			{ sourceKey: 'title', targetKey: 'Title' },
+			{ sourceKey: 'lds14', targetKey: 'Attribution' },
+			{ sourceKey: 'creator', targetKey: 'Creator' },
+			{ sourceKey: 'addtitle', targetKey: 'Variant title' },
+			{ sourceKey: 'edition', targetKey: 'Edition' },
+			{ sourceKey: 'lds07', targetKey: 'Produced' },
+			{ sourceKey: 'format', targetKey: 'Description' },
+			{ sourceKey: 'description', targetKey: 'Summary' },
+			{ sourceKey: 'lds13', targetKey: 'Notes' },
+			{ sourceKey: 'subject', targetKey: 'Subject' },
+			{ sourceKey: 'lds22', targetKey: 'Style' },
+			{ sourceKey: 'genre', targetKey: 'Form / genre' },
+			{ sourceKey: 'lds23', targetKey: 'Culture' },
+			{ sourceKey: 'lds31', targetKey: 'Place' },
+			{ sourceKey: 'identifier', targetKey: 'Identifier' },
+			{ sourceKey: 'lds24', targetKey: 'Related work' },
+			{ sourceKey: 'lds25', targetKey: 'Related information' },
+			{ sourceKey: 'lds44', targetKey: 'Associated name' },
+			{ sourceKey: 'lds27', targetKey: 'Restrictions' },
+			{ sourceKey: 'lds15', targetKey: 'Rights' },
+			{ sourceKey: 'lds26', targetKey: 'Repository' },
+			{ sourceKey: 'creationdate', targetKey: 'Creation date' },
+			{ sourceKey: 'lds01', targetKey: 'HOLLIS number' },
+			{ sourceKey: 'lds64', targetKey: 'Image detail' }
 		];
 
+		// component data from lds65
+		//              NOTE
+		// note the 2-levels - component and component flat (was surrogate in old via)
+		// 
+		// not mapped below but in use: 
+		// u - image href
+		// x - restriction flag
+		// y - caption or thumbnail
+		// this are avail if needed: o e l
 		const keyOrderMap = [
-			{ oldKey: 'W', newKey: 'ID' },
-			{ oldKey: '0', newKey: 'Subject' },
-			{ oldKey: '1', newKey: 'Rights' },
-			{ oldKey: '3', newKey: 'Style' },
-			{ oldKey: '4', newKey: 'Date' },
-			{ oldKey: '5', newKey: 'Physical Description' },
-			{ oldKey: '6', newKey: 'Catalog Record' },
-			{ oldKey: '7', newKey: 'Collection' },
-			{ oldKey: '8', newKey: 'Location' },
+			
 			{ oldKey: '9', newKey: 'Title' },
-			{ oldKey: 'A', newKey: 'Photographer' },
-			{ oldKey: 'B', newKey: 'Architecture Terms' },
-			{ oldKey: 'D', newKey: 'Century' },
-			{ oldKey: 'F', newKey: 'Format' },
-			{ oldKey: 'I', newKey: 'Identifier' },
-			{ oldKey: 'J', newKey: 'Access Information' },
-			{ oldKey: 'K', newKey: 'Access Level' },
-			{ oldKey: 'N', newKey: 'Authors' },
-			{ oldKey: 'R', newKey: 'Library' },
-			{ oldKey: 'U', newKey: 'Primary URL' },
-			{ oldKey: 'X', newKey: 'Subject Location' },
-			{ oldKey: 'Y', newKey: 'Alternate URL' }
+			{ oldKey: '2', newKey: 'Creator' },
+			{ oldKey: '5', newKey: 'Description' },
+			{ oldKey: 'B', newKey: 'Subject' },
+			{ oldKey: '3', newKey: 'Culture' },
+			{ oldKey: 'M', newKey: 'Style' },
+			{ oldKey: 'F', newKey: 'Form / genre' },
+			{ oldKey: 'P', newKey: 'Place' },
+			{ oldKey: '7', newKey: 'Related work' },
+			{ oldKey: '6', newKey: 'Related information' },
+			{ oldKey: 'I', newKey: 'Classification' },
+			{ oldKey: '0', newKey: 'Associated name' },
+			{ oldKey: 'J', newKey: 'Use restrictions' },
+			{ oldKey: '1', newKey: 'Copyright' },
+			{ oldKey: 'Q', newKey: 'Rights' },
+			{ oldKey: '4', newKey: 'Date' },
+			{ oldKey: '8', newKey: 'Repository' },
+			{ oldKey: 'W', newKey: 'ID' },
+
+			{ oldKey: 'T', newKey: 'Title' },
+			{ oldKey: 'A', newKey: 'Creator' },
+			{ oldKey: 'Z', newKey: 'Description' },
+			{ oldKey: 'S', newKey: 'Subject' },
+			{ oldKey: 'G', newKey: 'Form / genre' },
+			{ oldKey: 'H', newKey: 'Classification' },	
+			{ oldKey: 'N', newKey: 'Associated name' },		
+			{ oldKey: 'K', newKey: 'Use restrictions' },
+			{ oldKey: 'C', newKey: 'Copyright' },
+			{ oldKey: 'D', newKey: 'Date' },
+			{ oldKey: 'R', newKey: 'Repository' }
+
 			];
 
 
@@ -110,6 +151,7 @@
 					vm.item=result.data; 
 					vm.itemData=vm.item.pnx.display;
 					vm.componentData=vm.item.pnx.display.lds65;
+					// console.log(vm.componentData);
 					if(vm.componentData) {
 						vm.total = vm.componentData.length;
 					} else {
@@ -131,7 +173,16 @@
 				const sourceKey = mapping.sourceKey;
 				const targetKey = mapping.targetKey;
 				if (vm.itemData.hasOwnProperty(sourceKey)) {
-				vm.mainInfoRender[targetKey] = vm.itemData[sourceKey];
+					vm.mainInfoRender[targetKey] = vm.itemData[sourceKey].map(function(val) {
+						// Remove $$Q and everything after it
+						var idx = val.indexOf('$$Q');
+						var cleaned = idx !== -1 ? val.substring(0, idx) : val;
+						// If the cleaned value looks like HTML, trust it
+						if (cleaned.match(/<[^>]+>/)) {
+							return $sce.trustAsHtml(cleaned);
+						}
+						return cleaned;
+					});
 				}
 			}
 			// handle component info 
