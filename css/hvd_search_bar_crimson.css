@@ -10,9 +10,10 @@
 }
 #hvd-beta-badge {
     text-align: end;
-    margin-top: 6px;
+    margin-top: -2px;
     transform: rotate(-13deg);
     margin-right: -28px;
+    margin-bottom: -24px;
 }
 #hvd-beta-badge span {
     padding: 0px 6px;
