@@ -30,7 +30,7 @@
 }
 @media (min-width:1051px) and (max-width:1279px) {
     prm-full-view .full-view-section .hvd-embed-uv {
-        margin-left: 0.5em;
+        /* margin-left: 0.5em; */
     }
 }
 @media (min-width:1280px) and (max-width:1350px) {
