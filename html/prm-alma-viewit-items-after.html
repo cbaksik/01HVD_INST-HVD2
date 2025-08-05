@@ -41,7 +41,7 @@
 				<md-card-content class="imageBox">
 					<a title="{{vm.componentJSON[$index].T[0]}}">
 						<img ng-src="{{vm.componentJSON[$index].U[0]}}?width=150&height=150" class="md-card-image" alt="{{vm.componentJSON[$index].T[0]}}"/>
-						<div class="lockIcon" ng-if="vm.localScope.hideLockIcon" tabindex="-1">
+						<div class="lockIcon" ng-if="vm.componentJSON[$index].X[0]" tabindex="-1">
 							<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
 						</div>
 					</a>
