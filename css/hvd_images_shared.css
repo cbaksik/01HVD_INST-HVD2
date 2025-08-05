@@ -1,34 +1,60 @@
 /* via pages header */
 
-#via-page-header .metadataHeader {
-    display: inline-block;
-    font-size:120%;
-    white-space: nowrap;
-    color:#e4e4e4;
-    padding-top:15px;
-    line-height:50px;
-    margin-left:10px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
 #via-page-header .banner {
     background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
     color: #ffffff;
     height:65px;
     padding-right:20px;
     padding-left:20px;
+    font-family: "Trueno", sans-serif;
 }
 #via-page-header .logo {
     padding-left:10px;
 }
 #via-page-header .logo h1 {
-    font-family: "Trueno";
-    font-size: 42px;
     vertical-align: top;
     padding-left: 10px;
     padding-top:20px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    text-transform: uppercase;
+    letter-spacing: 2.4px;
+
+}
+#via-page-header .metadataHeader {
+    display: inline-block;
+    padding-top: 11px;
+    margin-left: 14px;
+    font-weight: 400;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 /* end via pages header */
+
+/* nav buttons */
+.hvdImgComponentView .imageNav {
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+.hvdImgComponentView .imageNav label {
+	font-weight: 600;
+	word-spacing: 2.5px;
+}
+.hvdImgComponentView .imageNav .md-button {
+    background-color:#0579b8;
+    color:#fff;
+    width:40px;
+    min-width:40px;
+    height:40px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.hvdImgComponentView .imageNav .md-button:hover,
+.hvdImgComponentView .imageNav .md-button:focus {
+    background-color:#2a5280;
+}
 
 /* thumbnail grid on full record page */
 .hvd-via-record-page-grid md-grid-tile {
@@ -40,12 +66,13 @@
 .hvd-via-record-page-grid md-card-content a:focus {
 	box-shadow:hone;
 }
-
-.hvd-via-record-page-grid md-grid-tile:focus md-card-content a>img,
+.hvd-via-record-page-grid md-grid-tile md-card-content a>img {
+	border-bottom:3px solid transparent;
+}
+/* .hvd-via-record-page-grid md-grid-tile:focus md-card-content a>img,
 .hvd-via-record-page-grid md-grid-tile:hover md-card-content a>img {
 	border-bottom:3px solid rgba(5, 121, 184, 0.3);
-}
-
+} */
 .hvfullsize {
     width:100%;
     height: auto;
@@ -71,6 +98,7 @@
 
 .imageBox a {
 	border:none;
+	display: inline-block;
 }
 
 .imageBox > img {
@@ -78,7 +106,7 @@
     margin-right: auto !important;
     display: block !important;
 }
-
+/* this is the caption under grid, if applicable */
 .imageTitle {
     width:185px;
     height:40px;
@@ -91,7 +119,11 @@
     margin-top:10px;
     text-align: center;
     cursor:default;
-
+}
+.imageBox .imageTitle span:hover {
+	/* border-bottom:3px solid rgba(5, 121, 184, 0.3); */
+	color:#0579b8;
+	cursor:pointer;
 }
 .lockIcon {
     display:block;
@@ -107,16 +139,6 @@
     width:25px;
     height:auto;
 }
-.nophoto {
-    width:148px;
-    height:148px;
-    text-align: center;
-    background:#e4e4e4;
-    line-height:148px;
-    z-index: 0;
-    margin-right: auto;
-    margin-left: auto;
-}
 /* end thumbnail grid on full record page */
 
 /* large image  page */
@@ -130,7 +152,8 @@
 }
 /* go to main page button for users from curiosity */
 div.parentImageLinkWrapper {
-	margin-left:-10%;
+	padding-left: 40px;
+    margin-top: 15px;
  }
  .hvdImgComponentView .full-view-inner-container  {
 	margin-left:10%;
@@ -160,4 +183,50 @@ div.parentImageLinkWrapper {
         height: auto;
     }
 
+}
+
+/* rest was previously in custom-view-all-component-metadata.css */
+
+#componentMetadata {
+    padding:1% 10%;
+    background: #ffffff;
+    color:#000000;
+}
+
+
+.hv-toggle {
+    text-align: right;
+}
+
+.hv-toggle > button {
+    margin-bottom:10px !important;
+    margin-top:0px !important;
+}
+
+.whiteBg {
+    background:#ffffff;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bigPadding {
+    padding:30px;
+}
+
+.spaceTop {
+    margin-top:10px !important;
+}
+
+hr {padding:0px; margin:0px;}
+
+.space {
+    margin-bottom: 5px;
+}
+.spaceBottom {
+    margin-bottom:10px;
+}
+.padding10 {
+    padding-bottom:10px;
 }
