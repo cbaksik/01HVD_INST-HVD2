@@ -150,7 +150,7 @@
         bindings: {parentCtrl: '<'},
         controller: 'customViewAllComponentMetadataController',
         controllerAs:'vm',
-        'templateUrl':'/primo-explore/custom/HVD2/html/custom-view-all-component-metadata.html'
+        'templateUrl':'/discovery/custom/01HVD_INST-HVD2/html/custom-view-all-component-metadata.html'
     });
 
 })();
