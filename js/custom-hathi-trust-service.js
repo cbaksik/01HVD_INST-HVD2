@@ -32,6 +32,7 @@ angular.module('viewCustom')
         /* test whether we want to call Hathi API, and if so, grab params we want to send */
 	serviceObj.validateHathiTrust=function (pnxItem) {
 		var online = false;
+		var veExtRes = false; // is this a Primo VE external resource e.g. VIA record? 
 		var item={'flag':false,'isbn':'','oclcid':'','data':{}};
 		if(pnxItem.delivery.deliveryCategory) {
 			let delCat=pnxItem.delivery.deliveryCategory;
@@ -42,7 +43,12 @@ angular.module('viewCustom')
 				}
 			}
 		}
-		if (!online && pnxItem.pnx.control.sourceid === 'alma') {
+		if (pnxItem.pnx.display.source) {
+			if (pnxItem.pnx.display.source[0] == 'HVD_VIA') {
+				veExtRes = true;
+			}			
+		}
+		if (!online && !veExtRes && pnxItem.pnx.control.sourceid === 'alma') {
 			item.flag = true;
 			if(pnxItem.pnx.addata.oclcid) {
 				item.oclcid=pnxItem.pnx.addata.oclcid[0];
