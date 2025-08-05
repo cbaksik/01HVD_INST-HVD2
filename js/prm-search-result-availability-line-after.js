@@ -99,6 +99,7 @@ angular.module('viewCustom')
 
 
         vm.$onInit=function() {
+          //   console.log(vm);
             vm.itemPNX=vm.parentCtrl.result;
 		  if (vm.itemPNX.pnx.display.contents) {
 			vm.hasTOC = 'true';
@@ -109,7 +110,11 @@ angular.module('viewCustom')
             } else {
                 vm.isSerial=false;
             }
-            //console.log(vm.isSerial);
+		  if (vm.itemPNX.pnx.display.source) {
+			if (vm.itemPNX.pnx.display.source[0] == 'HVD_VIA') {
+				vm.isVIA=true;
+			}			
+		 }
 		  // HathiTrust 
             vm.hathiTrust=chts.validateHathiTrust(vm.itemPNX);
             vm.hathiTrustItem={};
