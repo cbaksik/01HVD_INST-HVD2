@@ -29,7 +29,7 @@
 			{ sourceKey: 'creationdate', targetKey: 'Creation date' },
 			{ sourceKey: 'lds01', targetKey: 'HOLLIS number' },
 			{ sourceKey: 'lds64', targetKey: 'Image detail' }
-    ]);
+    ])
     	// component level data from lds65
 	//              NOTE
 	// there are 2-levels - component and component flat (was surrogate in old via)
