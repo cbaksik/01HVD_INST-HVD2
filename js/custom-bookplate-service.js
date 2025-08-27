@@ -7,7 +7,7 @@
     'use strict';
 
     angular.module('viewCustom')
-    .service('customImagesService',[function () {
+    .service('customBookplateService',[function () {
         let serviceObj={};
 
 		serviceObj.extractImageUrl=(item)=> {
@@ -79,6 +79,10 @@
 			{ name: '265_449843', label: 'Enoch P. Gambrell and Macie Latimer Gambrell Memorial Book Fund' },
 			{ name: '265_449850', label: 'John Chipman Gray Collection' },
 			{ name: '265_449880', label: 'Charles A. Leavitt Memorial Fund' },
+			{ name: '265_449912', label: 'Hyman H. Rudofsky Fund' },
+			{ name: '265_449841', label: 'Lee M. Friedman Fund' },
+			{ name: '265_449868', label: 'R. Keith Kane Fund' },
+			{ name: '265_449957', label: 'Moore, Sir Thomas R. Fund' },
 			{ name: '285_371531', label: 'Harriet Means Kendall \'04 Book Fund' },
 			{ name: '285_371534', label: 'Radcliffe Culinary Friends Book Fund' },
 			{ name: '285_469709', label: 'Anna Davis Dawes Memorial Fund' },
