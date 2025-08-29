@@ -11,8 +11,7 @@
 
 <!-- Link to go to parent record -- needed because Curiosity only has components and links here directly, so user needs a way to get to parent record -->
 		<div class="parentImageLinkWrapper hvd-img-open-in-new" ng-if="vm.componentData">
-			<a href="http://id.lib.harvard.edu/via/{{vm.recordid}}/catalog" class="parentImageLink">Go to main
-				record</a>
+			<a href="http://id.lib.harvard.edu/via/{{vm.item.pnx.display.lds01[0]}}/catalog" class="parentImageLink">Go to main record</a>
 		</div>
 
 <div layout="row" class="whiteBg hvdImgComponentView" ng-if="vm.index !== -1">
@@ -40,6 +39,10 @@
 		<!-- CB added this line 20200526 so users have another option during restricted image issue -->
 		<div class="hvd-img-open-in-new">
 			<a target="_blank" href="{{vm.filenameURL}}?buttons=Y">Open image in new tab</a>
+		</div>
+
+		<div class="lockIcon" ng-if="vm.itemX" tabindex="-1">
+			<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
 		</div>
 
 		<!-- main image embedded -->

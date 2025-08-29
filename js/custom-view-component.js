@@ -128,6 +128,10 @@
 						value: str.substring(1).trim() 
 						}));;
 				};
+				// is component image restricted - need to know for padlock 
+				vm.itemX = vm.viewComponent.find(function(entry) {
+					return entry.key === 'X';
+				});
 				// find the image URN to display image, only used for next/prev buttons
 				const itemU = vm.viewComponent.find(function(entry) {
 					return entry.key === 'U';
