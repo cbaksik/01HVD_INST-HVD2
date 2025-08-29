@@ -1306,12 +1306,6 @@ prm-full-view-service-container prm-service-header h4[translate="nui.getit.tab1_
 prm-full-view-service-container prm-service-header h4 {
     padding-bottom:15px;
 }
-.hvd-img-open-in-new {
-    text-transform:uppercase;
-    font-weight:600;
-    padding-bottom:3px;
-    margin-bottom:5px;
-}
 /* line spacing between marc elements in VE */
 /* .full-view-section-content prm-service-details .section-body .spaced-rows>div {
 	margin-bottom: .4em;
