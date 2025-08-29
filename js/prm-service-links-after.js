@@ -7,9 +7,9 @@
 (function(){
     'use strict';
     angular.module('viewCustom')
-    .controller('prmServiceLinksAfterCtrl',['customImagesService','$timeout','$sce',function (customImagesService, $timeout,$sce) {
+    .controller('prmServiceLinksAfterCtrl',['customBookplateService','$timeout','$sce',function (customBookplateService, $timeout,$sce) {
         let vm=this;
-        let cisv=customImagesService;
+        let cisv=customBookplateService;
         vm.plateList=[];
 	   vm.isVIArecord='';
         vm.getData=()=> {

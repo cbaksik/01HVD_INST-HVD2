@@ -15,6 +15,17 @@ angular.module('viewCustom')
         vm.isSerial='';
         var openLibUrl = 'https://openlibrary.org/api/books?bibkeys=';
 
+	// find if pnx had EAD finding aid link
+	vm.findFindingAid=function () {
+		var ead = '';
+		var eadURN = '';
+		if (vm.itemPNX.pnx.links.linktofa) {
+			ead = vm.itemPNX.pnx.links.linktofa[0];
+			ead=ead.slice(3);
+			eadURN = ead.replace(' $$Elinktofa','');
+			vm.FAlink=eadURN;
+		}
+	};
 
         // see if book is in open library
 	vm.findOpenLib=function () {
@@ -99,8 +110,10 @@ angular.module('viewCustom')
 
 
         vm.$onInit=function() {
-          //   console.log(vm);
             vm.itemPNX=vm.parentCtrl.result;
+            console.log(vm.itemPNX.pnx.control.score[0]);
+          //   console.log(vm.itemPNX.pnx.display.contents[0]);
+          //   console.log(vm.itemPNX.pnx.addata.abstract[0]);
 		  if (vm.itemPNX.pnx.display.contents) {
 			vm.hasTOC = 'true';
 		  }
@@ -121,8 +134,7 @@ angular.module('viewCustom')
             if(vm.hathiTrust.flag) {
                 vm.getHathiTrustData();
             }
-
-
+            vm.findFindingAid();
 
         };
 
