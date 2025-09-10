@@ -68,6 +68,7 @@ angular.module('viewCustom').controller('prmSmMoreRecords', ['$timeout', 'custom
     this.$onInit=function () { 
         vm.delivery = this.parentCtrl.result.delivery;
 	   	//console.log(vm.delivery.holding);
+	if (vm.delivery.holding) {
         if (vm.delivery.holding.length > 0) {
             vm.sm_holdings = vm.delivery.holding.map(function (entry, i) {
                 entry.toTranslate = entry.libraryCode;
@@ -101,6 +102,7 @@ angular.module('viewCustom').controller('prmSmMoreRecords', ['$timeout', 'custom
                 return true;
             });
         }
+	 }
     };
  
      vm.onCustomLinkClick = function (availability) {
