@@ -23,8 +23,11 @@
     opacity: .8;
     font-size: large;    
     text-transform: uppercase;
-}
+} 
 
+prm-tabs-and-scopes-selector md-divider.skewed-divider:nth-child(1) {
+	display: none; 
+}
 
 prm-search-bar {
     background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
