@@ -203,10 +203,6 @@ prm-icon md-icon svg[id^=magnifying-glass] {
 	text-decoration: underline;
  }
 
-
- prm-tabs-and-scopes-selector md-divider.skewed-divider:nth-child(1) {
-	display: none;
- }
  prm-tabs-and-scopes-selector md-input-container.zero-margin:nth-child(2) {
 	padding-left: 10px;
  }
@@ -533,7 +529,10 @@ prm-alert-bar .dismiss-alert-button.md-button.button-with-icon>prm-icon {
 /* ************** */
 /* SEARCH RESULTS SECTION / BRIEF RECORD */
 /* ************** */
-
+/* display CTO button for staff troubleshooting openurl */
+prm-brief-result-container form[action^="/primaws/rest/pub/openurl/01HVD_INST"] button {
+    background-color: orange;
+}
 /* hide the page number in the upper left corner of the result list; it duplicates page number in toolbar */
 #searchResultsContainer .md-subheader > .md-subheader-inner > .md-subheader-content > span.tiny-uppercase-text {
     display:none;
@@ -600,26 +599,25 @@ prm-search-result-journal-indication-line {
 	vertical-align: bottom;
 	/* margin-top: -2px; */
 }
-/* .hvd_TOC_link span {
-	vertical-align: top;
-} */
-/* hide via otb online button */
+/* hide via otb online button b/c of behavior problem - opens bib in new tab */
 .search-result-availability-line-wrapper:has(.hvd-hide-VIA-otb-online-button) {
+	display:none;
+}
+/* hide otb online button for 856 fields due to behavior problem - opens bib in new tab */
+prm-search-result-availability-line:has(.hvd-856-override) button:has(.not_restricted) {
 	display:none;
 }
 .search-result-availability-line-wrapper {
 	min-height:1.4em;
 }
 /* button changes per Feb 2022 redesign */
-prm-search-result-availability-line .md-button.neutralized-button,
-.hvd-via-online-button.md-button.neutralized-button {
+prm-search-result-availability-line .md-button.neutralized-button {
     text-transform:uppercase;
 }
 prm-search-result-availability-line prm-icon {
     display:none;
 }
-prm-search-result-availability-line .md-button.arrow-link-button .button-content,
-.hvd-via-online-button  {
+prm-search-result-availability-line .md-button.arrow-link-button .button-content {
     color:#0579b8;
     font-weight:600;
     line-height:1.4;
@@ -700,8 +698,7 @@ prm-search-result-availability-line .md-button.neutralized-button:focus [class*=
     border-bottom:3px solid rgba(43, 44, 44, 0.3);
 }
 /* color of button and text when online, for alma content, separate lines below for content from CDI */
-prm-search-result-availability-line button.md-button.neutralized-button span[translate*="delivery.code.not_restricted"],
- .hvd-via-online-button span.availability-status {
+prm-search-result-availability-line button.md-button.neutralized-button span[translate*="delivery.code.not_restricted"] {
     color:white;
     padding: 3px 10px 2px 25px;
     border-radius: 4px;
@@ -717,9 +714,7 @@ prm-search-result-availability-line button.md-button.neutralized-button svg {
     color:white;
 }
 prm-search-result-availability-line button.md-button.neutralized-button:hover span[translate*="delivery.code.not_restricted"],
-prm-search-result-availability-line button.md-button.neutralized-button:focus span[translate*="delivery.code.not_restricted"],
-.hvd-via-online-button:hover span.availability-status,
-.hvd-via-online-button:focus span.availability-status {
+prm-search-result-availability-line button.md-button.neutralized-button:focus span[translate*="delivery.code.not_restricted"] {
     background-color:#2a5280;
     border-bottom:0px solid transparent;
 }
@@ -761,9 +756,6 @@ prm-search-result-availability-line-after div {
 prm-search-result-availability-line-after prm-sm-more-records div {
     margin: 0;
 }
-.hvd_OL_link, .hvdHathiViewOnline_div {
-	margin-top:10px;
-}
 prm-search-result-availability-line-after a {
     text-transform: uppercase;
     color:#414141;
@@ -773,6 +765,40 @@ prm-search-result-availability-line-after a {
 prm-search-result-availability-line-after a:hover,
 prm-search-result-availability-line-after a:focus {
     box-shadow: inset 0 -3px 0 0 rgba(43, 44, 44, 0.3);
+}
+/* end cdi document attributes */
+/* hathi trurst link, harvard custom online links */
+div.hvd-online-button {
+	margin-top:10px;
+}
+.hvd-online-button a,
+.hvd-via-online-button {
+    text-transform:uppercase;
+	display: inline-block;
+    color:white;
+    background-color:#0579b8;
+    padding: 3px 10px 2px 25px;
+    line-height:21px;
+    border-radius: 4px;
+    font-weight:600;
+    background-image: url('../img/link-icon.svg');
+    background-repeat: no-repeat;
+    background-position: bottom 4px left 6px;
+}
+.hvd-online-button a:hover, .hvd-online-button a:focus {
+    background-color:#2a5280;
+}
+/* finding aid link */
+/* .hvd_EAD_link {
+    margin-top:15px;
+} */
+.hvd_EAD_link a {
+	padding: 3px 19px 2px 38px;
+	background-image: url('../img/folder_open_white_24dp.svg');
+	background-position: bottom 1px left 6px;
+}
+.hvd-grey-link {
+	margin-top:10px;
 }
 /* BEGIN cdi quicklinks */
 prm-quick-link {
@@ -831,50 +857,6 @@ prm-brief-result-container div.warning-cdi-attributes-mark span[translate="attri
 }
 prm-brief-result-container div.warning-cdi-attributes-mark span[translate="attribute.publication_addendum"] {
     display:none;
-}
-/* end cdi document attributes */
-/* hathi trurst link, online */
-.hvdHathiViewOnline {
-    color:white;
-    background-color:#0579b8;
-    padding: 3px 10px 2px 25px;
-    border-radius: 4px;
-    font-weight:600;
-    background-image: url('../img/link-icon.svg');
-    background-repeat: no-repeat;
-    background-position: bottom 4px left 6px;
-    box-shadow:inset 0 0 0 0 #000;
-}
-.hvdHathiViewOnline:hover, .hvdHathiViewOnline:focus {
-    background-color:#2a5280;
-    /* padding: 3px 12px 3px 25px;
-    border-radius: 4px; */
-    border-bottom:0px solid transparent;
-    box-shadow:inset 0 0 0 0 #000;
-}
-/* finding aid link */
-.hvd_EAD_link {
-    margin-top:15px;
-}
-.hvd_EAD_link a {
-    color:white;
-    background-color:#0579b8;
-    padding: 2px 22px 2px 11px;
-    border-radius: 4px;
-    letter-spacing: 0.15px;
-}
-.hvd_EAD_link a:hover,
-.hvd_EAD_link a:focus {
-    background-color:#2a5280;
-    border-bottom:0px; 
-    box-shadow:inset 0 0 0 #fff;
-}
-.hvd_EAD_link img {
-    min-height:20px;
-    height:20px;
-    margin-bottom:-4px;
-    margin-left:-4px;
-    margin-right:5px;
 }
 /* chapters within book, book reviews ... */
 prm-chapters-results-line {
@@ -1296,7 +1278,8 @@ prm-search-result-sort-by {
 .md-dialog-container.fixed-container {
     background-color:rgba(128, 125, 125, 0.1);
 }
-prm-full-view-service-container .arrow-link [link-arrow] md-icon {
+prm-full-view-service-container .arrow-link [link-arrow] md-icon,
+prm-full-view-service-container button prm-icon[icon-definition*="ic_open_in_new"] {
     display:none;
 }
 /* next line affects all section headers */
@@ -2171,8 +2154,26 @@ prm-library-card-menu .md-button.button-with-icon > prm-icon,
 prm-authentication .md-button.button-with-icon > prm-icon {
     display: none;
 }
+/* how to get it  */
+alma-howovp a {
+	/* font-size:18px; */
+	padding-bottom: 3px;
+	font-weight:600;
+}
+alma-howovp .neutralized-button:focus.md-button,
+alma-howovp .neutralized-button:hover.md-button {
+	box-shadow:none;
+}
+alma-howovp .neutralized-button:hover a:focus,
+alma-howovp .neutralized-button:hover a:hover {
+	box-shadow: inset 0 -3px 0 0 rgba(5, 121, 184, 0.3);
+}
+alma-howovp .neutralized-button:hover a {
+	color:#0579b8;
+}
 /*                                                          */
 /************ BEGIN View it Get it - formerly mash-up ****************/
+/* note that 'how to get it' is not part of alma-viewit or prm-opac */
 /*                                                          */
 /*     VIEW IT                                                  */
 prm-alma-viewit {
@@ -2293,7 +2294,7 @@ prm-opac prm-request-services .labeled-block .block-body prm-service-button .md-
 	text-transform: uppercase;
 	font-weight: 600;
 	margin-bottom: 10px;
-	padding: .3em 0em;
+	padding: .4em 0em;
 }
 /* hide slash separator between request options */
 prm-opac prm-request-services .links-block .separated-block-item:after {
