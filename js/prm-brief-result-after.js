@@ -3,20 +3,26 @@ created to display TOC presence in search results
  */
 
 angular.module('viewCustom')
-.controller('prmBriefResultAfterCtrl',[function () {
+.controller('prmBriefResultAfterCtrl',['prmSearchService', function (prmSearchService) {
 	var vm=this;
 	vm.itemPNX={};
 	vm.hasTOC='';
-	vm.isVIA='';
+	vm.isVIAonline='';
+	var sv=prmSearchService;
 
 	vm.$onInit=function() {
 		vm.itemPNX=vm.parentCtrl.item;
 		if (vm.itemPNX.pnx.display.contents) {
 			vm.hasTOC = 'true';
 		}
-		 if (vm.itemPNX.pnx.display.source) {
-			if (vm.itemPNX.pnx.display.source[0] == 'HVD_VIA') {
-				vm.isVIA=true;
+		// add fake via 'online' button to override problematic otb button which opens bib in new tab, clicking on it invokes the OTB function of opening full record in overlay mode
+		//console.log(vm.itemPNX); 
+		if (vm.itemPNX.pnx.display.source) {
+			if (vm.itemPNX.pnx.display.source[0] === 'HVD_VIA') {
+				const numImages = vm.itemPNX.pnx.display.lds20 ? vm.itemPNX.pnx.display.lds20[0] : null;
+				if (numImages > 0) {
+					vm.isVIAonline=true;
+				}
 			}			
 		 }
    
