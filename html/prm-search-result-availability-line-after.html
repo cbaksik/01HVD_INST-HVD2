@@ -1,17 +1,25 @@
-<div ng-if="vm.hathiTrustItem.orig" class="hvdHathiViewOnline_div">
-    <a ng-if="vm.hathiTrustItem.fullview && !vm.isSerial" href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvdHathiViewOnline hvd_hathi_ft_stats">
-        <span>Online Access</span>
-    </a>
-    <!-- since serials may be only partially digitzed, don't display Online Access even if some volumes are online; instead display Limited search -->
-    <a ng-if="vm.hathiTrustItem.fullview && vm.isSerial" href="https://catalog.hathitrust.org/Record/{{vm.hathiTrustItem.fromRecord}}" target="_blank" class="hvd_hathi_try_stats">
-        <span>Try Online Access in HathiTrust</span>
-    </a>
-    <a ng-if="!vm.hathiTrustItem.fullview && vm.isSerial" href="https://catalog.hathitrust.org/Record/{{vm.hathiTrustItem.fromRecord}}" target="_blank" class="hvd_hathi_lim_stats">        
-        <span ng-if="!vm.hathiTrustItem.fullview">Limited search in HathiTrust</span>  
-    </a>
-    <a ng-if="!vm.hathiTrustItem.fullview && !vm.isSerial" href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvd_hathi_lim_stats">        
-        <span ng-if="!vm.hathiTrustItem.fullview">Limited search in HathiTrust</span>  
-    </a>
+<div ng-if="vm.hathiTrustItem.orig">
+    <div ng-if="vm.hathiTrustItem.fullview && !vm.isSerial" class="hvd-online-button">
+		<a href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvd_hathi_ft_stats">
+			<span>Online Access</span>
+		</a>
+	</div>	
+	<!-- since serials may be only partially digitzed, don't promise that all volumes will be available -->
+	<div ng-if="vm.hathiTrustItem.fullview && vm.isSerial"  class="hvd-grey-link">
+		<a href="https://catalog.hathitrust.org/Record/{{vm.hathiTrustItem.fromRecord}}" target="_blank" class="hvd_hathi_try_stats">
+			<span>Try Online Access</span>
+		</a>
+	</div>
+	<div ng-if="!vm.hathiTrustItem.fullview && vm.isSerial"  class="hvd-grey-link">
+		<a href="https://catalog.hathitrust.org/Record/{{vm.hathiTrustItem.fromRecord}}" target="_blank" class="hvd_hathi_lim_stats">        
+			<span ng-if="!vm.hathiTrustItem.fullview">Limited search in HathiTrust</span>  
+		</a>
+	</div>
+	<div ng-if="!vm.hathiTrustItem.fullview && !vm.isSerial && !vm.OpenLib.display"  class="hvd-grey-link">
+		<a href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvd_hathi_lim_stats">        
+			<span ng-if="!vm.hathiTrustItem.fullview">Limited search in HathiTrust</span>  
+		</a>
+	</div>
 </div>
 
 <!-- when prm-brief-result-container:focus 
@@ -21,7 +29,7 @@
 -->
 <!-- <div ng-if="vm.hasTOC" class="hvd_TOC_link"><span>Includes Table of Contents</span></div> -->
 
-<div ng-if="vm.OpenLib.display" class="hvd_OL_link">
+<div ng-if="vm.OpenLib.display && !vm.hathiTrustItem.fullview" class="hvd-grey-link">
     <a href="{{vm.OpenLib.previewURL}}" target="_blank" class="hvd_OL_stats">
         <span>READ ONLINE (1 HOUR LOAN)</span>        
     </a>
@@ -32,11 +40,10 @@
 <prm-sm-more-records parent-ctrl="vm.parentCtrl"></prm-sm-more-records> 
 
 
-<div ng-if="vm.FAlink" class="hvd_EAD_link">
-    <a href="{{vm.FAlink}}" class="hvd_EAD_stats">
-        <img src="/discovery/custom/01HVD_INST-HVD2/img/folder_open_white_24dp.svg" aria-label="Finding Aid"></img>
-        <span>Finding Aid</span>        
-    </a>
+<div ng-if="vm.eadURN" class="hvd-online-button hvd_EAD_link">
+	<a href="{{vm.eadURN}}" class="hvd_EAD_stats target="_blank"">
+		<span>Finding Aid</span>
+	</a>
 </div>
 
 <!-- start browzine code from vendor
@@ -45,5 +52,17 @@ see custom-browzine.js for controller details
 <browzine parent-ctrl="vm.parentCtrl"></browzine>
 <!-- end browzine code from vendor --> 
 
-<!-- insert element so that I can use css:has to recognize this as a VIA bib and hide OTB online button because it opens first image in a new tab; instead we want it to open the full bib overlay like default behavior for print material -->
-<div ng-if="vm.isVIA" class="hvd-hide-VIA-otb-online-button"></div>
+<!-- via:  insert element so that I can use css:has to recognize this as a VIA bib and hide OTB online button; otb button opens first image in a new tab; instead we want it to open the full bib overlay like default behavior for print material -->
+<div ng-if="vm.isVIAonline" class="hvd-hide-VIA-otb-online-button"></div>
+
+<!-- rewrite OTB online button for cases where link is from holding 856 b/c otb behavior is to open bib in new tab instead of opening the target -->
+<div ng-if="vm.holding856 && !vm.isSerial" class="hvd-online-button hvd-856-override">
+	<a href="{{vm.holding856}}" target="_blank">
+		<span>Online access</span>
+	</a>
+</div>
+<div ng-if="vm.holding856 && vm.isSerial" class="hvd-grey-link hvd-856-override">
+	<a href="{{vm.holding856}}" target="_blank">
+		<span>Try online access</span>
+	</a>
+</div>
