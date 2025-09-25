@@ -22,19 +22,45 @@
 			if (vm.parentCtrl.item.pnx.display.source[0] == 'HVD_VIA') {
 				vm.isVIArecord = true;
 			}
-			if (vm.parentCtrl.item.pnx.display.lds20[0] == '1') {
-				vm.singleImageFlag = true;
-				if (vm.parentCtrl.item.pnx.display.lds67) { 
-					vm.filename = vm.parentCtrl.item.pnx.display.lds67[0];
-					vm.filename = vm.filename.split('/').pop();
+			if (vm.parentCtrl.item.pnx.display.lds20) {
+				if (vm.parentCtrl.item.pnx.display.lds20[0] == '1') {
+					vm.singleImageFlag = true;
+					if (vm.parentCtrl.item.pnx.display.lds67) { 
+						vm.filename = vm.parentCtrl.item.pnx.display.lds67[0];
+						vm.filename = vm.filename.split('/').pop();
+					}
+					vm.mpsEmbed(vm.filename);
 				}
-				vm.mpsEmbed(vm.filename);
-		    }
-	    		
+			}
 			if (vm.parentCtrl.item.pnx.display.lds65) {
 				vm.componentJSON = convertArrayToJSON(vm.parentCtrl.item.pnx.display.lds65);
+				//console.log(vm.componentJSON);
 			}
 		}
+
+		// try this new version from ai
+			// 		vm.$onInit = function () {
+			// const displayData = vm.parentCtrl.item?.pnx?.display;
+			// if (!displayData) {
+			// 	return;
+			// }
+			// if (displayData.source?.[0] === 'HVD_VIA') {
+			// 	vm.isVIArecord = true;
+			// }
+			// if (displayData.lds20?.[0] === '1') {
+			// 	vm.singleImageFlag = true;
+			// 	const filePath = displayData.lds67?.[0];
+			// 	if (filePath) {
+			// 		vm.filename = filePath.split('/').pop();
+			// 		vm.mpsEmbed(vm.filename); // Call this *only* when you have a filename.
+			// 	}
+			// }
+			// if (displayData.lds65) {
+			// 	vm.componentJSON = convertArrayToJSON(displayData.lds65);
+			// }
+			// };
+
+
 	};
 
 	// MPS Embed function also exists in custom-view-component.js for cases of multi-image records
@@ -64,7 +90,6 @@
 		}
 	};
 
-
 	// begin function to convert lds65 image components to json
 	function convertArrayToJSON(array) {
 		return array.map(item => {
@@ -84,6 +109,18 @@
 		});
 	 };
 	// end function for image component data conversion
+
+
+        // view all component metadata
+        vm.viewAllComponentMetaData=function () {
+		console.log("prm-alma-view-items-after.js viewAllComponentMetadata function");
+            var url='/discovery/viewallcomponentmetadata/L/' + vm.parentCtrl.item.pnx.control.recordid[0] + '?vid=01HVD_INST:HVD2';
+          //   url+='&tab='+vm.params.tab+'&search_scope='+vm.params.search_scope;
+          //   url+='&adaptor='+vm.item.adaptor;
+		console.log(url);
+          $window.open(url,'_blank');
+
+        };
 
 	// function to open component thumbnail in a new tab with all its data and scrolling feature
 	// this gets called from prm-alma-viewit-items-after.html

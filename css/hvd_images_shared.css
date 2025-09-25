@@ -1,7 +1,8 @@
 /* via pages header */
 
 #via-page-header .banner {
-    background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
+    /* background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%); */
+    background: #414141;
     color: #ffffff;
     height:65px;
     padding-right:20px;
@@ -11,9 +12,21 @@
 #via-page-header .logo {
     padding-left:10px;
 }
+#via-page-header .logo a {
+    display:inline-block;
+    height:60px;
+}
+#via-page-header .logo a:hover,
+#via-page-header .logo a:focus {    
+	box-shadow: inset 0 -2px 0 0 rgb(193, 194, 194);
+}
+#via-page-header .logo img {
+	height:60px;
+	padding: 9px 25px 5px 0px;
+}
 #via-page-header .logo h1 {
     vertical-align: top;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     padding-top:20px;
     font-weight: 700;
     font-size: 32px;
@@ -35,7 +48,6 @@
 
 /* nav buttons */
 .hvdImgComponentView .imageNav {
-    margin-top: 20px;
     margin-bottom: 0px;
 }
 .hvdImgComponentView .imageNav label {
@@ -43,8 +55,9 @@
 	word-spacing: 2.5px;
 }
 .hvdImgComponentView .imageNav .md-button {
-    background-color:#0579b8;
-    color:#fff;
+    /* background-color:#0579b8; */
+    /* color:#fff; */
+	box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.5);
     width:40px;
     min-width:40px;
     height:40px;
@@ -69,10 +82,6 @@
 .hvd-via-record-page-grid md-grid-tile md-card-content a>img {
 	border-bottom:3px solid transparent;
 }
-/* .hvd-via-record-page-grid md-grid-tile:focus md-card-content a>img,
-.hvd-via-record-page-grid md-grid-tile:hover md-card-content a>img {
-	border-bottom:3px solid rgba(5, 121, 184, 0.3);
-} */
 .hvfullsize {
     width:100%;
     height: auto;
@@ -110,13 +119,14 @@
 .imageTitle {
     width:185px;
     height:40px;
-    line-height:15px;
     font-size:100%;
+	max-width:100%;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: inherit;
-    display: inline-block;
-    margin-top:10px;
+    margin-top:0px;
     text-align: center;
     cursor:default;
 }
@@ -143,12 +153,28 @@
 }
 /* end thumbnail grid on full record page */
 
-/* large image  page */
+/* BEGIN large image  page */
+
+/* go to main page button for users from curiosity */
+div.parentImageLinkWrapper {
+	padding-left: 40px;
+	padding-bottom:3px;
+	margin-top: 15px;
+	margin-bottom:10px;
+	text-transform:uppercase;
+	font-weight:600;
+ }
+ div.parentImageLinkWrapper span {
+	margin-left: 15px;
+	font-weight: 400;
+ }
 .hvd-img-open-in-new {
-    text-transform:uppercase;
-    font-weight:600;
+    /* text-transform:uppercase; */
+    /* font-weight:600; */
     padding-bottom:3px;
-    margin-bottom:20px;
+    margin-bottom:5px;
+    text-align: end;
+    font-size: 14px;
 }
 .hvd-via-full-image #iframe {
 	width: 100%;
@@ -157,14 +183,20 @@
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	background: no-repeat center/50% url("../img/rotate_right_24dp.svg");
 }
-/* go to main page button for users from curiosity */
-div.parentImageLinkWrapper {
-	padding-left: 40px;
-    margin-top: 15px;
- }
+.hvdImgComponentView .topCpation {
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 16px;
+}
+.hvdImgComponentView .topCpation a {
+	float: right;
+}
  .hvdImgComponentView .full-view-inner-container  {
 	margin-left:10%;
+	padding-top:0em;
  }
  .hvdImgComponentViewMD {
 	margin-top:20px;
@@ -172,17 +204,24 @@ div.parentImageLinkWrapper {
  }
  .hvdImgComponentViewMD .item-details-element {
 	margin-bottom:5px;
+ } 
+  .hvdImgComponentViewMD .hvd-thumbnail {
+	padding-left:15px;
  }
- /* didn't finish css for below button, class not applied yet in prm-view-online-after.html */
  /* button to view all component metadata, from primo details page */
- .hvdImgGroupAllMetadata {
+ .hvd-view-all-component-md {
 	color:#fff;
 	background-color:#0579b8;
-	font-weight:600px;
+	font-weight:600;
 	border-radius:4px;
+	padding: 5px 10px;
+	border: none;
+	font-family:Source Sans Pro,Arial,sans-serif;
+	margin-bottom: 45px;
+	margin-top: -15px;
  }
- .hvdImgGroupAllMetadata:hover,
- .hvdImgGroupAllMetadata:focus {
+ .hvd-view-all-component-md:hover,
+ .hvd-view-all-component-md:focus {
 	background-color:#2a5280;
  }
 
@@ -233,7 +272,8 @@ div.parentImageLinkWrapper {
 hr {padding:0px; margin:0px;}
 
 .spaceBottom {
-    margin-bottom:10px;
+    margin-bottom:15px;
+    margin-top: 20px;
 }
 .padding10 {
     padding-bottom:10px;

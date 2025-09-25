@@ -37,6 +37,7 @@
 		vm.mpsEmbed=function (objectURN) {
 		if (objectURN.startsWith("urn-3:")) {
 			const restUrl = 'https://embed.lib.harvard.edu/api/nrs'
+			vm.iframeAttributes = {}; // corinna added this line, otherwise when using next/prev buttons the old image displays until the new one is rendered, and that takes a few seconds sometimes and causes confusion and people press the next/prev again
 			var params={'urn':objectURN,'prod':1}
 			sv.getAjax(restUrl,params,'get')
 			.then(function (result) {
@@ -55,7 +56,7 @@
 				   }
 				}
 			},function (err) {
-			    console.log(err);
+			     (err);
 			});
 		  }
 		};
@@ -140,6 +141,15 @@
 				const match = valueForU.match(/urn-3\S*/);
 				vm.urnPart = match ? match[0] : null;
 				// begin mapping labels and values for display of component data
+				// find main title and image title for display above image
+				var titleObject = vm.viewComponent.find(function(entry) {
+					return entry.key === 'T';
+					});
+				vm.componentTitle = titleObject ? titleObject.value : null;
+				var titleObjectHvd = vm.viewComponent.find(function(entry) {
+					return entry.key === 'L';
+					});
+				vm.componentTitleHvd = titleObjectHvd ? titleObjectHvd.value : null;				
 				var map = {};
 				// some keys appear twice; find out which
 				vm.viewComponent.forEach(function(item) {

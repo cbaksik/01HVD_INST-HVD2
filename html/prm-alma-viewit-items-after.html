@@ -24,12 +24,13 @@
 
 
 <!-- view all metadata button  -->
-<!-- <div ng-if="vm.viewAllComponetMetadataFlag && !vm.item.pnx.display.lds41 && vm.pnxControlSourceIdFlag" class="hvfullsize">
+<div ng-if="vm.componentJSON.length > 1" class="hvfullsize">
     <div layout="column" layout-align="center center">
-     <md-button class="md-raised md-primary btn-margin-bottom" (click)="vm.viewAllComponentMetaData()" tabindex="0">
-        VIEW ALL COMPONENT METADATA
-     </md-button>
-     </div> -->
+     	<button class="hvd-view-all-component-md" ng-click="vm.viewAllComponentMetaData()" tabindex="0">
+        		VIEW ALL COMPONENT METADATA
+		</button>
+     </div>
+</div>
 
 
 <!-- multiple images -->
@@ -39,14 +40,17 @@
 		<md-grid-tile ng-repeat="item in vm.componentJSON track by $index" ng-click="vm.gotoFullPhoto($event,item,$index)">
 			<md-card class="hv-md-card">
 				<md-card-content class="imageBox">
-					<a title="{{vm.componentJSON[$index].T[0]}}">
-						<img ng-src="{{vm.componentJSON[$index].U[0]}}?width=150&height=150" class="md-card-image" alt="{{vm.componentJSON[$index].T[0]}}"/>
+					<a>
+						<img ng-src="{{vm.componentJSON[$index].U[0]}}?width=150&height=150" class="md-card-image"/>
 						<div class="lockIcon" ng-if="vm.componentJSON[$index].X[0]" tabindex="-1">
 							<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
 						</div>
 					</a>
-					<div class="imageTitle" title="{{vm.componentJSON[$index].T[0]}}">
-						<span>{{vm.componentJSON[$index].T[0]|truncatefilter}}</span>
+					<div class="imageTitle" ng-if="vm.componentJSON[$index].L[0]">
+						<span>{{vm.componentJSON[$index].L[0]}}</span>
+					</div>
+					<div class="imageTitle" ng-if="vm.componentJSON[$index].T[0] && !vm.componentJSON[$index].L[0]"">
+						<span>{{vm.componentJSON[$index].T[0]}}</span>
 					</div>
 				</md-card-content>
 			</md-card>
