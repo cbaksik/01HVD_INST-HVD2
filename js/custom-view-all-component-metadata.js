@@ -98,6 +98,14 @@
 					value: map[key].length === 1 ? map[key][0] : map[key]
 					};
 				});
+				// convert related work into html link
+				var relatedWorkUrl = vm.componentDataRev[i].find(function(entry) {
+					return entry.key === '6';
+					});
+				//console.log(relatedWorkUrl);
+				if (relatedWorkUrl) {
+					relatedWorkUrl.value = '<a href="' + relatedWorkUrl.value.split('--')[1] + '">' + relatedWorkUrl.value.split('--')[0] + '</a>';
+				}
 				// components will always have w, get that to ensure same # of items, then get y thumbnail
 				var thumbnailLink = vm.componentDataRev[i].find(function(entry) {
 					return entry.key === 'U';

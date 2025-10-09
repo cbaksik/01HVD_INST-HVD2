@@ -165,6 +165,13 @@
 					value: map[key].length === 1 ? map[key][0] : map[key]
 					};
 				});
+				// convert related work into html link
+				var relatedWorkUrl = vm.viewComponentRev.find(function(entry) {
+					return entry.key === '6';
+					});
+				if (relatedWorkUrl) {
+					relatedWorkUrl.value = '<a href="' + relatedWorkUrl.value.split('--')[1] + '">' + relatedWorkUrl.value.split('--')[0] + '</a>';
+				}
 				// specify order for component detail display and change keys to display labels
 				vm.orderedComponents = keyOrderMap
 					.filter(function(mapping) {
@@ -180,7 +187,7 @@
 							key: mapping.newKey,
 							value: original.value
 						};
-					});
+					});				
 			}; // end handle component info 
 		};  // end displayPhoto fx
 

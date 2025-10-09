@@ -85,7 +85,8 @@
 				<div class="item-details-element-container flex" flex>
 					<div role="list" class="item-details-element" >
 						<div role="listitem" layout="column" class="word-break layout-column" ng-if="valuesArray.length > 1" ng-repeat="value in valuesArray track by $index">
-							{{ value }}
+							<!-- {{ value }} -->
+							<span ng-bind-html="value"></span>
 						</div>
 						<div role="listitem" ng-if="valuesArray.length === 1" layout="column" class="word-break layout-column" >
 							<!-- {{ valuesArray[0] }} -->
@@ -111,7 +112,7 @@
 							{{ val }}
 						</div>
 						<div role="listitem" ng-if="!isArray(item.value)" layout="column" class="word-break layout-column" >
-							{{ item.value }}
+							<span ng-bind-html="item.value"></span>
 						</div>
 					</div>
 				</div>

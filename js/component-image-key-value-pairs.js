@@ -24,6 +24,7 @@
 			{ sourceKey: 'lds24', targetKey: 'Related work' },
 			{ sourceKey: 'lds25', targetKey: 'Related information' },
 			{ sourceKey: 'lds27', targetKey: 'Restrictions' },
+			{ sourceKey: 'rights', targetKey: 'Copyright' },
 			{ sourceKey: 'lds15', targetKey: 'Rights' },
 			{ sourceKey: 'lds26', targetKey: 'Repository' },
 			{ sourceKey: 'lds01', targetKey: 'HOLLIS number' }
@@ -35,7 +36,6 @@
 	// u - image href
 	// x - restriction flag
 	// y - caption or thumbnail
-	// this is avail if needed: o
     .constant('keyOrderMap', [
 			{ oldKey: 'L', newKey: 'Title' },
 			{ oldKey: '2', newKey: 'Creator' },

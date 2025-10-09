@@ -20,21 +20,10 @@
 			<span>[{{vm.itemData.title[0]}}]</span>
 		</div> -->
 
-<div layout="row" class="whiteBg hvdImgComponentView" ng-if="vm.index !== -1">
+<div layout="row" class="whiteBg" ng-if="vm.index !== -1">
 
 	<div flex="{{vm.flexsize}}" class="full-view-inner-container whiteBg">
 
-
-
-		<div class="lockIcon" ng-if="vm.itemX" tabindex="-1">
-			<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
-		</div>
-
-
-		<!-- CB added this line 20200526 so users have another option during restricted image issue -->
-		<!-- <div class="hvd-img-open-in-new">
-			<a target="_blank" href="{{vm.filenameURL}}?buttons=Y">Open image in new tab</a>
-		</div> -->
 
 		<!-- display image  metadata -->
 		<div class="hvdImgComponentViewMD">
@@ -49,7 +38,8 @@
 				<div class="item-details-element-container flex" flex>
 					<div role="list" class="item-details-element" >
 						<div role="listitem" layout="column" class="word-break layout-column" ng-if="valuesArray.length > 1" ng-repeat="value in valuesArray track by $index">
-							{{ value }}
+							<!-- {{ value }} -->
+							<span ng-bind-html="value"></span>
 						</div>
 						<div role="listitem" ng-if="valuesArray.length === 1" layout="column" class="word-break layout-column" >
 							<span ng-bind-html="valuesArray[0]"></span>
@@ -73,6 +63,9 @@
 					<div flex-gt-sm="20" flex-sm="100" class="flex-sm-100 flex-gt-sm-20 hvd-thumbnail">
 						<a target="_blank" ng-href="/discovery/viewcomponent/L/{{vm.docid}}?vid=01HVD_INST:HVD2&imageId={{vm.componentDataThumb[$index].split('nrs.harvard.edu/')[1] }}">
 							<img ng-src="{{vm.componentDataThumb[$index]}}?width=150&height=150">
+							<div class="lockIcon" ng-show="vm.itemData.lds63"" tabindex="-1">
+								<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey">
+							</div>
 						</a>
 					</div>					
 					<div flex-gt-sm="80" flex-sm="100" class="flex-sm-100 flex-gt-sm-80">
@@ -86,7 +79,7 @@
 										{{ val }}
 									</div>
 									<div role="listitem" ng-if="!isArray(field.value)" layout="column" class="word-break layout-column" >
-										{{ field.value }}
+										<span ng-bind-html="field.value"></span>
 									</div>
 								</div>
 							</div>
