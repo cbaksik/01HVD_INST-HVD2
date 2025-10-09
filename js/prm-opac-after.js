@@ -8,7 +8,7 @@ angular.module('viewCustom')
 	vm.singleHolding = '';
 
 	vm.$onInit=function() {
-		console.log(vm.parentCtrl.item.delivery.holding);
+		//console.log(vm.parentCtrl.item.delivery.holding);
 		if (vm.parentCtrl.item.delivery.holding) {
 			const holdingCount=vm.parentCtrl.item.delivery.holding.length;
 			if (holdingCount === 1) {

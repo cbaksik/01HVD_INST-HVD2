@@ -113,11 +113,11 @@
 
         // view all component metadata
         vm.viewAllComponentMetaData=function () {
-		console.log("prm-alma-view-items-after.js viewAllComponentMetadata function");
+		//console.log("prm-alma-view-items-after.js viewAllComponentMetadata function");
             var url='/discovery/viewallcomponentmetadata/L/' + vm.parentCtrl.item.pnx.control.recordid[0] + '?vid=01HVD_INST:HVD2';
           //   url+='&tab='+vm.params.tab+'&search_scope='+vm.params.search_scope;
           //   url+='&adaptor='+vm.item.adaptor;
-		console.log(url);
+		//console.log(url);
           $window.open(url,'_blank');
 
         };
