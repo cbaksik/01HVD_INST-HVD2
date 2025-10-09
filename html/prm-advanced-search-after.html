@@ -1,0 +1,155 @@
+<!-- <div id="hvd-adv-lang" layout-align="end center"> -->
+
+	<div id="hvd-adv">
+		<!-- <div><a href="https://guides.library.harvard.edu/hollishelp">placeholder to use guide</a></div> -->
+
+		
+			<md-toolbar>
+
+				<div class="hvd-adv-toolbar">
+					<md-button ng-click="isCollapsedHelp = !isCollapsedHelp">
+						 
+						Help with Advanced Search
+						
+						<prm-icon external-link="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new"><<md-icon  md-svg-icon="primo-ui:open-in-new" role="presentation" class="md-primoExplore-theme"></md-icon></prm-icon>
+
+
+						<!-- <span ng-show="isCollapsedHelp">
+							<prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-up" ng-class="{'rotate-180': !$ctrl.openCloseSearchFilterButton}"><md-icon md-svg-icon="primo-ui:chevron-up" role="presentation" class="md-primoExplore-theme"></md-icon></prm-icon>
+						</span> -->
+						
+					</md-button>
+					<md-button ng-click="isCollapsedLang = !isCollapsedLang">
+					Language codes
+					</md-button>
+					<md-button ng-click="isCollapsedPub = !isCollapsedPub">
+					Place of publication codes
+					</md-button>
+				</div>
+
+			</md-toolbar>
+
+			<md-content class="collapsible-content" ng-hide="isCollapsedHelp">
+				<span ng-show="!isCollapsedHelp">
+						<prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-down" ng-class="{'rotate-180': !$ctrl.openCloseSearchFilterButton}"><md-icon  md-svg-icon="primo-ui:chevron-down" role="presentation" class="md-primoExplore-theme"></md-icon></prm-icon>
+				</span>
+				The <a href="https://guides.library.harvard.edu/hollishelp">HOLLIS User Guide</a> has numerous tips & tricks on using HOLLIS. The page on <a href="https://guides.library.harvard.edu/hollishelp/advanced">Advanced Search</a> explains the precision search options and provides numerous examples. A summary is included here for quick reference:
+
+			</md-content>
+
+			<md-content class="collapsible-content" ng-hide="isCollapsedLang">
+
+
+				<span>Language code reference table</span>
+				<ol>
+					<li>Find the language by typing in the search box below and options will be presented to you</li>
+					<li>Each entry includes a 3-character language code in brackets</li>
+					<li>Identify your code, and in the Search Options above, use the dropdowns to choose field "Code: MARC language" and then enter the language code you wish to search </li>
+					<li>Some microlanguges are grouped into macrolanguges and are listed with their cross-references, .e.g. 'Aztec -- use Nahuatl [nah]'</li>
+				</ol>
+
+				<input 
+				type="text"
+				class="search-input"
+				placeholder="Start typing a language name"
+				ng-model="searchText"
+				autocomplete="off"
+					>		
+
+				<div ng-if="vm.copyMessage" class="feedback-message"
+					ng-class="vm.copyStatus === 'success' ? 'feedback-success' : 'feedback-error'">
+					{{ vm.copyMessage }}
+				</div>
+
+				<div ng-show="searchText" >
+					<div class="lang-input-options-header">
+						<span class="lang-header-left">Language name </span>
+						<span class="lang-header-right"> [language code]</span>
+					</div>
+					<ul class="results-list" >
+						<li ng-repeat="language in vm.languages | filter:searchText" ng-click="vm.selectLanguage(language)||vm.selectLanguage(code)">
+							<div class="langEntry">
+								<span class="lang-name">{{ language.name }}</span>
+								<span class="lang-code">[{{ language.code }}]</span>
+							</div> 
+						</li>
+
+						<li ng-if="(vm.languages | filter:searchText).length === 0">
+							No results found
+						</li>
+					</ul>
+				</div>
+
+			</md-content>
+
+			<md-content class="collapsible-content" ng-hide="isCollapsedPub">
+				<span ng-show="!isCollapsedPub">
+						<prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-down" ng-class="{'rotate-180': !$ctrl.openCloseSearchFilterButton}"><!----><md-icon  md-svg-icon="primo-ui:chevron-down" role="presentation" class="md-primoExplore-theme"></md-icon></prm-icon>
+				</span>
+
+
+				Coming soon
+
+			</md-content>
+
+	<!-- <div class="collapsible-container">
+
+		<div class="collapsible-header" ng-click="isCollapsedLang = !isCollapsedLang">
+			<span class="lang-howto">Language codes</span>
+			<span ng-show="isCollapsedLang">
+				<prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-up" ng-class="{'rotate-180': !$ctrl.openCloseSearchFilterButton}"><md-icon md-svg-icon="primo-ui:chevron-up" role="presentation" class="md-primoExplore-theme"></md-icon></prm-icon>
+			</span>
+			<span ng-show="!isCollapsedLang">
+				<prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-down" ng-class="{'rotate-180': !$ctrl.openCloseSearchFilterButton}"><md-icon  md-svg-icon="primo-ui:chevron-down" role="presentation" class="md-primoExplore-theme"></md-icon></prm-icon>
+			</span>
+		</div>
+		<div class="collapsible-content" ng-hide="isCollapsedLang">
+
+			<span>Language code reference table</span>
+				<ol>
+					<li>Find the language by typing in the search box below and options will be presented to you</li>
+					<li>Each entry includes a 3-character language code in brackets</li>
+					<li>Identify your code, and in the Search Options above, use the dropdowns to choose field "Code: MARC language" and then enter the language code you wish to search </li>
+					<li>Some microlanguges are grouped into macrolanguges and are listed with their cross-references, .e.g. 'Aztec -- use Nahuatl [nah]'</li>
+				</ol>
+
+			<input 
+				type="text"
+				class="search-input"
+				placeholder="Start typing a language name"
+				ng-model="searchText"
+				autocomplete="off"
+			>		
+
+				<div ng-if="vm.copyMessage" class="feedback-message"
+					ng-class="vm.copyStatus === 'success' ? 'feedback-success' : 'feedback-error'">
+					{{ vm.copyMessage }}
+				</div>
+
+			<div ng-show="searchText" >
+				<div class="lang-input-options-header">
+					<span class="lang-header-left">Language name </span>
+					<span class="lang-header-right"> [language code]</span>
+				</div>
+				<ul class="results-list" >
+					<li ng-repeat="language in vm.languages | filter:searchText" ng-click="vm.selectLanguage(language)||vm.selectLanguage(code)">
+						<div class="langEntry">
+							<span class="lang-name">{{ language.name }}</span>
+							<span class="lang-code">[{{ language.code }}]</span>
+						</div> 
+					</li>
+
+					<li ng-if="(vm.languages | filter:searchText).length === 0">
+						No results found
+					</li>
+				</ul>
+			</div>
+
+
+				
+
+
+		</div> 
+	</div>  -->
+
+</div>

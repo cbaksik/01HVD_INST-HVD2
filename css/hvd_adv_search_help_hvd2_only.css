@@ -1,0 +1,112 @@
+/* for advanced search - search by language */
+/* hide OTB option and provide info on how to search by code */
+
+md-input-container:has(#advancedSearchLanguage) {
+	display:none;
+}
+#hvd-adv {
+
+
+    margin-top: 10px;
+    /* position: absolute;
+    right:0; */
+
+    /* display:flex;
+    flex-direction:row;
+    justify-content: flex-end; */
+
+}
+
+#hvd-adv .collapsible-container .lang-howto {
+	font-weight:600;
+	font-size:15px;
+	line-height: 20px;
+}
+#hvd-adv .collapsible-container {
+}
+
+#hvd-adv md-toolbar {
+	min-height:25px;
+}
+#hvd-adv .hvd-adv-toolbar  {
+	 display: flex;
+	 justify-content: flex-end;
+}
+
+#hvd-adv .hvd-adv-toolbar .md-button:focus:not([disabled]):first-of-type,
+#hvd-adv .hvd-adv-toolbar .md-button:hover:not([disabled]):first-of-type {
+	background-color:transparent;
+}
+#hvd-adv .collapsible-header {
+            padding: 10px 15px;
+            cursor: pointer;
+            user-select: none; /* Prevents text selection on click */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+		  		      display:flex;
+    flex-direction:row;
+    justify-content: flex-end;
+        }
+
+#hvd-adv .collapsible-content {
+		margin-bottom:10px;
+			border: 1px solid rgba(58, 58, 58, .3);
+    box-shadow: 0 2px 7px 0 rgba(58, 58, 58, .12);
+    background-color: #fff;
+        padding: 20px;
+}
+#hvd-adv .collapsible-content.ng-hide {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top: none; /* Hide the border when collapsed */
+        }
+
+#hvd-adv .lang-input-options-header {
+	margin-left: 25px;
+	font-weight:600;
+	display:block;
+	margin-top:15px
+}
+
+#hvd-adv input {
+	    background-color: white;
+	    border: 1px solid #848484;
+    box-shadow: inset 0 0 2px rgb(114, 114, 112);
+    padding: 5px 30px 5px 8px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+    /* background-image: url(../img/pencil.svg);
+    background-repeat: no-repeat;
+    background-position: bottom 4px right 4px;
+    background-size: 25px; */
+        margin-left: 25px;
+    margin-top: 15px;
+        min-height: 40px;
+    min-width: 300px;
+}
+
+#hvd-adv  .results-list {
+	border: 1px solid #848484;
+    margin: 0px 20px 10px 25px;
+    padding: 15px 25px 20px 23px;
+}
+#hvd-adv  .results-list li {
+	       list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+	    
+}
+#hvd-adv .results-list li:hover, 
+#hvd-adv .results-list li:focus
+ {
+	background: #e6e6e6;
+}
+#hvd-adv  .feedback-message {
+	margin-left: 25px;
+	font-weight:600;
+	margin-top:10px;
+}
