@@ -20,13 +20,13 @@ angular.module('viewCustom')
 		vm.eDelivery = {};
 		var openLibUrl = 'https://openlibrary.org/api/books?bibkeys=';
 
-		// find if pnx had EAD finding aid link
+		// find if pnx had EAD finding aid link, there may be more than one 555 field
 		vm.findFindingAid=function () {
 			if (vm.itemPNX.pnx.display.lds09) {
 				const ead = vm.itemPNX.pnx.display.lds09[0].match(/<a[^>]*href="([^"]*)"/);
 				//console.log(ead);
 				// need to test if it's a harvard link
-				if (ead[1].includes("nrs.harvard.edu")) {
+				if (ead[1].includes("nrs.harvard.edu") || ead[1].includes("id.lib.harvard.edu")) {
 					vm.eadURN = ead[1];
 				}
 			}
@@ -184,6 +184,8 @@ angular.module('viewCustom')
 
 
 		vm.$onInit=function() {
+			//console.log(vm.parentCtrl.searchService);
+			//console.log(vm.parentCtrl.searchService.snippetService._snippets);
 			vm.itemPNX=vm.parentCtrl.result;
 			console.log('score: ' + vm.itemPNX.pnx.control.score[0]);
 			if(vm.itemPNX.pnx.display.type[0] == 'journals'|| vm.itemPNX.pnx.display.type[0] == 'newspapers') {
