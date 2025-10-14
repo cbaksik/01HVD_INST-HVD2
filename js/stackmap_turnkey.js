@@ -20,7 +20,7 @@
 
     var w = document.createElement("script"); 
     w.type = "text/javascript"; w.async = true;
-    w.src = "https://www.stackmapintegration.com/harvard-primo/StackMap.min.js?v=20240815";
+    w.src = "https://www.stackmapintegration.com/harvard-primo/StackMap.min.js";
     var b = document.body;
     b.appendChild(w);
 

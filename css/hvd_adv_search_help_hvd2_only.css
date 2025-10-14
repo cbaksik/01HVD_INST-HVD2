@@ -1,0 +1,124 @@
+/* for advanced search - search by language */
+/* hide OTB option and provide info on how to search by code */
+
+md-input-container:has(#advancedSearchLanguage) {
+	display:none;
+}
+#hvd-adv {
+    margin-top: 10px;
+}
+/* #hvd-adv md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+    min-height: 25px;
+} */
+#hvd-adv md-tabs.md-dynamic-height {
+    min-height: 25px; /* Height of the tab bar itself. */
+    transition: min-height 0.3s ease-in-out;
+}
+#hvd-adv md-tabs.md-dynamic-height.tab-is-open {
+  height: 400px;
+  overflow-y: auto; 
+}
+#hvd-adv .md-tabs-content-wrapper {
+    overflow-y: auto;
+}
+#hvd-adv md-tabs-canvas {
+	background-color:#f3f3f3;
+}
+#hvd-adv md-tab-item {
+	padding-left: 5px;
+	padding-right: 5px;
+    margin-left: 20px;
+}
+#hvd-adv md-tab-item {
+	padding-left: 5px;
+	padding-right: 5px;
+    margin-right: 20px;
+}
+#hvd-adv md-ink-bar {
+		bottom: 8px;
+}
+#hvd-adv md-pagination-wrapper md-tab-item:hover {	
+        text-decoration: underline;
+}
+#hvd-adv md-pagination-wrapper md-tab-item:focus {
+    text-decoration: none;
+}
+#hvd-adv md-tab-content {
+	padding: 10px 25px;
+	background-color:#f3f3f3;    
+}
+#hvd-adv .close-tabs-button {
+    margin: 0 8px; 
+}
+#hvd-adv input {
+	background-color: white;
+	border: 1px solid #848484;
+	box-shadow: inset 0 0 2px rgb(114, 114, 112);
+	padding: 5px 30px 5px 8px;
+	white-space: normal;
+	overflow: visible;
+	text-overflow: initial;
+	margin:5px 10px 10px 25px;
+	min-height: 30px;
+	min-width: 250px;
+}
+
+#hvd-adv  .results-list {
+	border: 1px solid #848484;
+	margin: 0px 20px 10px 25px;
+	padding: 15px 25px 20px 23px;
+	max-width: 600px;
+}
+#hvd-adv  .results-list li {
+	list-style-type: none;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 10px;	    
+}
+#hvd-adv .results-list li:hover, 
+#hvd-adv .results-list li:focus
+ {
+	background: #e6e6e6;
+}
+/* Make each list item a flex container to create the two columns */
+#hvd-adv .lang-entry {
+    display: flex;
+    justify-content: space-between; /* Pushes the name and code to opposite ends */
+    align-items: center;          /* Vertically aligns them in the middle */
+    padding: 1px 4px;             /* Add some spacing */
+}
+/* Style the language code block to meet all requirements */
+#hvd-adv .lang-code {
+    color:#fff;
+    letter-spacing: 2px;            /* Add wider letter spacing */
+    cursor: pointer;                /* Show the 'pointer' hand cursor on hover */
+    padding: 1px 8px;
+    border-radius: 4px;
+    background-color: #0579b8;;
+    transition: background-color 0.2s ease-in-out; /* Smooth transition for hover */
+    width:50px;
+    text-align: center;
+    font-weight: 600;
+}
+/* Change the background on hover so the user knows it's clickable */
+#hvd-adv .lang-code:hover {
+    background-color: #2a5280;
+}
+/* Ensure the feedback messages are styled */
+.feedback-message {
+    padding: 8px;
+    margin:5px 25px;
+    border-radius: 4px;
+    text-align: start;
+    width: 300px;
+}
+.feedback-success {
+    background-color: #d4edda; /* Light green */
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.feedback-error {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

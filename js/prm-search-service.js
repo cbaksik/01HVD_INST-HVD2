@@ -7,30 +7,6 @@ angular.module('viewCustom')
     .service('prmSearchService',['$http','$window','$filter',function ($http, $window, $filter) {
     let serviceObj={};
 
-    serviceObj.getPlatform=function () {
-        var userAgent=$window.navigator.userAgent;
-        var browsers = {ios: /ios/i, android: /android/i, blackberry: /blackberry/i, tablet: /tablet/i,iphone:/iphone/i,ipad:/ipad/i,samsung:/samsung/i};
-        for(var key in browsers) {
-            if (browsers[key].test(userAgent)) {
-                return key;
-            }
-        };
-
-        return '';
-    };
-
-    serviceObj.getBrowserType=function () {
-        var userAgent=$window.navigator.userAgent;
-        var browsers = {chrome: /chrome/i, safari: /safari/i, firefox: /firefox/i, ie: /internet explorer/i};
-        for(var key in browsers) {
-            if (browsers[key].test(userAgent)) {
-                return key;
-            }
-        };
-
-        return '';
-    };
-
     //http ajax service, pass in URL, parameters, method. The method can be get, post, put, delete
     serviceObj.getAjax=function (url,param,methodType) {
       return $http({
@@ -151,15 +127,6 @@ angular.module('viewCustom')
             return newData;
         };
 
-    // get user login ID
-    serviceObj.logID=false;
-    serviceObj.setLogInID=function (logID) {
-        serviceObj.logID=logID;
-    };
-
-    serviceObj.getLogInID=function () {
-        return serviceObj.logID;
-    };
 
     // getter and setter for item data for view full detail page
     serviceObj.item={};
@@ -197,15 +164,6 @@ angular.module('viewCustom')
     };
     serviceObj.getPhoto=function () {
         return serviceObj.photo;
-    };
-
-    // get user profile for authentication to login
-    serviceObj.auth={};
-    serviceObj.setAuth=function (data) {
-        serviceObj.auth=data;
-    };
-    serviceObj.getAuth=function () {
-      return serviceObj.auth;
     };
 
     serviceObj.modalDialogFlag=false;
@@ -278,23 +236,15 @@ angular.module('viewCustom')
         };
 
         // store api rest url from config.html
-        serviceObj.api={};
-        serviceObj.setApi=function (data) {
-            serviceObj.api=data;
-        };
+        // serviceObj.api={};
+        // serviceObj.setApi=function (data) {
+        //     serviceObj.api=data;
+        // };
 
-        serviceObj.getApi=function () {
-            return serviceObj.api;
-        };
+        // serviceObj.getApi=function () {
+        //     return serviceObj.api;
+        // };
 
-        // store validate client ip status
-        serviceObj.clientIp={};
-        serviceObj.setClientIp=function (data) {
-            serviceObj.clientIp = data;
-        };
-        serviceObj.getClientIp=function(){
-            return serviceObj.clientIp;
-        };
 
     return serviceObj;
 
