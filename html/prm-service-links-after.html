@@ -1,33 +1,35 @@
+<!-- for via record -->
+<div ng-if="vm.isVIArecord" class="spaced-rows">
+    <div>
+        <a class="arrow-link md-primoExplore-theme" href="http://nrs.harvard.edu/urn-3:hul.ois:portal_copyright_images" target="_blank">
+            <span>Copyright and Permissions</span> 
+        </a>
+    </div>
+</div>
+
 <!-- search hathitrust link for books -->
 <div ng-if="vm.showHathiLink" class="spaced-rows">
     <div ng-show="vm.searchHathiLink">
         <a class="arrow-link md-primoExplore-theme" href="{{vm.searchHathiLink}}" target="_blank">
-            <span>Search HathiTrust (via Harvard membership)</span>
-            <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui" icon-definition="open-in-new"></prm-icon>
-            <prm-icon link-arrow icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
+            <span>Try HathiTrust (HarvardKey)</span>            
         </a>
 
     </div>
 </div>
+
 <!-- The html below is used for Digital Bookplates component -->
-<ul class="serviceLink">
-    <!-- items have image and matching with $$U and $$d -->
-    <li ng-repeat="rec in vm.itemList track by $index">
+<ul ng-if="vm.hasPlates" class="serviceLink">
+    <li ng-repeat="rec in vm.plateList track by $index">
         <md-card class="serviceLinkBox">
             <md-card-title-text class="serviceLinkSpace">
-                <a class="arrow-link md-primoExplore-theme" href="{{rec.linkURL}}" title="{{rec.displayLabel}}"
-                    target="_blank">
-                    <span>{{rec.displayLabel}}</span>
-                    <prm-icon external-link icon-type="svg" svg-icon-set="primo-ui"
-                        icon-definition="open-in-new"></prm-icon>
-                    <prm-icon link-arrow icon-type="svg" svg-icon-set="primo-ui"
-                        icon-definition="chevron-right"></prm-icon>
+                <a class="arrow-link md-primoExplore-theme" href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank">
+                    <span>Acquired by the {{rec.label}}</span>
                 </a>
             </md-card-title-text>
             <md-card-title-media>
                 <div layout="row" layout-align="start start" class="md-media-md card-media">
-                    <a href="{{rec.linkURL}}" target="_blank" title="{{rec.displayLabel}}" class="serviceLinkImage">
-                        <img src="{{rec.linkNewURL}}" alt="{{rec.displayLabel}}" class="serviceLinkPhoto" />
+                    <a href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank" class="serviceLinkImage">
+                        <img src="https://nrs.harvard.edu/urn-3:hul.EBKPLT:{{rec.name}}" class="serviceLinkPhoto" />
                     </a>
                 </div>
             </md-card-title-media>
@@ -51,4 +53,7 @@
         </iframe>
     </div>
 </div>
-<!-- end Alma-D auxilliary images  -->
+
+
+<!-- if VIA record, add div with custom class to use in css:has so we can hide online access link for via records  -->
+<div ng-if="vm.isVIArecord" class="hvd-hide-VIA-otb-online-button"></div>

@@ -1,0 +1,114 @@
+/* crimson search bar for HOLLIS primary view */
+
+/* advanced search code is in hvd_core.css */
+
+/* they are separate b/c HOLLIS Images has different search bar coding */
+#hvd-beta-sticker {
+	 max-height: 50px;
+	 margin-left: -4px;
+	 vertical-align: middle;
+}
+#hvd-beta-badge {
+    text-align: end;
+    margin-top: -2px;
+    transform: rotate(-13deg);
+    margin-right: -28px;
+    margin-bottom: -24px;
+}
+#hvd-beta-badge span {
+    padding: 0px 6px;
+    color:#0579b8;
+    font-weight: 700;
+    border: 3px solid #0579b8;
+    opacity: .8;
+    font-size: large;    
+    text-transform: uppercase;
+} 
+
+prm-tabs-and-scopes-selector md-divider.skewed-divider:nth-child(1) {
+	display: none; 
+}
+
+prm-search-bar {
+    background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%);
+}
+
+prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm:after {
+	content:"Search";
+}
+/* reorder searchbar */
+prm-search-bar .search-element-inner .search-input {
+    order: 2;
+}
+prm-search-bar .search-element-inner .search-options {
+    order: 1;
+}
+prm-search-bar .search-element-inner .search-actions {
+   order: 3;
+}
+prm-search-bar .search-switch-buttons .md-button.switch-to-advanced span.layout-align-start-center {
+	background-color:rgba(58, 58, 58, 0.15);
+	padding: 4px 12px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):hover:not([disabled]):hover:not([disabled]),
+prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):focus:not([disabled]):focus:not([disabled]) {
+	background-color:#a51c30;
+	border: 1px solid #eb001b;
+	color:#fff
+}   
+
+/* search bar padding */
+prm-search-bar > div:first-child > div:first-child > div:first-child,
+prm-search-bar .search-wrapper > div:last-child {
+  display: none !important;
+}
+prm-search-bar .advanced-mode + .search-switch-buttons {
+  display: block !important;
+}
+prm-search-bar .layout-fill {
+  max-width: 1402px;
+  margin-left: auto;
+  margin-right: auto;
+ }
+ prm-search-bar div.search-wrapper div.search-elements-wrapper {
+	max-width: 930px;
+}
+
+/* helper text below search bar */
+.hl__helper-text {
+    max-width: 1402px;
+    width: 100%;
+    color: white;
+    font-family: "Trueno", sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* padding with chat widget is on screen */
+@media (min-width: 769px) {
+    prm-search-bar .layout-fill,
+    .hl__helper-text {
+        padding-right: 40px !important;
+    }
+}
+
+/* keeping padding on small screens */
+.__xs prm-search-bar {
+	padding: 1em;
+}
+
+
+/* prevent scope selector tab from taking over 40% of searchbox on smaller screens */
+.search-options.flex-sm-40.visible {
+	flex: initial;
+}
+
+
+/* fixing padding and background on small screens */
+
+
+ 

@@ -1,47 +1,110 @@
-<custom-header parent-ctrl="vm.parentCtrl"></custom-header>
-
-<md-content id="componentMetadata" layout="row">
-   <div flex="80">
-
-    <div layout="row" layout-xs="column" class="layout-block-xs layout-xs-column layout-row space" ng-repeat="key in vm.keys track by $index" ng-if="vm.items.pnx.display[key]">
-        <div flex-gt-sm="20" flex-gt-xs="25" flex class="flex-gt-xs-25 flex-gt-sm-20 flex">
-            <label class="bold-text">{{key|mapXmlFilter}}</label>
+<div id="via-page-header" class="banner">
+	<div layout="row" layout-align="start center" class="banner layout-align-start-center layout-row">
+		<div class="logo hide-xs">
+            <a href="https://library.harvard.edu" class="md-primoExplore-theme">
+                <img src="/discovery/custom/01HVD_INST-HVD2/img/library-logo.png" aria-label="Harvard Library">
+            </a>
         </div>
-        <div flex class="flex">
-               <span ng-repeat="val in vm.items.pnx.display[key] track by $index">
-                  <span ng-bind-html="vm.getValue(val,key)"></span><br/>
-               </span>
-        </div>
-    </div>
+	   <div class="logo hide-xs">
+			<h1>HOLLIS</h1>
+		</div>
+		<div class="metadataHeader">
+			FULL COMPONENT METADATA
+		</div>
+	</div>
+</div>
 
-   </div>
-</md-content>
-<hr/>
-<!--- display component -->
-<md-content  id="componentMetadata">
-    <div class="hv-toggle">
-        <!-- <md-button ng-click="vm.toggle()" class="md-fab md-button md-ink-ripple">
-            <md-icon md-svg-src="/discovery/custom/01HVD_INST-HVD2/img/{{vm.toggleData.icon}}"></md-icon>
-        </md-button> -->
-    </div>
-    <div  ng-repeat="data in vm.xmldata.component track by $index" ng-hide="vm.toggleData.flag" class="spaceBottom">
-        <div layout="row" layout-xs="column" layout-sm="column" class="layout-row padding10">
-            <span>{{$index + 1}}.</span>
-            <div flex-gt-sm="20" flex-sm="100" ng-click="vm.gotoFullPhoto($index,data)">
-                <custom-thumbnail itemdata="data" searchdata="vm.params"></custom-thumbnail>
-            </div>
-            <div flex-gt-sm="80" flex-sm="100">
-                <div layout="row" layout-xs="column" class="layout-block-xs layout-xs-column layout-row space" ng-repeat="key in vm.getKeys(data) track by $index" ng-if="data[key]" ng-init="val=vm.getValue(data[key],key)">
-                <div flex-gt-sm="25" flex-gt-xs="25" flex class="flex-gt-xs-25 flex-gt-sm-25 flex" ng-if="val">
-                    <label class="bold-text">{{key|mapXmlFilter}}</label>&nbsp;
-                </div>
-                <div flex flex-gt-sm="75" flex-gt-xs="75" class=" flex-gt-xs-75 flex-gt-sm-75 flex" ng-if="val">
-                    <span ng-bind-html="val"></span>
-                </div>
-                </div>
-            </div>
+<!-- Link to go to parent record -- needed because Curiosity only has components and links here directly, so user needs a way to get to parent record -->
+		<!-- <div class="parentImageLinkWrapper" ng-if="vm.componentData">
+			<a href="http://id.lib.harvard.edu/via/{{vm.item.pnx.display.lds01[0]}}/catalog" class="parentImageLink">Go to main record</a>
+			<span>[{{vm.itemData.title[0]}}]</span>
+		</div> -->
 
-        </div>
-        <hr/>
-    </div>
-</md-content>
+<div layout="row" class="whiteBg" ng-if="vm.index !== -1">
+
+	<div flex="{{vm.flexsize}}" class="full-view-inner-container whiteBg">
+
+
+		<!-- display image  metadata -->
+		<div class="hvdImgComponentViewMD">
+
+			<!--PNX main  info -->
+			<h3 id="seeMoreInfo">Main information</h3>
+
+			<div layout="row"  layout-xs="column" class="layout-block-xs layout-xs-column layout-row" ng-repeat="(label, valuesArray) in vm.mainInfoRender">
+				<div flex-gt-sm="20" flex-gt-xs="25" flex="" class="flex-gt-xs-25 flex-gt-sm-20 flex">
+					<span class="bold-text word-break">{{ label }}</span>
+				</div> 
+				<div class="item-details-element-container flex" flex>
+					<div role="list" class="item-details-element" >
+						<div role="listitem" layout="column" class="word-break layout-column" ng-if="valuesArray.length > 1" ng-repeat="value in valuesArray track by $index">
+							<!-- {{ value }} -->
+							<span ng-bind-html="value"></span>
+						</div>
+						<div role="listitem" ng-if="valuesArray.length === 1" layout="column" class="word-break layout-column" >
+							<span ng-bind-html="valuesArray[0]"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<hr style="margin: 25px 0px 15px 0px;"/>
+
+			<!--component level info from lds65 -->
+			<h3>Image information</h3>
+			<!-- <hr style="margin: 25px 0px 15px 0px;"/> -->
+
+			<!-- start of individual component div -->
+			<div ng-repeat="component in vm.orderedComponents track by $index">
+				<!-- next div is wrapper to hold 2 cols (thumbnail on left, metadata on right) -->
+				<div layout="row" class="spaceBottom">
+					<span>{{$index + 1}}.</span>
+					<div flex-gt-sm="20" flex-sm="100" class="flex-sm-100 flex-gt-sm-20 hvd-thumbnail">
+						<a target="_blank" ng-href="/discovery/viewcomponent/L/{{vm.docid}}?vid=01HVD_INST:HVD2&imageId={{vm.componentDataThumb[$index].split('nrs.harvard.edu/')[1] }}">
+							<img ng-src="{{vm.componentDataThumb[$index]}}?width=150&height=150">
+							<div class="lockIcon" ng-show="vm.itemData.lds63"" tabindex="-1">
+								<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey">
+							</div>
+						</a>
+					</div>					
+					<div flex-gt-sm="80" flex-sm="100" class="flex-sm-100 flex-gt-sm-80">
+						<div layout="row" layout-xs="column" class="layout-block-xs layout-xs-column layout-row" ng-repeat="field in component">
+							<div flex-gt-sm="20" flex-gt-xs="25" flex="" class="flex-gt-xs-25 flex-gt-sm-20 flex">
+								<span class="bold-text word-break">{{ field.key }}</span>
+							</div> 
+							<div class="item-details-element-container flex" flex>
+								<div role="list" class="item-details-element" >
+									<div role="listitem" layout="column" class="word-break layout-column" ng-if="isArray(field.value)" ng-repeat="val in field.value track by $index">
+										{{ val }}
+									</div>
+									<div role="listitem" ng-if="!isArray(field.value)" layout="column" class="word-break layout-column" >
+										<span ng-bind-html="field.value"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr/>
+			</div>
+			<!-- end of individual component div -->
+			
+		</div>
+
+	</div>
+
+</div>
+
+
+<!-- display error message when the vm.index = -1 -->
+<div layout="row" class="whiteBg" ng-if="vm.index === -1">
+	<div flex class="full-view-inner-container whiteBg">
+		<p class="text-center bigPadding">
+			This component does not exist. Please visit the work record at
+			<a href="http://id.lib.harvard.edu/images/{{vm.recordid}}/catalog">
+				http://id.lib.harvard.edu/images/{{vm.recordid}}/catalog
+			</a>.
+		</p>
+	</div>
+</div>

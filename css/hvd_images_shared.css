@@ -1,0 +1,284 @@
+/* via pages header */
+
+#via-page-header .banner {
+    /* background: linear-gradient(-46deg,#eb001b 0%,#a51c30 100%); */
+    background: #414141;
+    color: #ffffff;
+    height:65px;
+    padding-right:20px;
+    padding-left:20px;
+    font-family: "Trueno", sans-serif;
+}
+#via-page-header .logo {
+    padding-left:10px;
+}
+#via-page-header .logo a {
+    display:inline-block;
+    height:60px;
+}
+#via-page-header .logo a:hover,
+#via-page-header .logo a:focus {    
+	box-shadow: inset 0 -2px 0 0 rgb(193, 194, 194);
+}
+#via-page-header .logo img {
+	height:60px;
+	padding: 9px 25px 5px 0px;
+}
+#via-page-header .logo h1 {
+    vertical-align: top;
+    /* padding-left: 10px; */
+    padding-top:20px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    text-transform: uppercase;
+    letter-spacing: 2.4px;
+
+}
+#via-page-header .metadataHeader {
+    display: inline-block;
+    padding-top: 11px;
+    margin-left: 14px;
+    font-weight: 400;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+/* end via pages header */
+
+/* nav buttons */
+.hvdImgComponentView .imageNav {
+    margin-bottom: 0px;
+}
+.hvdImgComponentView .imageNav label {
+	font-weight: 600;
+	word-spacing: 2.5px;
+}
+.hvdImgComponentView .imageNav .md-button {
+    /* background-color:#0579b8; */
+    /* color:#fff; */
+	box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.5);
+    width:40px;
+    min-width:40px;
+    height:40px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.hvdImgComponentView .imageNav .md-button:hover,
+.hvdImgComponentView .imageNav .md-button:focus {
+    background-color:#2a5280;
+}
+
+/* thumbnail grid on full record page */
+.hvd-via-record-page-grid md-grid-tile {
+	background-color:transparent;
+	box-shadow:none;
+}
+
+.hvd-via-record-page-grid md-card-content a:hover
+.hvd-via-record-page-grid md-card-content a:focus {
+	box-shadow:hone;
+}
+.hvd-via-record-page-grid md-grid-tile md-card-content a>img {
+	border-bottom:3px solid transparent;
+}
+.hvfullsize {
+    width:100%;
+    height: auto;
+}
+
+.hv-md-card {
+    padding-top: 0px !important;
+    margin-top:0px !important;
+    margin-bottom:0px !important;
+    padding-bottom:0px !important;
+    padding-left:0px !important;
+    background: transparent !important;
+}
+.imageBox {
+    height:150px;
+    display: table-cell;
+    padding:0px;
+    margin-left:auto;
+    margin-right: auto ;
+    z-index:0;
+    text-align: center;
+}
+
+.imageBox a {
+	border:none;
+	display: inline-block;
+}
+
+.imageBox > img {
+    margin-left:auto !important;
+    margin-right: auto !important;
+    display: block !important;
+}
+/* this is the caption under grid, if applicable */
+.imageTitle {
+    width:185px;
+    height:40px;
+    font-size:100%;
+	max-width:100%;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    margin-top:0px;
+    text-align: center;
+    cursor:default;
+}
+.imageBox .imageTitle span:hover {
+	/* border-bottom:3px solid rgba(5, 121, 184, 0.3); */
+	color:#0579b8;
+	cursor:pointer;
+}
+.lockIcon {
+    display:block;
+    position: absolute;
+    margin-left:-11px;
+    margin-top:-20px;
+    z-index:5;
+    width:25px;
+    height:25px;
+}
+.hvdImgComponentView .lockIcon {	
+	margin-top: -10px;
+}
+.lockIcon > img {
+    width:25px;
+    height:auto;
+}
+/* end thumbnail grid on full record page */
+
+/* BEGIN large image  page */
+
+/* go to main page button for users from curiosity */
+div.parentImageLinkWrapper {
+	padding-left: 40px;
+	padding-bottom:3px;
+	margin-top: 15px;
+	margin-bottom:10px;
+	text-transform:uppercase;
+	font-weight:600;
+ }
+ div.parentImageLinkWrapper span {
+	margin-left: 15px;
+	font-weight: 400;
+ }
+.hvd-img-open-in-new {
+    /* text-transform:uppercase; */
+    /* font-weight:600; */
+    padding-bottom:3px;
+    margin-bottom:5px;
+    text-align: end;
+    font-size: 14px;
+}
+.hvd-via-full-image #iframe {
+	width: 100%;
+	height: 80vh;
+	border: 1px solid lightgrey;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: no-repeat center/50% url("../img/rotate_right_24dp.svg");
+}
+.hvdImgComponentView .topCpation {
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 16px;
+}
+.hvdImgComponentView .topCpation a {
+	float: right;
+}
+ .hvdImgComponentView .full-view-inner-container  {
+	margin-left:10%;
+	padding-top:0em;
+ }
+custom-view-all-component-metadata .full-view-inner-container  {
+	margin-left:10%;
+	padding-top:0em;
+ }
+ .hvdImgComponentViewMD {
+	margin-top:20px;
+	width:90%;
+ }
+ .hvdImgComponentViewMD .item-details-element {
+	margin-bottom:5px;
+ } 
+  .hvdImgComponentViewMD .hvd-thumbnail {
+	padding-left:15px;
+ }
+ /* button to view all component metadata, from primo details page */
+ .hvd-view-all-component-md {
+	color:#fff;
+	background-color:#0579b8;
+	font-weight:600;
+	border-radius:4px;
+	padding: 5px 10px;
+	border: none;
+	font-family:Source Sans Pro,Arial,sans-serif;
+	margin-bottom: 45px;
+	margin-top: -15px;
+ }
+ .hvd-view-all-component-md:hover,
+ .hvd-view-all-component-md:focus {
+	background-color:#2a5280;
+ }
+
+
+@media print {
+
+    .hvfullsize {
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+/* rest was previously in custom-view-all-component-metadata.css */
+
+#componentMetadata {
+    padding:1% 10%;
+    background: #ffffff;
+    color:#000000;
+}
+
+
+.hv-toggle {
+    text-align: right;
+}
+
+.hv-toggle > button {
+    margin-bottom:10px !important;
+    margin-top:0px !important;
+}
+
+.whiteBg {
+    background:#ffffff;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bigPadding {
+    padding:30px;
+}
+
+.spaceTop {
+    margin-top:10px !important;
+}
+
+hr {padding:0px; margin:0px;}
+
+.spaceBottom {
+    margin-bottom:15px;
+    margin-top: 20px;
+}
+.padding10 {
+    padding-bottom:10px;
+}

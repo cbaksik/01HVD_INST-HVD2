@@ -1,18 +1,17 @@
 /**
  * Created by samsan on 8/7/17.
  * This component is used for Digital Bookplates
+ * also adds link to HT from below full bib
  * 
- * CB adding tech loan as well March 2020
  */
 (function(){
     'use strict';
     angular.module('viewCustom')
-    .controller('prmServiceLinksAfterCtrl',['customImagesService','$timeout','$sce',function (customImagesService, $timeout,$sce) {
+    .controller('prmServiceLinksAfterCtrl',['customBookplateService','$timeout','$sce',function (customBookplateService, $timeout,$sce) {
         let vm=this;
-        let cisv=customImagesService;
-        vm.itemList=[];
-        vm.almaDaux='';
-        vm.recordLinks=[]; // keep track the original vm.parentCtrl.recordLinks
+        let cisv=customBookplateService;
+        vm.plateList=[];
+	   vm.isVIArecord='';
         vm.getData=()=> {
             // make a copy to avoid data binding
             vm.recordLinks = angular.copy(vm.parentCtrl.recordLinks);        
@@ -43,29 +42,24 @@
             /* END hathi section */   
 
             /* ALMA-D AUX IMAGE DISPLAY */
-
-            if (vm.parentCtrl.item.pnx.links.thumbnail){
-                if (vm.parentCtrl.item.pnx.links.thumbnail[0].includes('hvd.alma.exlibrisgroup.com/view/delivery/thumbnail/01HVD_INST/12')) {
-                    vm.almaDaux = vm.parentCtrl.item.pnx.links.thumbnail[0].substring(73);
+            if (vm.parentCtrl.item.pnx.display.lds69){
+                    vm.almaDaux = vm.parentCtrl.item.pnx.display.lds69[0];
                     vm.almaDauxEmbed = 'https://hvd.alma.exlibrisgroup.com/view/UniversalViewer/01HVD_INST/' + vm.almaDaux + '#?iiifVersion=3&updateStatistics=false&embedded=true&c=0&m=0&s=0&cv=0&config=&locales=en-GB:English (GB),cy-GB:Cymraeg,fr-FR:Français (FR),pl-PL:Polski,sv-SE:Svenska,xx-XX:English (GB) (xx-XX)&r=0';
-                    //console.log(vm.almaDaux);
-                    //console.log(vm.almaDauxEmbed);
                     
                     vm.almaDauxEmbed = $sce.trustAsResourceUrl(vm.almaDauxEmbed);
+          }
 
-                }
-            }
+          //   DIGITAL BOOKPLATES
+		if (vm.parentCtrl.item.pnx.display.lds06) {
+			vm.hasPlates = 'true';
+			vm.plateList=cisv.extractImageUrl(vm.parentCtrl.item);
+		}
 
-            // DIGITAL BOOKPLATES
-            vm.itemList=cisv.extractImageUrl(vm.parentCtrl.item, vm.recordLinks);
-            // delay data from parentCtrl
-            $timeout(()=> {
-                vm.recordLinks = angular.copy(vm.parentCtrl.recordLinks);                
-                vm.itemList=cisv.extractImageUrl(vm.parentCtrl.item, vm.recordLinks);
-                if(vm.recordLinks.length > 0 && vm.itemList.length > 0) {
-                    vm.parentCtrl.recordLinks = cisv.removeMatchItems(vm.recordLinks, vm.itemList);
-                }
-            },1500);
+		if (vm.parentCtrl.item.pnx.display.source) {
+			if (vm.parentCtrl.item.pnx.display.source[0] == 'HVD_VIA') {
+				vm.isVIArecord = true;
+			}
+		}
 
         };
 

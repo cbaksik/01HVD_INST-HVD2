@@ -1,156 +1,179 @@
 /**
- * Created by samsan on 7/17/17.
+ * Created by samsan on 6/9/17.
+ * Custom page for image record components -- full display of single image and metadata when a user clicks on thumbnail from a Primo full display page
  */
 
 (function () {
 
-    angular.module('viewCustom')
-    .controller('customViewAllComponentMetadataController', [ '$sce','$element','$location','prmSearchService','$window','$stateParams','$timeout','customMapXmlKeys','$mdMedia','customMapXmlValues', function ($sce, $element,$location, prmSearchService, $window, $stateParams, $timeout, customMapXmlKeys, $mdMedia, customMapXmlValues) {
+	angular.module('viewCustom')
+	.controller('customViewAllComponentMetadataController', [ '$scope','$sce','$mdMedia','prmSearchService','$location','$stateParams', '$element','$timeout','$window','mainInfoMapping','keyOrderMap', function ($scope,$sce,$mdMedia,prmSearchService,$location,$stateParams, $element, $timeout, $window,mainInfoMapping,keyOrderMap) {
 
-        var vm = this;
-        var sv=prmSearchService;
-        var cMap=customMapXmlKeys;
-        var cMapValue=customMapXmlValues;
-        vm.params=$location.search();
-        // get ui-router parameters
-        vm.context=$stateParams.context;
-        vm.docid=$stateParams.docid;
+		let vm = this;
+		var sv=prmSearchService;
+		// get location parameter
+		vm.params=$location.search();
+		// get parameter from angular ui-router
+		vm.docid=$stateParams.docid; // eg alma99158322666803941
+		vm.index='0'; 
+		vm.photo={};
+		vm.flexsize=80;
+		vm.total=0; // number of components
+		vm.itemData={};
+		vm.componentData={}; 
+		vm.componentDataRev={}; 
+		vm.componentDataThumb={}; // to contain thumbnails for rendering
+		vm.orderedComponents = {};
+		vm.mainInfoRender = {};	
 
-        vm.toggleData={'icon':'ic_remove_black_24px.svg','flag':false};
-        vm.xmldata=[];
-        vm.keys=[];
-        vm.items={};
 
-        vm.toggle=function () {
-          if(vm.toggleData.flag) {
-              vm.toggleData.icon='ic_remove_black_24px.svg';
-              vm.toggleData.flag=false;
-          } else {
-              vm.toggleData.icon='ic_add_black_24px.svg';
-              vm.toggleData.flag=true;
-          }
-        };
+	   /* example ajax call http://localhost:8003/primaws/rest/pub/pnxs/L/alma99158322666803941?vid=01HVD_INST:HVD2&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&lang=en */
 
-        // ajax call to get data
-        vm.getData=function () {
-          let api = sv.getApi();
-          let restUrl = '';
-          if(api.pnxbaseurl) {
-             restUrl = api.pnxbaseurl;
-          } else {
-              restUrl = vm.parentCtrl.searchService.restBaseURLs.pnxBaseURL;
-          }
-          restUrl = restUrl + '/' + vm.context + '/' + vm.docid;
-          var params={'vid':'01HVD_INST-HVD2','lang':'en_US','search_scope':'default_scope','adaptor':'Local Search Engine'}
-          // CB 20220720 commented out next 4 lines causing ang1.8 error; appear to be unneeded
-        //   params.vid=vm.params.vid;
-        //   params.lang=vm.params.lang;
-        //   params.search_scope=vm.params.search_scope;
-        //   params.adaptor=vm.params.adaptor;
-          sv.getAjax(restUrl,params,'get')
-              .then(function (result) {
-                  vm.items=result.data;
-                  if(vm.items.pnx.addata) {
-                      var result = sv.parseXml(vm.items.pnx.addata.mis1[0]);
-                      if(result.work) {
-                          vm.xmldata = result.work[0];
-                          if(vm.items.pnx.display) {
-                              vm.keys = Object.keys(vm.items.pnx.display);
-                              var removeKeys = cMap.getRemoveList();
-                              for (var i = 0; i < removeKeys.length; i++) {
-                                  var key = removeKeys[i];
-                                  var index = vm.keys.indexOf(key);
-                                  if (index !== -1) {
-                                      vm.keys.splice(index, 1);
-                                  }
-                              }
-                              vm.keys=cMap.sort(vm.keys);
-                          }
-                      }
+		// ajax call to get data
+		vm.getData=function () {
+			//var url=vm.parentCtrl.searchService.cheetah.restBaseURLs.pnxBaseURL+'/L/'+vm.docid;
+			var urlVE ='/primaws/rest/pub/pnxs/L/' + vm.docid;
+			var params={'vid':'','lang':'','search_scope':'','adaptor':''};
+			params.vid='01HVD_INST:HVD2';
+			params.lang='en';
+			params.search_scope='MyInst_and_CI';
+			params.adaptor='Local%20Search%20Engine';
 
-                  }
+			sv.getAjax(urlVE,params,'get')
+				.then(function (result) {
+					vm.item=result.data; 
+					vm.itemData=vm.item.pnx.display;
+					vm.componentData=vm.item.pnx.display.lds65;
+					if(vm.componentData) {
+						vm.total = vm.componentData.length;
+					} else {
+						console.log(error);
+					}
+					vm.displayPhoto();
+				},function (error) {
+						console.log(error);
+				}
+			)
+		};
 
-              },function (err) {
-                  console.log(err);
-              })
+		// display component photo and component metadata
+		// function receives array of all components
+		vm.displayPhoto=function () {
+			vm.photo={}; // this will be URL to image
+			// handle main info 
+			for (const mapping of mainInfoMapping) {
+				const sourceKey = mapping.sourceKey;
+				const targetKey = mapping.targetKey;
+				if (vm.itemData.hasOwnProperty(sourceKey)) {
+					vm.mainInfoRender[targetKey] = vm.itemData[sourceKey].map(function(val) {
+						// Remove $$Q and everything after it
+						var idx = val.indexOf('$$Q');
+						var cleaned = idx !== -1 ? val.substring(0, idx) : val;
+						// If the cleaned value looks like HTML, trust it
+						if (cleaned.match(/<[^>]+>/)) {
+							return $sce.trustAsHtml(cleaned);
+						}
+						return cleaned;
+					});
+				}
+			}
+			// handle component info 
+			for(var i=0; i < vm.componentData.length; i++) {
+				vm.index = i;				
+				vm.componentData[i] = vm.componentData[i].split('==').filter(str => str.trim()).map(str => ({ 
+					key: str.charAt(0), 
+					value: str.substring(1).trim() 
+				}));
+				// some keys appear twice; find out which
+				var map = {};
+				vm.componentData[i].forEach(function(item) {
+					if (!map[item.key]) {
+					map[item.key] = [];
+					}
+					map[item.key].push(item.value);
+				});
+				// Convert the grouped map back to array of key/values with unique keys
+				vm.componentDataRev[i] = Object.keys(map).map(function(key) {
+					return {
+					key: key,
+					value: map[key].length === 1 ? map[key][0] : map[key]
+					};
+				});
+				// convert related work into html link
+				var relatedWorkUrl = vm.componentDataRev[i].find(function(entry) {
+					return entry.key === '6';
+					});
+				//console.log(relatedWorkUrl);
+				if (relatedWorkUrl) {
+					relatedWorkUrl.value = '<a href="' + relatedWorkUrl.value.split('--')[1] + '">' + relatedWorkUrl.value.split('--')[0] + '</a>';
+				}
+				// components will always have w, get that to ensure same # of items, then get y thumbnail
+				var thumbnailLink = vm.componentDataRev[i].find(function(entry) {
+					return entry.key === 'U';
+				});
+				vm.componentDataThumb[i] = thumbnailLink ? thumbnailLink.value : null;
+				// console.log(vm.componentDataRev[i]);
+				// specify order for component detail display and change keys to display labels
+				vm.orderedComponents[i] = keyOrderMap
+					.filter(function(mapping) {
+						return vm.componentDataRev[i].some(function(item) {
+						return item.key === mapping.oldKey;
+						});
+					})
+					.map(function(mapping) {
+						var original = vm.componentDataRev[i].find(function(item) {
+							return item.key === mapping.oldKey;
+						});
+						return {
+							key: mapping.newKey,
+							value: original.value
+						};
+					});
 
-        };
+			} // end of for loop
 
-        // get json key
-        vm.getKeys=function (obj) {
-            var keys=Object.keys(obj);
-            var removeList = cMap.getRemoveList();
-            for(var i=0; i < removeList.length; i++) {
-                var key=removeList[i];
-                var index = keys.indexOf(key);
-                if (index !== -1) {
-                    // remove image from the list
-                    keys.splice(index, 1);
-                }
-            }
-            return cMap.getOrderList(keys);
-        };
+			// Helper function for the view to check if a value is an array
+		 	$scope.isArray = angular.isArray;
 
-        // get json value base on dynamic key
-        vm.getValue=function (obj,key) {
-            var values = cMapValue.getValue(obj,key);
-            return values;
-        };
+		}; //end displayPhoto fx
 
-        // show the pop up image
-        vm.gotoFullPhoto=function (index,data) {
-            var filename='';
-            if(data.image){
-                var urlList = data.image[0]._attr.href._value;
-                urlList = urlList.split('/');
-                if(urlList.length >=3) {
-                    filename = urlList[3];
-                }
-            } else if(data._attr) {
-                filename = data._attr.componentID._value;
-            }
+		
 
-            // go to full display page
-            var url='/discovery/viewcomponent/'+vm.context+'/'+vm.docid + '?vid='+vm.params.vid +'&imageId='+filename;
-            if(vm.params.adaptor) {
-                url+='&adaptor='+vm.params.adaptor;
-            }
 
-            $window.open(url,'_blank');
-        };
+		vm.$onInit=function() {
+			// console.log("custom-view-all-component-metadata");			
+			// if the smaller screen size, make the flex size to 100.
+			if($mdMedia('sm')) {
+				vm.flexsize=100;
+			} else if($mdMedia('xs')) {
+				 vm.flexsize=100;
+			}
+			// call ajax and display component data
+			vm.getData();
+			setTimeout(()=>{
+				// hide search bar
+				let searchBar=document.getElementsByTagName('prm-search-bar')[0];
+				if(searchBar) {
+				searchBar.style.display = 'none';
+				}
+				// hide top black bar
+				let topBar = document.getElementsByTagName('prm-topbar')[0];
+				if(topBar) {
+				 topBar.style.display='none';
+				}
+			},5);
+		};
 
-        vm.$onInit=function() {
-
-            // initialize banner title so it would display next to logo
-            vm.parentCtrl.bannerTitle='FULL COMPONENT METADATA';
-
-            setTimeout(()=>{
-                // hide search bar
-                let searchBar=document.getElementsByTagName('prm-search-bar')[0];
-                if(searchBar) {
-                    searchBar.style.display = 'none';
-                }
-
-                // hide top black bar
-                let topBar = document.getElementsByTagName('prm-topbar')[0];
-                if(topBar) {
-                    topBar.style.display='none';
-                }
-
-            },5);
-
-            vm.getData();
-        };
 
     }]);
 
-
     angular.module('viewCustom')
     .component('customViewAllComponentMetadata', {
-        bindings: {parentCtrl: '<'},
-        controller: 'customViewAllComponentMetadataController',
-        controllerAs:'vm',
-        'templateUrl':'/discovery/custom/01HVD_INST-HVD2/html/custom-view-all-component-metadata.html'
+		bindings: {item: '<',services:'<',params:'<',parentCtrl:'<'},
+		controller: 'customViewAllComponentMetadataController',
+		controllerAs:'vm',
+		'templateUrl':'/discovery/custom/01HVD_INST-HVD2/html/custom-view-all-component-metadata.html'
     });
+
+
 
 })();

@@ -38,6 +38,7 @@
     });
 
     // truncate word to limit 60 characters
+    // used in via grid display on full record page
     angular.module('viewCustom').filter('truncatefilter',function () {
         return function (str) {
             var newstr=str;
