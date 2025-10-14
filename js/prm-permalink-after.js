@@ -10,15 +10,12 @@ angular.module('viewCustom')
             vm.permalinkText='';
             // change perm a link to correct url, only for data where we've put a link to id.lib via norm rules
             $scope.$watch('vm.parentCtrl.permalink',function () {
-                if(vm.parentCtrl.item && vm.parentCtrl.item.pnx.display.lds03){                    
+                if(vm.parentCtrl.item && vm.parentCtrl.item.pnx.display.lds03){ 
                         const perma = vm.parentCtrl.item.pnx.display.lds03[0].match(/<a[^>]*href="([^"]*)"/);
-					vm.parentCtrl.permalink = '<a href="' + perma + '">' + perma + '</a>';
-					//console.log(vm.parentCtrl.permalink);
-                        vm.permalink=$sce.trustAsHtml(vm.parentCtrl.permalink);
-                        //console.log(vm.permalink.innerHtml);
+					vm.parentCtrl.permalink = '<a href="' + perma[1] + '">' + perma[1] + '</a>';
+					vm.permalink=$sce.trustAsHtml(vm.parentCtrl.permalink);
                     // remove parent node
                     var pNode=$element[0].parentNode.children[0];
-
                     if(pNode) {
                        pNode.style.display='none';
                     } 
