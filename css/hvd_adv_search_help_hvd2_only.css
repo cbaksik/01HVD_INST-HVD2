@@ -15,8 +15,8 @@ md-input-container:has(#advancedSearchLanguage) {
     transition: min-height 0.3s ease-in-out;
 }
 #hvd-adv md-tabs.md-dynamic-height.tab-is-open {
-  height: 400px;
-  overflow-y: auto; 
+  height: 550px;
+  /* overflow-y: auto;  */
 }
 #hvd-adv .md-tabs-content-wrapper {
     overflow-y: auto;
@@ -68,6 +68,8 @@ md-input-container:has(#advancedSearchLanguage) {
 	margin: 0px 20px 10px 25px;
 	padding: 15px 25px 20px 23px;
 	max-width: 600px;
+	overflow-y: auto; 
+	height: 350px;
 }
 #hvd-adv  .results-list li {
 	list-style-type: none;
