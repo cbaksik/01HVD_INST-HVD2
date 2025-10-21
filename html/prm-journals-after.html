@@ -9,13 +9,13 @@
 		<div class="padding-medium flex-xl-50 flex-md-50 flex-lg-50" flex-md="50" flex-lg="50" flex-xl="50" >
 			<md-card class="default-card _md md-primoExplore-theme">
 				<md-card-title>
-					<h2>Trial feature:</h2>
+					<h2>Title starts with</h2>
 				</md-card-title>
 				<md-card-content>
 					
 					<form ng-submit="performSearch()">
 						<div class="form-group">
-						<label for="searchInput">Title starts with:</label>
+						<!-- <label for="searchInput">Title starts with:</label> -->
 						
 						<!-- 
 							ng-model binds this input's value to the 'searchQuery'
@@ -25,11 +25,11 @@
 							type="text" 
 							id="searchInput"
 							ng-model="searchQuery"
-							placeholder="e.g., Studies in English Lit"
+							placeholder="e.g. Studies in English Lit"
 							required>
 						</div>
 						
-						<button class="md-button button-as-link" type="submit">Search</button>
+						<button class="submit-button button-confirm md-button md-primoExplore-theme md-ink-ripple" type="submit">Search</button>
 					</form>
 				</md-card-content>
 			</md-card>
