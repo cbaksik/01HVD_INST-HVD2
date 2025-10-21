@@ -1,11 +1,3 @@
-prm-search {
-  min-height: 900px;
-  display: block;
-}
-prm-facet [sticky].is-stuck {
-  background: white;
-}
-
 footer {
   display: none;
 }

@@ -1,0 +1,61 @@
+
+/*  journal search*/
+prm-journals prm-search {
+  min-height: 200px;
+}
+
+@media (min-width: 1280px) and (max-width: 1919px) {
+   prm-journals .flex-lg-25, prm-journals .layout-row>.flex-lg-25 {
+        flex: 1 1 100%;
+        max-width: 15%;
+        max-height: 100%;
+        box-sizing: border-box;
+    }
+prm-atoz-search-bar {
+    background: linear-gradient(-46deg,#555353 0%,#443e3e 100%);
+}
+prm-atoz-search-bar prm-alphabet-toolbar {
+	/* display:none; */
+}
+prm-atoz-search-bar .simple-search-wrapper .journal-search-tile {
+	display:none;
+}
+prm-journals prm-databases-categorize .sticking-wrapper {
+padding-top: 15px;
+    padding-left: 10px;
+}
+prm-atoz-search-bar .simple-search-wrapper .submit-button {
+	background-color: #0579b8;
+    color: white;
+    font-family: "Trueno", sans-serif;
+    padding: 1px 25px 0px 25px;
+    border: 8px solid #fff;
+    border-radius: 12px;
+}
+prm-atoz-search-bar .simple-search-wrapper .submit-button:after {
+	content:"Find Journals";
+}
+prm-atoz-search-bar .simple-search-wrapper  .submit-button prm-icon {
+	display:none;
+}
+prm-journals-after button.submit-button {
+		background-color: #0579b8;
+    border-radius: 12px;}
+
+prm-journals-after .md-button.button-confirm {
+    color: white;
+ }
+prm-journals-after #searchInput {
+    border-radius: 3px;
+    padding: 0;
+    height: 30px;
+    width: 450px;
+    padding-left: 1em;
+    border: 1px solid #e6dfdf;
+    margin-left: 6px;
+    margin-bottom: 10px;
+ }
+prm-alphabet-toolbar {
+	margin-left: -28px;
+    margin-right: -28px;
+ }

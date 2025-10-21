@@ -23,6 +23,14 @@ body {
     min-height:auto;
     height:auto;
 }
+prm-search {
+  min-height: 900px;
+  display: block;
+}
+prm-facet [sticky].is-stuck {
+  background: white;
+}
+
 /* end*/
 a {
     color:#0579b8;
@@ -227,21 +235,6 @@ md-input-container:after {
 
 /* END search bar area (there may be additional css later in file */
 
-/* BEGIN area for journal search*/
-prm-atoz-search-bar {
-    background: linear-gradient(-46deg,#555353 0%,#443e3e 100%);
-}
-prm-atoz-search-bar prm-alphabet-toolbar {
-	display:none;
-}
-prm-atoz-search-bar .simple-search-wrapper .journal-search-tile {
-	display:none;
-}
-prm-journals prm-databases-categorize .sticking-wrapper {
-padding-top: 15px;
-    padding-left: 10px;
-}
-/* END area for journal search*/
 
 md-backdrop.md-opaque {
     background: rgba(56,56,61);
@@ -2345,9 +2338,9 @@ prm-opac prm-request #form_field_pickupLocation md-input-container md-select:foc
 /* end request form */
 /* begin 'Access options' header and alert bar  */
 /* hide back to loc button if there is only 1 hol, involves js too */
-prm-opac:has(.hide-back-to-location-list) prm-opac-back-button {
+/* prm-opac:has(.hide-back-to-location-list) prm-opac-back-button {
 	display:none;
-}
+} */
 prm-opac prm-opac-back-button {
 	display:block;
 	margin:10px 3px 15px 0px;
@@ -2582,6 +2575,12 @@ prm-opac prm-location-holdings .display-block .layout-column .padding-left-mediu
 	padding-left: 0em;
 	padding-right: 0.3em;
 }
+/* for 856 links , when there are multiple, add line breaks */
+prm-opac prm-location-holdings .display-block .layout-column .padding-left-medium:has(a) span>a:after  {
+  content: "\A";
+  white-space: pre;
+}
+
 /* end holding notes */
 /* START ITEMS */
  /* alert about not being able to find any items to display */
