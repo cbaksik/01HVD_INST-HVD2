@@ -11,6 +11,7 @@ prm-journals prm-search {
         max-height: 100%;
         box-sizing: border-box;
     }
+}
 prm-atoz-search-bar {
     background: linear-gradient(-46deg,#555353 0%,#443e3e 100%);
 }
