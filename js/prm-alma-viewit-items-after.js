@@ -10,7 +10,8 @@
 	var vm=this;
 	var sv=prmSearchService;
 	vm.isVIArecord=false;
-	vm.singleImageFlag=false; // refer to this in html as {{$ctrl.singleImageFlag}} 
+	vm.singleImageFlag=false;
+	vm.imageRestricted=''; // PNX lds63 is 'restricted' if there is 1 image and it's restricted, or if there are multiple and any are restricted
 	vm.filename=''; // eg urn-3:DOAK.LIB:3205217
 	// vm.noImage=false; can't test here because this controller doesn't exist if there is no image
 	vm.componentJSON={};
@@ -21,6 +22,10 @@
 		if (vm.parentCtrl.item.pnx.display.source) {
 			if (vm.parentCtrl.item.pnx.display.source[0] == 'HVD_VIA') {
 				vm.isVIArecord = true;
+				if (vm.parentCtrl.item.pnx.display.lds63) {
+					vm.imageRestricted = true;
+					// console.log(vm.imageRestricted);
+				}
 			}
 			if (vm.parentCtrl.item.pnx.display.lds20) {
 				if (vm.parentCtrl.item.pnx.display.lds20[0] == '1') {
@@ -65,6 +70,8 @@
 
 	// MPS Embed function also exists in custom-view-component.js for cases of multi-image records
 	vm.mpsEmbed=function (objectID) {
+		console.log("start mpsEmbed fx for objectID:");
+		console.log(objectID);
 		if (objectID.startsWith("urn-3:")) {
 			const restUrl = 'https://embed.lib.harvard.edu/api/nrs'
 			var params={'urn':objectID,'prod':1}
@@ -84,6 +91,7 @@
 					  vm.iframeAttributes[attrib.name] = attrib.value;  
 				   }
 				}
+				console.log(vm.iframeAttributes);
 			},function (err) {
 			    console.log(err);
 			});

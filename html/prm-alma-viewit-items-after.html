@@ -9,7 +9,10 @@
 		<a target="_blank" href="{{vm.iframeAttributes.src}}?buttons=Y">Open image in new tab</a>
 	</div>
 	
-	<!-- <img ng-if="vm.restricted" src="custom/HVD2/img/icon_lock25.png" class="hvdSingleImgLock" alt="Restricted to HarvardKey" aria-label="Restricted to HarvardKey" title="Restricted to HarvardKey"/> -->
+	<div class="lockIcon" ng-if="vm.imageRestricted" tabindex="-1">
+		<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
+	</div>
+
 	<div layout="column" layout-align="center center" class="hvd-via-full-image">
 		<iframe id="iframe" name="{{vm.iframeAttributes.name}}" src="{{vm.iframeAttributes.src}}"
 			height="{{vm.iframeAttributes.height}}" width="{{vm.iframeAttributes.width}}"
