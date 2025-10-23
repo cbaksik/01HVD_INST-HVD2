@@ -11,6 +11,7 @@
         let vm=this;
         let cisv=customBookplateService;
         vm.plateList=[];
+	   vm.hasPlates = 'false';
 	   vm.isVIArecord='';
         vm.getData=()=> {
             // make a copy to avoid data binding
