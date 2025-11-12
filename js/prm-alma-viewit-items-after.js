@@ -5,7 +5,7 @@
 (function () {
 
     angular.module('viewCustom')
-    .controller('prmAlmaViewitItemsAfterController', [ '$scope','$sce','$mdMedia','prmSearchService','$location','$stateParams', '$element','$timeout','$window', function ($scope,$sce,$mdMedia,prmSearchService,$location,$stateParams, $element, $timeout, $window) {
+    .controller('prmAlmaViewitItemsAfterController', [ '$scope','$sce','$mdMedia','prmSearchService','$location','$stateParams', '$element','$timeout','$window','$http', function ($scope,$sce,$mdMedia,prmSearchService,$location,$stateParams, $element, $timeout, $window, $http) {
 
 	var vm=this;
 	var sv=prmSearchService;
@@ -70,14 +70,31 @@
 
 	// MPS Embed function also exists in custom-view-component.js for cases of multi-image records
 	vm.mpsEmbed=function (objectID) {
-		console.log("start mpsEmbed fx for objectID:");
-		console.log(objectID);
-		if (objectID.startsWith("urn-3:")) {
+		//console.log("start mpsEmbed fx for objectID:");
+		//console.log(objectID);
+		if (objectID.startsWith("urn-3:") || objectID.startsWith("URN-3:")) {
 			const restUrl = 'https://embed.lib.harvard.edu/api/nrs'
 			var params={'urn':objectID,'prod':1}
 			sv.getAjax(restUrl,params,'get')
+			//start section added to log as part of troubleshooting
+			// console.log('%c[AJAX Request] ► Sending...', 'font-weight: bold;', {
+               //  url: restUrl,
+        		// params: params
+			// });
+			// return $http({
+			// 	'url': restUrl,
+			// 	'params': params
+			// }) 
+			//end section added to log as part of troubleshooting
 			.then(function (result) {
-			    vm.items=result.data;
+				// start console log 
+				// console.log("received response");
+				// console.log('%c[AJAX Success] ✔ Received a response from: ' + restUrl, 'font-weight: bold;', {
+				// 	status: result.status,
+				// 	statusText: result.statusText
+                	// });
+				// end console log 
+			    vm.items=result.data;			    
 			    vm.iframeHtml = vm.items.html;
 			    const doc = new DOMParser().parseFromString(vm.iframeHtml, 'text/html');
 			    const element = doc.body.children[0];
@@ -93,7 +110,12 @@
 				}
 				console.log(vm.iframeAttributes);
 			},function (err) {
-			    console.log(err);
+			//     console.log(err);
+			    console.err('%c[AJAX Error] ✖ Failed to reach: ' + restUrl, 'color: red; font-weight: bold;', {
+                    status: err.status,
+                    statusText: err.statusText,
+                    data: err.data
+                	});
 			});
 		}
 	};
