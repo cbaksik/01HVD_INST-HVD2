@@ -68,7 +68,9 @@ a:hover, a:focus {
 .md-button.button-notice:focus:not([disabled]) {
     background-color:#2a5280;
 }
-
+prm-alert-bar {
+	border-radius:4px;
+}
 /* START search bar area */
 
 /* see hvd_search_bar....css for view specific code */
@@ -492,7 +494,6 @@ button.mobile-menu-button prm-icon {
 /* alert bar e.g. sign in prompt above results */
 prm-alert-bar .bar.alert-bar {
     background-color:#fff;
-    border-radius: 0;
     border: none;
     border-bottom: 1px solid #c0c0c0;
 }
@@ -2126,6 +2127,7 @@ prm-service-links:has(.hvd-hide-VIA-otb-online-button) .spaced-rows > div > div 
     margin-bottom:10px;
 }
 /* end digital bookplates */
+/* END  SERVICE LINKS SECTION  (links under Details) */
 @media print {
 
     body {                  
@@ -2168,6 +2170,7 @@ alma-howovp a {
 	/* font-size:18px; */
 	padding-bottom: 3px;
 	font-weight:600;
+	text-transform:uppercase;
 }
 alma-howovp .neutralized-button:focus.md-button,
 alma-howovp .neutralized-button:hover.md-button {
@@ -2288,18 +2291,6 @@ prm-alma-viewit a[href*="urn.harvard.edu"]:after { content:" -- Harvard digital 
  prm-location 		= list of single holding;
  prm-location-items = expanded single location with items;
 
- /* hiding hours info button for now - placement is too problematic */
-/* need both references to override otb css */
-prm-opac prm-stack-map,
-prm-location .stack-map {
-	display:none;
-}
-prm-opac prm-stack-map .md-button.button-with-icon>prm-icon md-icon {
-	height: 16px;
-	width: 16px;
-	min-height: 16px;
-	min-width: 16px;
-}
 /* title-level request links */
 prm-opac prm-request-services .labeled-block .block-body {
 	display:block;
@@ -2386,6 +2377,15 @@ prm-opac prm-alert-bar .bar.alert-bar {
 	border-bottom: none;
 }
  /* list of libraries, incl item filter  */
+ /* holding info area with 2 columns where left = notes and right = hours button */
+prm-opac prm-locations prm-location .layout-row>.flex-70 {
+	max-width:80%;
+	width:80%;
+}
+prm-opac prm-locations prm-location .layout-row>.flex-30 {
+	max-width:20%;
+	width:20%;
+}
 prm-opac prm-locations > .padding-left-medium {
 	padding-left:0em;
 }
@@ -2393,6 +2393,7 @@ prm-opac prm-locations>div.layout-row {
 	background-color: #e4e4e4;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	border-radius:4px;
 }
 prm-opac prm-locations>div.layout-row:before {
 	content:"Select a location below or use the item filter to find a specific volume";
@@ -2404,41 +2405,94 @@ prm-opac prm-locations .separate-list-items md-list-item {
 }
 /* prevent entire hol from turning grey on hover */
 /* need separate css for dialog over search results vs record in its own tab */
-md-dialog prm-opac md-list md-list-item prm-location .md-button:hover:not([disabled]).neutralized-button,
+/* md-dialog prm-opac md-list md-list-item prm-location .md-button:hover:not([disabled]).neutralized-button,
 md-dialog prm-opac md-list md-list-item prm-location .md-button:focus:not([disabled]).neutralized-button,
 prm-opac prm-location > .md-button.neutralized-button:focus,
 prm-opac prm-location > .md-button.neutralized-button:hover {
 	background-color:transparent;
-}
+} */
 /* make lib name look like active link on hover instead of entire hol */
-prm-opac prm-location > .md-button.neutralized-button:focus h3,
+/* prm-opac prm-location > .md-button.neutralized-button:focus h3,
 prm-opac prm-location > .md-button.neutralized-button:hover h3 {
 	box-shadow: inset 0 -3px 0 0 rgba(5, 121, 184, 0.3);
-}
+} */
 /* make lib + loc + call number blue in list of all libraries only */
-prm-opac prm-locations prm-location h3 {
+/* prm-opac prm-locations prm-location h3 {
 	color:#0579b8;
 	padding-bottom: .2em;
 	line-height:1.6em;
+} */
+prm-opac prm-locations prm-location > .md-button.neutralized-button {
+	padding-left: 10px;
 }
 prm-opac prm-locations prm-location .md-list-item.md-2-line .md-list-item-text h3 + p {
 	margin-left:10px;
 }
-/* this adding space bewteen the location name and call number */
-prm-opac prm-locations prm-location p span,
-prm-opac prm-location-items p span {
+/* adding grid to expanding hold header area so that map-it button displays under all other info */
+prm-opac prm-location-items>.tab-content-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1rem; 
+}
+/* this adding space bewteen the location name and call number, on hol w/ expanded items */
+prm-opac prm-location-items h6+p span {
 	padding-right:15px;
 }
-/* item filter button */
-/* this is where I'm trying shenanigans to move filter etc */
-prm-opac prm-location-items .tab-content-header {
-	display:block;
+/* this adding space bewteen the location name and call number, on list of hol */
+prm-opac prm-location h3+p span {
+	padding-right:15px;
 }
-prm-opac prm-location-items .tab-content-header div.layout-column+div.layout-row {
-	display:block;
-	flex-grow: 1;
+/* this is the flex div that contains both hours button and filter/expand buttons, on expanded hol */
+prm-opac prm-location-items .tab-content-header>.layout-row {
+	flex-direction: column;
+	justify-content: space-between;
+	height:100%;
 }
-/* end filter shenanigans */
+/* this is the flex div that contains just filter/expand buttons, on expanded hol */
+prm-opac prm-location-items .tab-content-header .layout-row .layout-row:has(.expand-collapse-button) {
+	flex-direction: row;
+	/* margin-top:auto; */
+}
+/* BEGIN hours & info button ------------------ */
+/*  n.b. exl puts this in 'stack-map' section */
+/* do not confuse it with the Map It section */
+
+/* button on holding list */
+prm-location prm-stack-map a.md-button {
+	min-height: 26px;
+	line-height: 28px;
+}
+/* hide map it button from appearing in hol list b/c it distorts alignment */
+prm-location>div.neutralized-button prm-stack-map+p.SMsearchbtn-container  {
+	display:none;
+ }
+prm-location>div.neutralized-button prm-stack-map+p.SMsearchbtn-container>button  {
+	display:none;
+ }
+/* hours button on expanded hol */
+prm-location-items .tab-content-header prm-stack-map a.md-button {
+	min-height: 30px;
+	line-height: 28px;
+}
+prm-opac prm-stack-map a.md-button.button-link:hover:not([disabled]),
+prm-opac prm-stack-map a.md-button.button-link:focus:not([disabled]) {
+	background-color:#0579b8;
+}
+prm-opac prm-stack-map .md-button.button-with-icon>prm-icon md-icon {
+	height: 16px;
+	width: 16px;
+	min-height: 16px;
+	min-width: 16px;
+}
+/* make hours hover to top of column and leave filter/expand at bottom, on expanded hol */
+prm-opac prm-location-items .tab-content-header>.layout-row>.layout-row>prm-stack-map {
+	position: absolute;
+    top: 5px;
+    right: 5px;
+}
+/* END hours & info button ------------------ */
+ /* BEGIN item filter button on expanded hol */
 prm-opac prm-locations button.md-button.md-mini,
 prm-opac prm-location-items button.md-button.md-mini {
 	background-color:#0579b8;
@@ -2509,9 +2563,6 @@ prm-opac prm-location-items h6.md-title+p {
 prm-opac prm-location-items h6.md-title+p+p {
 	font-size:14px;
 	font-weight:400;
-}
-prm-opac prm-location .layout-row>.flex-70 {
-	max-width:100%;
 }
 /* location name and call number, from prm-location, doesn't work if you add prm-opac */
 md-list-item.md-2-line .md-list-item-text h3+p {
@@ -2587,9 +2638,9 @@ prm-opac prm-location-holdings .display-block .layout-column .padding-left-mediu
  prm-opac prm-location-items .alert-bar {
 	display:none;
  }
-/* this is the down caret to expand items, hide for now to simplify */
+/* this is the down caret to expand items */
 prm-opac prm-location-items .md-secondary-container button.item-expand-button {
-	display:none;
+	margin-left:10px;
 }
 /* box around item list */
 prm-opac prm-location-items md-list.separate-list-items {
@@ -2630,10 +2681,19 @@ prm-opac prm-location-items md-list.separate-list-items md-list-item.md-2-line  
 /* item-level request links eg aeon  */
 prm-location-items md-list prm-service-button .md-button, 
 prm-location-items md-list prm-service-button .md-button.button-as-link {
-	padding: .5em 0em;
+	padding: .5em .5em;
 	color: #0579b8;
 	margin-right:10px;
 	font-weight: 600;
+	border:1px solid #0579b8;
+	border-radius:4px;
+}
+prm-location-items prm-service-button .md-button.button-as-link:hover:not([disabled]),
+prm-location-items prm-service-button .md-button.button-as-link:focus:not([disabled]) {
+	color:#fff;
+	background-color:#0579b8;
+	box-shadow:none;
+	border-radius:4px;
 }
 /* remove request link icon indicating external link */
 prm-opac prm-service-button prm-icon {
