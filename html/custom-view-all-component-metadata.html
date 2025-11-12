@@ -62,7 +62,7 @@
 					<span>{{$index + 1}}.</span>
 					<div flex-gt-sm="20" flex-sm="100" class="flex-sm-100 flex-gt-sm-20 hvd-thumbnail">
 						<a target="_blank" ng-href="/discovery/viewcomponent/L/{{vm.docid}}?vid=01HVD_INST:HVD2&imageId={{vm.componentDataThumb[$index].split('nrs.harvard.edu/')[1] }}">
-							<img ng-src="{{vm.componentDataThumb[$index]}}?width=150&height=150">
+							<img ng-src="{{vm.componentDataThumb[$index]}}:THUMBNAIL">
 							<div class="lockIcon" ng-show="vm.itemData.lds63"" tabindex="-1">
 								<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey">
 							</div>
