@@ -1128,7 +1128,15 @@ prm-facet .switch-results md-switch.active:focus:not([disabled]) {
     background-color:#1e1e1e;
 } 
 /* END FULL TEXT SWITCH  */
-
+/* if a user changes selection away from default (relevance) make it appearent) */
+prm-facet prm-search-result-sort-by md-select-value div.md-text span {
+	color:#0579B8;
+	font-weight:600;
+}
+prm-facet prm-search-result-sort-by md-select-value div.md-text span[translate='results.sortby.option.rank'] {
+	color:#3a3a3a;
+	font-weight:400;
+}
 prm-facet prm-search-result-sort-by md-select {
     padding: 5px;
     border-radius: 3px;
@@ -1536,27 +1544,44 @@ div.search-switch-buttons .md-button {
 prm-advanced-search legend {
     transform:scale(1.0);
 }
-/* if user has selected a value for resource type, lang, or date, display text in bold to make it easier to see that they have filled in a value there */
-prm-advanced-search .advanced-drop-downs md-select.ng-dirty md-select-value .md-text span {
+/* if user has selected a value for one of the dropdowns, alter display text to make it easier to see that they have filled in a value there */
+prm-advanced-search fieldset div.inputs-row md-input-container md-select-value div.md-text span {
+	color:#0579B8;
 	font-weight:600;
 }
-/* if user has not chosen a valdue for the dropdown, don't show text as bold */
-prm-advanced-search .advanced-drop-downs md-select-value .md-text span[translate$='.any'],
-prm-advanced-search .advanced-drop-downs md-input-container md-select.ng-untouched,
-prm-advanced-search .advanced-drop-downs md-select-value .md-text span[translate$='day'],
-prm-advanced-search .advanced-drop-downs md-select-value .md-text span[translate$='month']
-{
+/* FIRST ROW --  is special because it does not have boolean operator */
+/* first container is field value */
+prm-advanced-search fieldset div.inputs-row:first-of-type md-input-container:first-of-type md-select-value div.md-text span[translate='search-advanced.scope.option.nui.advanced.index.any'] {
+	color:#3a3a3a;
 	font-weight:400;
 }
+/* second container is precision */
+prm-advanced-search fieldset div.inputs-row:first-of-type md-input-container:nth-of-type(2) md-select-value div.md-text span[translate='search-advanced.precisionOperator.option.contains'] {
+	color:#3a3a3a;
+	font-weight:400;
+}
+/* SECOND AND SUBSEQUENT rows start with additional container for boolean value */
+prm-advanced-search fieldset div.inputs-row:not(first-of-type) md-input-container:first-of-type md-select-value div.md-text span[translate='search-advanced.boolOperator.option.AND'] {
+	color:#3a3a3a;
+	font-weight:400;
+}
+prm-advanced-search fieldset div.inputs-row:not(first-of-type) md-input-container:nth-of-type(2) md-select-value div.md-text span[translate='search-advanced.scope.option.nui.advanced.index.any'] {
+	color:#3a3a3a;
+	font-weight:400;
+}
+prm-advanced-search fieldset div.inputs-row:not(first-of-type) md-input-container:nth-of-type(3) md-select-value div.md-text span[translate='search-advanced.precisionOperator.option.contains'] {
+	color:#3a3a3a;
+	font-weight:400;
+}
+/* media type column */
+prm-advanced-search md-input-container:has(label[id='advancedSearchMaterialType']) md-select-value div.md-text span:not([translate='search-advanced.mediaType.option.any']) {
+	color:#0579B8;
+	font-weight:600;
+}
+/* */
 prm-advanced-search md-select:hover, prm-advanced-search md-select:focus {
     background:#e4e4e4;
 }
-/* prm-advanced-search md-input-container:after {
-    height: 0px;
-} */
-/* prm-advanced-search .complex-rows {
-    border-bottom:none;
-} */
 prm-advanced-search .search-string input {
     border: 1px solid #848484;
     padding:5px;
@@ -2204,10 +2229,10 @@ prm-alma-viewit:has(.via-alma-viewit) a.item-title {
 prm-alma-viewit-items:has(.via-alma-viewit) .separate-list-items md-list-item {
 	display:none;
 }
-prm-full-view-service-container prm-alert-bar .bar.alert-bar {
-    background-color: #f7eda3;
-    border-bottom: none;
+prm-alma-viewit  prm-alert-bar .bar.alert-bar {
+	display:none;	
 }
+prm-alma-viewit
 prm-alma-viewit-items .scrolling-area {
     max-height: 1000px;
     overflow-y: visible;
@@ -2281,6 +2306,33 @@ background-color:red;
 prm-alma-viewit a[href*="hathitrust"]:after { content:" -- HathiTrust (partial coverage)"; }
 prm-alma-viewit a[href*="hdl.handle.net"]:after { content:" -- HathiTrust"; }
 prm-alma-viewit a[href*="urn.harvard.edu"]:after { content:" -- Harvard digital object"; }
+/* alma-d section */
+prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h3 {
+    text-transform: uppercase;
+    color: #0579B8;
+    font-weight: 600;
+    font-size: 15px;
+	    padding: 5px 0px;
+}
+prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h3 span:hover,
+prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h3 span:focus {
+	box-shadow: inset 0 -3px 0 0 rgba(5, 121, 184, 0.3);
+	padding: 5px 0px;
+}
+prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h4 {
+    color: grey;
+    font-weight: bold;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline;
+    margin-right: 15px;
+}
+prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text p {
+	color:#000;
+    display: inline;
+    font-style: normal;
+}
+
 /* end VIEW IT */
 /*                                                       */
 
