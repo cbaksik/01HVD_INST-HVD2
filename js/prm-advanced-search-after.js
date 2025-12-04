@@ -14,7 +14,7 @@
 		  vm.languages = []; 
 
 		vm.tabs = [
-				{ id: 'advHelpTabGuide', title: 'Help with Advanced Search'},
+				{ id: 'advHelpTabGuide', title: 'Help with Advanced Search '},
 				{ id: 'advHelpTabLang', title: 'Language Codes'},
 				{ id: 'advHelpTabPub', title: 'Place of publication codes'}
 			];

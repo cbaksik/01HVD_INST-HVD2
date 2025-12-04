@@ -1,5 +1,3 @@
-<!-- <div id="hvd-adv-lang" layout-align="end center"> -->
-
 <div id="hvd-adv" layout="row" class="display-black layout-row" style="width: 100%;" >
 
 	<md-tabs flex md-dynamic-height md-selected="vm.selectedIndex" ng-class="{'tab-is-open': vm.selectedIndex !== -1}">
@@ -7,13 +5,19 @@
 			md-on-deselect="vm.announceDeselected(tab)" ng-disabled="tab.disabled">
 			<md-tab-label>
 				{{tab.title}}
-				 <!-- <img src="https://icongr.am/clarity/close.svg?size=16&color=currentColor" ng-click="vm.removeTab(tab)" class="delete" alt="Remove tab"> -->
 			</md-tab-label>
 			<md-tab-body>
 				 <div ng-if="tab.id === 'advHelpTabGuide'">
-						<p>The <a href="https://guides.library.harvard.edu/hollishelp">HOLLIS User Guide</a> has numerous tips & tricks on using HOLLIS. The page on <a href="https://guides.library.harvard.edu/hollishelp/advanced">Advanced Search</a> explains the precision search options and provides numerous examples. A summary is included here for quick reference:</p>
+						<p>The <a href="https://guides.library.harvard.edu/hollishelp">HOLLIS User Guide</a> has numerous tips & tricks on using HOLLIS. The page on <a href="https://guides.library.harvard.edu/hollishelp/advanced">Advanced Search</a> explains the precision search options and provides numerous examples. Some quick tips:</p>
 
-					<p>Coming soon</p>
+					<p>
+						<ul>
+							<li>You can use "starts with" for Title or Holding call number searches only.</li>
+							<li>Audience -- example: “People with visual disabilities” </li>
+							<li>Holding call number -- this will search all call number schemas (Library of Congress, Old Widener, ...); include spaces where appropriate (and if you don't find what you're looking for, try removing spaces) </li>
+							<li>Holding notes on binding, ownership -- search for copy-specific information such as "marbled boards"</li>
+						</ul>
+					</p>
 
 
 				 </div>
