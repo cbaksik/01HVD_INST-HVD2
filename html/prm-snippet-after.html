@@ -1,0 +1,12 @@
+<div ng-if="vm.hvdSnipBefore">
+	<prm-icon class="open-quote" icon-type="svg" svg-icon-set="primo-actions" icon-definition="citation">
+		<md-icon md-svg-icon="primo-actions:citation" ></md-icon>
+	</prm-icon>
+	<span class="italic-text"> {{vm.hvdSnipBefore}} </span>
+	<span ng-if="vm.hvdSnipMatch" class="italic-text hvd-snippet-match"> {{vm.hvdSnipMatch}} </span>
+	<span ng-if="!vm.hvdSnipMatch" class="italic-text" style="padding-left:20px;"></span>
+	<span ng-if="vm.hvdSnipAfter" class="italic-text"> {{vm.hvdSnipAfter}} </span>
+	<prm-icon class="open-quote" icon-type="svg" svg-icon-set="primo-actions" icon-definition="citation">
+		<md-icon md-svg-icon="primo-actions:citation" ></md-icon>
+	</prm-icon>	
+</div>
