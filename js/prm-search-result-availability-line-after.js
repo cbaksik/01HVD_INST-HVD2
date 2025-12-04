@@ -22,12 +22,13 @@ angular.module('viewCustom')
 
 		// find if pnx had EAD finding aid link, there may be more than one 555 field
 		vm.findFindingAid=function () {
-			if (vm.itemPNX.pnx.display.lds09) {
-				const ead = vm.itemPNX.pnx.display.lds09[0].match(/<a[^>]*href="([^"]*)"/);
-				//console.log(ead);
-				// need to test if it's a harvard link
-				if (ead[1].includes("nrs.harvard.edu") || ead[1].includes("id.lib.harvard.edu")) {
-					vm.eadURN = ead[1];
+			if (vm.itemPNX.pnx.display.lds08) {
+				const targets = ["id.lib.harvard.edu", "nrs.harvard.edu"];
+				for (const key in vm.itemPNX.pnx.display.lds08) {
+					const val = vm.itemPNX.pnx.display.lds08[key];
+					if (typeof val === "string" && targets.some(t => val.includes(t))) {
+						vm.eadURN = val;
+					}
 				}
 			}
 		};		
