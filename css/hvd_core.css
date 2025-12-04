@@ -68,9 +68,49 @@ a:hover, a:focus {
 .md-button.button-notice:focus:not([disabled]) {
     background-color:#2a5280;
 }
+/* prm-alert bar general */
+prm-alert-bar .bar prm-authentication {
+    margin-right:15px;
+}
+prm-alert-bar .bar prm-authentication .md-button {
+    color: #2a5280;
+    font-weight:bold;
+    padding:11px;
+    border-radius:4px;
+}
+prm-alert-bar .bar prm-authentication .md-button:hover:not([disabled]),
+prm-alert-bar .bar prm-authentication .md-button:focus:not([disabled]) {
+    background-color:#2a5280;
+    padding: 11px;
+}
+prm-alert-bar .bar.alert-bar span.bar-text {    
+    padding: 7px 15px;
+}
+prm-alert-bar prm-authentication .md-button.button-with-icon>prm-icon+span {
+    text-decoration:none;
+    font-weight:600;
+    text-transform:uppercase;
+    font-size:15px;
+}
+prm-alert-bar md-divider {
+    display:none;
+}
+prm-alert-bar .dismiss-alert-button {
+    font-weight:600;
+    text-transform:uppercase;
+    font-size:15px;
+    border-radius:4px;
+    padding: 0px;
+    display:inline-block;
+    height:37px;
+}
+prm-alert-bar .dismiss-alert-button.md-button.button-with-icon>prm-icon {
+    display:none;
+}
 prm-alert-bar {
 	border-radius:4px;
 }
+/* end prm-alert bar general */
 /* START search bar area */
 
 /* see hvd_search_bar....css for view specific code */
@@ -492,48 +532,10 @@ button.mobile-menu-button prm-icon {
     }
 }
 /* alert bar e.g. sign in prompt above results */
-prm-alert-bar .bar.alert-bar {
+prm-search prm-alert-bar .bar.alert-bar {
     background-color:#fff;
     border: none;
     border-bottom: 1px solid #c0c0c0;
-}
-prm-alert-bar .bar prm-authentication {
-    margin-right:15px;
-}
-prm-alert-bar .bar prm-authentication .md-button {
-    color: #2a5280;
-    font-weight:bold;
-    padding:11px;
-    border-radius:4px;
-}
-prm-alert-bar .bar prm-authentication .md-button:hover:not([disabled]),
-prm-alert-bar .bar prm-authentication .md-button:focus:not([disabled]) {
-    background-color:#2a5280;
-    padding: 11px;
-}
-prm-alert-bar .bar.alert-bar span.bar-text {    
-    padding: 7px 15px;
-}
-prm-alert-bar prm-authentication .md-button.button-with-icon>prm-icon+span {
-    text-decoration:none;
-    font-weight:600;
-    text-transform:uppercase;
-    font-size:15px;
-}
-prm-alert-bar md-divider {
-    display:none;
-}
-prm-alert-bar .dismiss-alert-button {
-    font-weight:600;
-    text-transform:uppercase;
-    font-size:15px;
-    border-radius:4px;
-    padding: 0px;
-    display:inline-block;
-    height:37px;
-}
-prm-alert-bar .dismiss-alert-button.md-button.button-with-icon>prm-icon {
-    display:none;
 }
 /* ************** */
 /* SEARCH RESULTS SECTION / BRIEF RECORD */
@@ -949,6 +951,9 @@ prm-snippet prm-icon.close-quote md-icon {
     transform: scale(.4) translate(0px,-10px);
     opacity: 0.7;
 }
+prm-snippet .hvd-snippet-match {
+	background-color:rgb(248, 194, 28, .15);
+}
 prm-search-result-thumbnail-container .fan-img:first-of-type {
     background-color:#fff;
     transform: translate3d(-12px,12px,0) scale3d(.8,.8,1);
@@ -1301,9 +1306,6 @@ prm-full-view-service-container button prm-icon[icon-definition*="ic_open_in_new
     display:none;
 }
 /* next line affects all section headers */
-prm-full-view-service-container prm-service-header h4[translate="nui.getit.tab1_onl_norestrict"] {
-    padding-bottom:25px;
-}
 prm-full-view-service-container prm-service-header h4 {
     padding-bottom:15px;
 }
@@ -2190,7 +2192,7 @@ prm-library-card-menu .md-button.button-with-icon > prm-icon,
 prm-authentication .md-button.button-with-icon > prm-icon {
     display: none;
 }
-/* how to get it  */
+/* how to get it - howovp getit */
 alma-howovp a {
 	/* font-size:18px; */
 	padding-bottom: 3px;
@@ -2208,6 +2210,14 @@ alma-howovp .neutralized-button:hover a:hover {
 alma-howovp .neutralized-button:hover a {
 	color:#0579b8;
 }
+alma-howovp md-dialog md-list md-list-item .md-button:focus:not([disabled]).neutralized-button, 
+alma-howovp md-dialog md-list md-list-item .md-button:hover:not([disabled]).neutralized-button, 
+alma-howovp md-dialog md-list md-list-item button:focus:not([disabled]).neutralized-button, 
+alma-howovp md-dialog md-list md-list-item button:hover:not([disabled]).neutralized-button {
+	background-color:none;
+}
+
+
 /*                                                          */
 /************ BEGIN View it Get it - formerly mash-up ****************/
 /* note that 'how to get it' is not part of alma-viewit or prm-opac */
@@ -2306,18 +2316,22 @@ background-color:red;
 prm-alma-viewit a[href*="hathitrust"]:after { content:" -- HathiTrust (partial coverage)"; }
 prm-alma-viewit a[href*="hdl.handle.net"]:after { content:" -- HathiTrust"; }
 prm-alma-viewit a[href*="urn.harvard.edu"]:after { content:" -- Harvard digital object"; }
+
 /* alma-d section */
 prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h3 {
     text-transform: uppercase;
     color: #0579B8;
     font-weight: 600;
     font-size: 15px;
-	    padding: 5px 0px;
+    padding-bottom:.1em;
+    margin-bottom: 3px;
+}
+prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h3 span {
+	padding-bottom: 1.5px;
 }
 prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h3 span:hover,
 prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h3 span:focus {
 	box-shadow: inset 0 -3px 0 0 rgba(5, 121, 184, 0.3);
-	padding: 5px 0px;
 }
 prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text h4 {
     color: grey;
@@ -2332,7 +2346,15 @@ prm-alma-viewit prm-alma-viewit-items md-list-item.md-3-line .md-list-item-text 
     display: inline;
     font-style: normal;
 }
-
+/* address the problem where if you are logged in, the alma-d file label is turned into a link, which goes to the same place as the link that already exists above it for the Digital Reserves or View in Browser links, so you get redundant links and it's confusing; needs to be handled carefully so you don't undo links for portfolio services */
+prm-alma-viewit-items h3+div.record-status-text a.item-title {
+    text-transform: none;
+    font-weight:400;
+    color:#000;
+}
+prm-alma-viewit-items h3+div.record-status-text a.item-title:hover {
+	box-shadow:none;
+}
 /* end VIEW IT */
 /*                                                       */
 
