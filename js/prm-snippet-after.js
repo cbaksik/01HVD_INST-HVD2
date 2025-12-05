@@ -68,7 +68,7 @@ angular.module('viewCustom')
 		}
 
 
-		//vm.fileContent = vm.localhostFT; // COMMENT THIS LINE AFTER LOCAL HOST TESTING
+		//prepareSnippet(vm.localhostFT); // COMMENT THIS LINE AFTER LOCAL HOST TESTING
 
 		function prepareSnippet(fileContent) {
 
@@ -116,14 +116,14 @@ angular.module('viewCustom')
 			console.log("matchWordCount: " + matchWordCount);
 			console.log("index: " + index);
 
-			vm.hvdSnipBefore = "... " + words.slice(Math.max(0, index - 10), index).join(" ");
+			vm.hvdSnipBefore = words.slice(0,20).join(" ") + "... " + words.slice(Math.max(0, index - 10), index).join(" ");
 			vm.hvdSnipMatch = words.slice(index, index + matchWordCount).join(" ");
 			vm.hvdSnipAfter= words.slice(index + matchWordCount, index + matchWordCount + 10).join(" ") + "... ";
 
 			if (matchString === '' || index <= 0 ) {
-				vm.hvdSnipBefore = words.slice(0,10).join(" ") + "... ";
+				vm.hvdSnipBefore = words.slice(0,20).join(" ") + "... ";
 				vm.hvdSnipMatch = '';
-				vm.hvdSnipAfter = words.slice(-10).join(" ");
+				vm.hvdSnipAfter = words.slice(-15).join(" ");
 			}
 
 			console.log(vm.hvdSnipBefore);
