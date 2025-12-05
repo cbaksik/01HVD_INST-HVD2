@@ -30,29 +30,29 @@ angular.module('viewCustom')
 			}
 		}
 		if (vm.eadId) {
-			console.log("if vm.eadID");
+			//console.log("if vm.eadID"+ vm.itemPNX.pnx.control.sourcerecordid[0]);
 			const recordid = vm.itemPNX.pnx.control.sourcerecordid[0];
 			var url ='/view/delivery/01HVD_INST/' + recordid + '.json';	
 			var params={};
 			sv.getAjax(url,params,'get')
 				.then(function(result) {
 					vm.eadDelivery = result.data;
-					 console.log("rest response (eadDelivery)");
-					 console.log(vm.eadDelivery);
-					 console.log(vm.eadDelivery.files);
+					 //console.log("rest response (eadDelivery)");
+					 //console.log(vm.eadDelivery);
+					 //console.log(vm.eadDelivery.files);
 					if (vm.eadDelivery.files) {
-						console.log("if true: vm.eadDelivery.files");
+						//console.log("if true: vm.eadDelivery.files");
 						const txtFile = vm.eadDelivery.files[0].fulltext ? vm.eadDelivery.files[0].fulltext.format : null;
-						console.log(txtFile);
+						//console.log(txtFile);
 						if (txtFile === 'PLAIN') {
 							//pull file
 							var fileUrl = vm.eadDelivery.files[0].fulltext.url;
-							console.log(vm.eadDelivery.files[0].fulltext.url);
+							//console.log(vm.eadDelivery.files[0].fulltext.url);
 							$http.get(fileUrl).then(
 							// Success function
 							function(response) {
 								vm.fileContent = response.data; 
-								console.log("fx response to set vm.fileContent");
+								//console.log("fx response to set vm.fileContent");
 								prepareSnippet(vm.fileContent);
 
 							},
@@ -68,16 +68,36 @@ angular.module('viewCustom')
 		}
 
 
-		//prepareSnippet(vm.localhostFT); // COMMENT THIS LINE AFTER LOCAL HOST TESTING
+		//if (vm.eadId) {prepareSnippet(vm.localhostFT)}; // COMMENT THIS LINE AFTER LOCAL HOST TESTING
 
 		function prepareSnippet(fileContent) {
 
-			console.log("fx prepareSnippet");
+			// find query words, testing for both basic search and advanced search
+
+			let string1 = '';
+			let string2 = '';
+
+			//console.log(vm.parentCtrl.searchService.$stateParams.query);
+			const queryTest = typeof vm.parentCtrl.searchService.$stateParams.query;
+
+			if (queryTest === 'string') {
+				var query = vm.parentCtrl.searchService.$stateParams.query;
+			}
+			if (queryTest === 'object') {
+				var query = vm.parentCtrl.searchService.$stateParams.query[0];
+			}
+			if (query) {
+				string1 = query.split(',').slice(2)[0].replaceAll("\"", "");
+				// if string1 has a space in it
+				if (string1.indexOf(' ')) {
+					string2 = string1.split(/\s+/)[0];	
+				}				
+			}
+
+			//console.log("string1: " + string1);
+			//console.log("string2: " + string2);	
+
 			const words = fileContent.split(/\s+/);
-			const string1 = document.getElementById('searchBar').value;
-			const string2 = string1.split(/\s+/)[0];
-			console.log(string1);
-			console.log(string2);
 
 			 // normalize a word: lowercase + strip punctuation
 			function normalize(w) {
@@ -99,26 +119,26 @@ angular.module('viewCustom')
 
 			let matchString = '';
 			let index = findSequenceIndex(string1);			
-			console.log("index for string1: " + index);
+			//console.log("index for string1: " + index);
 
 			if (index > 0) {
 				matchString = string1;
-				console.log("matchString1: " + matchString);
+				//console.log("matchString1: " + matchString);
 			}
 			if (index === -1) {
 				index = findSequenceIndex(string2);
 				matchString = string2;					
-				console.log("index for string2: " + index);
-				console.log("matchString2: " + matchString);
+				//console.log("index for string2: " + index);
+				//console.log("matchString2: " + matchString);
 			}
 
 			const matchWordCount = matchString.trim().split(/\s+/).length;
-			console.log("matchWordCount: " + matchWordCount);
-			console.log("index: " + index);
+			//console.log("matchWordCount: " + matchWordCount);
+			//console.log("index: " + index);
 
-			vm.hvdSnipBefore = words.slice(0,20).join(" ") + "... " + words.slice(Math.max(0, index - 10), index).join(" ");
+			vm.hvdSnipBefore = "... " + words.slice(Math.max(0, index - 15), index).join(" ");
 			vm.hvdSnipMatch = words.slice(index, index + matchWordCount).join(" ");
-			vm.hvdSnipAfter= words.slice(index + matchWordCount, index + matchWordCount + 10).join(" ") + "... ";
+			vm.hvdSnipAfter= words.slice(index + matchWordCount, index + matchWordCount + 15).join(" ") + "... ";
 
 			if (matchString === '' || index <= 0 ) {
 				vm.hvdSnipBefore = words.slice(0,20).join(" ") + "... ";
@@ -126,9 +146,9 @@ angular.module('viewCustom')
 				vm.hvdSnipAfter = words.slice(-15).join(" ");
 			}
 
-			console.log(vm.hvdSnipBefore);
-			console.log(vm.hvdSnipMatch);
-			console.log(vm.hvdSnipAfter);
+			//console.log(vm.hvdSnipBefore);
+			//console.log(vm.hvdSnipMatch);
+			//console.log(vm.hvdSnipAfter);
 
 			
 		}
