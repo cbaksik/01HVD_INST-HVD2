@@ -136,9 +136,9 @@ angular.module('viewCustom')
 			//console.log("matchWordCount: " + matchWordCount);
 			//console.log("index: " + index);
 
-			vm.hvdSnipBefore = "... " + words.slice(Math.max(0, index - 15), index).join(" ");
+			vm.hvdSnipBefore = "... " + words.slice(Math.max(0, index - 10), index).join(" ");
 			vm.hvdSnipMatch = words.slice(index, index + matchWordCount).join(" ");
-			vm.hvdSnipAfter= words.slice(index + matchWordCount, index + matchWordCount + 15).join(" ") + "... ";
+			vm.hvdSnipAfter= words.slice(index + matchWordCount, index + matchWordCount + 20).join(" ") + "... ";
 
 			if (matchString === '' || index <= 0 ) {
 				vm.hvdSnipBefore = words.slice(0,20).join(" ") + "... ";
