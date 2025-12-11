@@ -1634,7 +1634,17 @@ prm-advanced-search .md-button.md-primary:focus:not([disabled]) {
 prm-advanced-search prm-icon md-icon svg[id^=magnifying-glass] {
     color:#fff;
 }
-
+/* hide starts with for any field other than title and holding call number */
+/* still confusing  */
+/* md-option:has(span[translate='search-advanced.precisionOperator.option.startswith']) {
+	text-decoration:line-through;
+} */
+/* span[translate='search-advanced.scope.option.nui.advanced.index.title'] {
+	color:green;
+} */
+/* body:has(md-select-value span[translate='search-advanced.scope.option.nui.advanced.index.title']) md-option:has(span[translate='search-advanced.precisionOperator.option.startswith']) {
+	display:flex;
+} */
 /* BROWSE  */
 prm-browse-search md-list.has-list-nav {
     margin-bottom:200px;
@@ -2604,9 +2614,6 @@ prm-opac prm-locations prm-locations-filter .filter-bar md-input-container md-se
 prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container md-select {
 	margin-top:0px;
 	padding-left: 10px;
-}
-.separate-list-items md-list-item .md-list-item-text {
-	padding-left:0em;
 }
 prm-opac prm-location .separate-list-items md-list-item .md-list-item-text {
 	padding: .75em 0em;
