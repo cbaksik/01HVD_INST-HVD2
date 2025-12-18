@@ -55,6 +55,9 @@ see custom-browzine.js for controller details
 <!-- via:  insert element so that I can use css:has to recognize this as a VIA bib and hide OTB online button; otb button opens first image in a new tab; instead we want it to open the full bib overlay like default behavior for print material -->
 <div ng-if="vm.isVIAonline" class="hvd-hide-VIA-otb-online-button"></div>
 
+<!-- for SKC: insert element so that I can use css:has to recognize this as an SKC bib and hide OTB online button; SKC has 856 links in hol but they are for partial resource not whole resource -->
+<div ng-if="vm.isSKC" class="hvd-hide-SKC-otb-online-button"></div>
+
 <!-- rewrite OTB online button for cases where link is from holding 856 b/c otb behavior is to open bib in new tab instead of opening the target -->
 <div ng-if="vm.holding856 && !vm.isSerial" class="hvd-online-button hvd-856-override">
 	<a href="{{vm.holding856}}" target="_blank">

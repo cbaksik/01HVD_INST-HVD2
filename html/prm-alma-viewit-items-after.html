@@ -2,6 +2,7 @@
 
 <!-- single image -->
 
+ <!-- class 'via-alma-viewit' prevents the OTB service list from displaying via css -->
 <div class="via-alma-viewit" ng-if="vm.singleImageFlag">
 
 	<!-- so users have another option if restricted image doesn't display -->
@@ -37,14 +38,15 @@
 
 
 <!-- multiple images -->
+  <!-- class 'via-alma-viewit' prevents the OTB service list from displaying via css -->
 <div class="hvd-via-record-page-grid via-alma-viewit" ng-if="vm.componentJSON.length > 1">
 
 	<md-grid-list md-row-height="230px" md-cols="4">
 		<md-grid-tile ng-repeat="item in vm.componentJSON track by $index" ng-click="vm.gotoFullPhoto($event,item,$index)">
 			<md-card class="hv-md-card">
 				<md-card-content class="imageBox">
-					<a>
-						<img ng-src="{{vm.componentJSON[$index].U[0]}}:THUMBNAIL" class="md-card-image"/>
+					<a title="{{vm.componentJSON[$index].L[0]}}" aria-label="image {{$index + 1}} {{vm.componentJSON[$index].L[0]}}">
+						<img ng-src="{{vm.componentJSON[$index].U[0]}}:THUMBNAIL" class="md-card-image" alt=""/>
 						<div class="lockIcon" ng-if="vm.componentJSON[$index].X[0]" tabindex="-1">
 							<img src="/discovery/custom/01HVD_INST-HVD2/img/icon_lock25.png" class="md-avatar" alt="Restricted to HarvardKey"/>
 						</div>
@@ -62,5 +64,25 @@
 
 </div>
 
+<!-- legancy SKC-->
+ <!-- class 'via-alma-viewit' prevents the OTB service list from displaying via css -->
+<div class="hvd-via-record-page-grid via-alma-viewit" ng-if="vm.skcLinks.length > 0">
+
+	<md-grid-list md-row-height="425px" md-cols="3">
+		<md-grid-tile ng-repeat="item in vm.skcLinks track by $index">
+			<md-card class="hv-md-card">
+				<md-card-content class="imageBox">
+					<a href="{{vm.skcLinks[$index].serviceUrl}}:VIEW" title="{{vm.skcLinks[$index].packageName}}">
+						<img style="height:375px" ng-src="{{vm.skcLinks[$index].serviceUrl}}" class="md-card-image" alt=""/>
+					</a>
+					<div ng-if="vm.skcLinks[$index].packageName">
+						<span>{{vm.skcLinks[$index].packageName}}</span>
+					</div>
+				</md-card-content>
+			</md-card>
+		</md-grid-tile>
+	</md-grid-list>
+
+</div>
 
 <!-- end prm-alma-viewit-items-after.html -->

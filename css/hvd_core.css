@@ -614,6 +614,10 @@ prm-search-result-journal-indication-line {
 .search-result-availability-line-wrapper:has(.hvd-hide-VIA-otb-online-button) {
 	display:none;
 }
+/* hide SKC otb online button */
+.search-result-availability-line-wrapper:has(.hvd-hide-SKC-otb-online-button) prm-search-result-availability-line button:has(span.not_restricted) {
+	display:none;
+}
 /* hide otb online button for 856 fields due to behavior problem - opens bib in new tab */
 prm-search-result-availability-line:has(.hvd-856-override) button:has(.not_restricted) {
 	display:none;

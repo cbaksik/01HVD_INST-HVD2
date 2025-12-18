@@ -43,27 +43,23 @@
 			}
 		}
 
-		// try this new version from ai
-			// 		vm.$onInit = function () {
-			// const displayData = vm.parentCtrl.item?.pnx?.display;
-			// if (!displayData) {
-			// 	return;
-			// }
-			// if (displayData.source?.[0] === 'HVD_VIA') {
-			// 	vm.isVIArecord = true;
-			// }
-			// if (displayData.lds20?.[0] === '1') {
-			// 	vm.singleImageFlag = true;
-			// 	const filePath = displayData.lds67?.[0];
-			// 	if (filePath) {
-			// 		vm.filename = filePath.split('/').pop();
-			// 		vm.mpsEmbed(vm.filename); // Call this *only* when you have a filename.
-			// 	}
-			// }
-			// if (displayData.lds65) {
-			// 	vm.componentJSON = convertArrayToJSON(displayData.lds65);
-			// }
-			// };
+		// legacy scanned key content feature
+		if (vm.parentCtrl.item.pnx.display.lds62) {
+			if (vm.parentCtrl.item.pnx.display.lds62[0] == 'legacyKeyContent') {
+				//console.log("legacyKeyContent");
+				//console.log(vm.parentCtrl.services);
+			    vm.skcLinks = vm.parentCtrl.services.filter(function (item) {
+					return item.serviceType === 'GENERAL_ELECTRONIC';
+					})
+					.map(function (item) {
+					return {
+						serviceUrl: item.serviceUrl,
+						packageName: item.packageName
+					};
+				});
+				//console.log(vm.skcLinks);
+			}
+		}
 
 
 	};
@@ -168,6 +164,7 @@
 		var url='/discovery/viewcomponent/L/'+vm.parentCtrl.item.pnx.control.recordid[0]+'?vid=01HVD_INST:HVD2'+'&imageId='+filename;
 		$window.open(url,'_blank');
 	 }	
+
 	
  }]);
 
