@@ -1141,10 +1141,12 @@ prm-facet .switch-results md-switch.active:focus:not([disabled]) {
 prm-facet prm-search-result-sort-by md-select-value div.md-text span {
 	color:#0579B8;
 	font-weight:600;
+	background-color: yellow;
 }
 prm-facet prm-search-result-sort-by md-select-value div.md-text span[translate='results.sortby.option.rank'] {
 	color:#3a3a3a;
 	font-weight:400;
+	background-color: white;
 }
 prm-facet prm-search-result-sort-by md-select {
     padding: 5px;
@@ -2710,6 +2712,19 @@ prm-opac prm-location-holdings .display-block .layout-column .padding-left-mediu
 	display: inline;
 	padding-left: 0em;
 	padding-right: 0.3em;
+}
+/* for paired holding statements, add line breaks per staff request for readability */
+prm-opac prm-location-holdings div[ng-repeat*='summaryHoldings.allLines']:has(span[translate='Holdings']) div.padding-left-medium > span > span:after {
+  content: "\A";
+  white-space: pre;
+}
+prm-opac prm-location-holdings div[ng-repeat*='summaryHoldings.allLines']:has(span[translate='Supplements']) div.padding-left-medium > span > span:after {
+  content: "\A";
+  white-space: pre;
+}
+prm-opac prm-location-holdings div[ng-repeat*='summaryHoldings.allLines']:has(span[translate='Index']) div.padding-left-medium > span > span:after {
+  content: "\A";
+  white-space: pre;
 }
 /* for 856 links , when there are multiple, add line breaks */
 prm-opac prm-location-holdings .display-block .layout-column .padding-left-medium:has(a) span>a:after  {
