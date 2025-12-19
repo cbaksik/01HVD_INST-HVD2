@@ -186,7 +186,7 @@ angular.module('viewCustom')
 
 
 		vm.$onInit=function() {
-			console.log(vm.parentCtrl);
+			//console.log(vm.parentCtrl);
 			vm.itemPNX=vm.parentCtrl.result;
 			console.log('score: ' + vm.itemPNX.pnx.control.score[0]);
 			if(vm.itemPNX.pnx.display.type[0] == 'journals'|| vm.itemPNX.pnx.display.type[0] == 'newspapers') {
@@ -210,9 +210,14 @@ angular.module('viewCustom')
 					}
 			}
 			// if not already online, do openLib and hathi checks
-			const bibOnline = vm.itemPNX.delivery.deliveryCategory.some(deliveryCategory => 
+			var bibOnline = vm.itemPNX.delivery.deliveryCategory.some(deliveryCategory => 
 				deliveryCategory === 'Alma-E' || deliveryCategory === 'Alma-D'
 			);
+			// also test VE external resources for Online
+			if (vm.itemPNX.delivery.availabilityLinks.some(availabilityLinks => availabilityLinks === 'directlink')) {				
+				bibOnline = 'true';
+			}
+			console.log(bibOnline);
 			if (!bibOnline) {
 				vm.findOpenLib();
 				vm.hathiTrust=chts.validateHathiTrust(vm.itemPNX);
