@@ -55,7 +55,7 @@ prm-search-bar .search-switch-buttons .md-button.switch-to-advanced span.layout-
 prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):hover:not([disabled]):hover:not([disabled]),
 prm-search-bar .search-switch-buttons .md-button.button-over-dark:not(.disable-hover):focus:not([disabled]):focus:not([disabled]) {
 	background-color:#a51c30;
-	border: 1px solid #eb001b;
+	/* border: 1px solid #eb001b; */
 	color:#fff
 }   
 

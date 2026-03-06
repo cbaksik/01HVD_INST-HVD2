@@ -170,9 +170,15 @@ prm-search-bar .search-switch-buttons .md-button.switch-to-advanced {
 	width: 100%;
 	height: 60px;
 	background-color:transparent;
+	/* font-size:16px; */
+	/* letter-spacing: 0.04em; */
+	font-family: "Trueno", sans-serif;
 }
 prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
 	height:36px;
+	/* font-size:16px; */
+	/* letter-spacing: 0.04em; */
+	font-family: "Trueno", sans-serif;
 }
 prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm prm-icon {
 	display:none;
@@ -2176,6 +2182,13 @@ prm-service-links:has(.hvd-hide-VIA-otb-online-button) .spaced-rows > div > div 
     body {                  
         margin:5%;    
         font-size:70%;
+		height: auto !important;
+		overflow: visible !important;
+    }
+    sticky-scroll {
+	    height: auto !important;
+    	max-height: none !important;
+    	overflow: visible !important;
     }
     prm-snippet {
         display:none;
@@ -2201,6 +2214,13 @@ prm-service-links:has(.hvd-hide-VIA-otb-online-button) .spaced-rows > div > div 
     prm-explore-footer {
         display:none;
     }
+    prm-linked-data {
+	display:none;
+    }
+    prm-linked-data md-card md-card-header md-card-avatar .avatar-img {
+    max-width: 100px;
+    max-height: 100px;
+}
 }
   
 /* remove icons for my account and sign in */
@@ -2801,3 +2821,9 @@ prm-opac prm-service-button prm-icon {
 }
 
 /************ END view it get it - formerly mash-up ****************/
+
+/************ Begin Linked Data person card, entities ****************/
+/* hide specific images */
+prm-linked-data img[src*='depiction_of_Muhammad'] {
+	display:none;
+}
