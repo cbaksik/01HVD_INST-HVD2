@@ -8,42 +8,42 @@
 
   <div ng-repeat="item in $ctrl.holListOpen" class="hvd-holding-notes-key-value-pair" layout="row">
 
-    <!-- Key label -->
-    <div class="hvd-holding-notes-key">{{ item.key }}</div>
+	<!-- Key label -->
+	<div class="hvd-holding-notes-key">{{ item.key }}</div>
 
-    <!-- CASE 1: key !== 'Holdings'  → all values on ONE line, space-separated -->
-    <div ng-if="item.key !== 'Holdings'" class="hvd-holding-notes-value">
-      <span ng-repeat="val in item.value">
+	<!-- CASE 1: key !== 'Holdings'  → all values on ONE line, space-separated -->
+	<div ng-if="item.key !== 'Holdings'" class="hvd-holding-notes-value">
+		<span ng-repeat="val in item.value track by $index">
 
-        <!-- link if starts with http/https -->
-        <span ng-if="val.indexOf('http') === 0">
-          <a ng-href="{{ val }}" target="_blank" rel="noopener" aria-label="Link to resource (opens in new window)">{{ val }}</a>
-        </span>
+		<!-- link if starts with http/https -->
+		<span ng-if="val.indexOf('http') === 0">
+			<a ng-href="{{ val }}" target="_blank" rel="noopener" aria-label="Link to resource (opens in new window)">{{ val }}</a>
+		</span>
 
-        <!-- otherwise plain text -->
-        <span ng-if="val.indexOf('http') !== 0">
-          {{ val }}
-        </span>
+		<!-- otherwise plain text -->
+		<span ng-if="val.indexOf('http') !== 0">
+			{{ val }}
+		</span>
 
-        <!-- space between items, but not after the last -->
-        <!-- <span ng-if="!$last"> </span> -->
-      </span>
-    </div>
+		<!-- space between items, but not after the last -->
+		<!-- <span ng-if="!$last"> </span> -->
+		</span>
+	</div>
 
-    <!-- CASE 2: key === 'Holdings' → each value on its OWN line -->
-    <div ng-if="item.key === 'Holdings'" class="hvd-holding-notes-value">
-      <div ng-repeat="val in item.value">
+	<!-- CASE 2: key === 'Holdings' → each value on its OWN line -->
+	<div ng-if="item.key === 'Holdings'" class="hvd-holding-notes-value">
+		<div ng-repeat="val in item.value track by $index">
 
-        <span ng-if="val.indexOf('http') === 0">
-          <a ng-href="{{ val }}" target="_blank" rel="noopener">{{ val }}</a>
-        </span>
+		<span ng-if="val.indexOf('http') === 0">
+			<a ng-href="{{ val }}" target="_blank" rel="noopener">{{ val }}</a>
+		</span>
 
-        <span ng-if="val.indexOf('http') !== 0">
-          {{ val }}
-        </span>
+		<span ng-if="val.indexOf('http') !== 0">
+			{{ val }}
+		</span>
 
-      </div>
-    </div>
+		</div>
+	</div>
 
   </div>
 
