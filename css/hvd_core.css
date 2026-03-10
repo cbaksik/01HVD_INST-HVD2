@@ -2697,7 +2697,16 @@ prm-opac prm-location-items h6+p>span.availability-status,
 prm-opac prm-location-items h6+p>span.availability-status+span  {
 	display:none;
 }
-/* begin holding notes */
+/*            BEGIN HOLDING NOTES              */
+
+/* HIDE OTB DISPLAY NOTES BECAUSE THEY ARE TRUNCATED - using js customziation to display whole notes */
+prm-opac prm-location-holdings>div.layout-row,
+prm-opac prm-location-holdings>button.md-button.button-as-link {
+	display:none;
+}
+/* end hide OTB notes */
+
+/* important: much of css below is n/a now b/c the OTB notes are hidden in favor of customization */
 prm-opac prm-location-holdings  {
 	margin-top:5px;
 	margin-left:0px;
@@ -2819,6 +2828,27 @@ prm-location-items prm-service-button .md-button.button-as-link:focus:not([disab
 prm-opac prm-service-button prm-icon {
 	display:none;
 }
+/* begin custom holding note section */
+.hvd-holding-notes-wrapper {
+	flex: 1 1 100%;
+	/* padding-left: 42px; */
+	padding-right: 42px;
+	padding-bottom: 20px;
+}
+.hvd-holding-notes-key-value-pair {
+    margin-bottom: 3px;
+}
+.hvd-holding-notes-key {
+	font-weight:600;
+	flex: 1 1 100%;
+        max-width: 20%;
+        max-height: 100%;
+        box-sizing: border-box;
+}
+/* .hvd-holding-notes-value {
+	flex-direction: column;
+	display: flex;
+} */
 
 /************ END view it get it - formerly mash-up ****************/
 
