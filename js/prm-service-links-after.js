@@ -13,6 +13,8 @@
         vm.plateList=[];
 	   vm.hasPlates = 'false';
 	   vm.isVIArecord='';
+	   vm.isReCAP = false;
+	   vm.addata = [];
         vm.getData=()=> {
             // make a copy to avoid data binding
             vm.recordLinks = angular.copy(vm.parentCtrl.recordLinks);        
@@ -48,24 +50,30 @@
                     vm.almaDauxEmbed = 'https://hvd.alma.exlibrisgroup.com/view/UniversalViewer/01HVD_INST/' + vm.almaDaux + '#?iiifVersion=3&updateStatistics=false&embedded=true&c=0&m=0&s=0&cv=0&config=&locales=en-GB:English (GB),cy-GB:Cymraeg,fr-FR:Français (FR),pl-PL:Polski,sv-SE:Svenska,xx-XX:English (GB) (xx-XX)&r=0';
                     
                     vm.almaDauxEmbed = $sce.trustAsResourceUrl(vm.almaDauxEmbed);
-          }
+          	}
 
-          //   DIGITAL BOOKPLATES
-		if (vm.parentCtrl.item.pnx.display.lds06) {
-			vm.hasPlates = 'true';
-			vm.plateList=cisv.extractImageUrl(vm.parentCtrl.item);
-		}
-
-		if (vm.parentCtrl.item.pnx.display.source) {
-			if (vm.parentCtrl.item.pnx.display.source[0] == 'HVD_VIA') {
-				vm.isVIArecord = true;
+			//   DIGITAL BOOKPLATES
+			if (vm.parentCtrl.item.pnx.display.lds06) {
+				vm.hasPlates = 'true';
+				vm.plateList=cisv.extractImageUrl(vm.parentCtrl.item);
 			}
-		}
+			//   IS VIA or RECAP
+			if (vm.parentCtrl.item.pnx.display.source) {
+				if (vm.parentCtrl.item.pnx.display.source[0] == 'HVD_VIA') {
+					vm.isVIArecord = true;
+				}
+				if (vm.parentCtrl.item.pnx.display.source[0] == 'HVD_RECAP') {
+					vm.isReCAP=true;
+				}
+			}
 
         };
+	   // end of getData
 
         vm.$onInit=()=> {
             vm.getData();
+		  vm.addata = vm.parentCtrl.item.pnx.addata;
+		  console.log(vm);
         }
 
 

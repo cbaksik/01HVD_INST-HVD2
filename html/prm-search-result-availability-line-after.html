@@ -1,3 +1,6 @@
+
+<div ng-if="vm.isReCAP" class="hvd-hide-otb-recap-check-button"></div>
+
 <div ng-if="vm.hathiTrustItem.orig">
     <div ng-if="vm.hathiTrustItem.fullview && !vm.isSerial" class="hvd-online-button">
 		<a href="{{vm.hathiTrustItem.itemURL}}" target="_blank" class="hvd_hathi_ft_stats">
@@ -54,6 +57,7 @@ see custom-browzine.js for controller details
 
 <!-- via:  insert element so that I can use css:has to recognize this as a VIA bib and hide OTB online button; otb button opens first image in a new tab; instead we want it to open the full bib overlay like default behavior for print material -->
 <div ng-if="vm.isVIAonline" class="hvd-hide-VIA-otb-online-button"></div>
+
 
 <!-- for SKC: insert element so that I can use css:has to recognize this as an SKC bib and hide OTB online button; SKC has 856 links in hol but they are for partial resource not whole resource -->
  <!-- had to undo this b/c of merged records where portfolios are present -->

@@ -16,6 +16,7 @@ angular.module('viewCustom')
 		vm.isSerial=false;
 		vm.eadURN ='';
 		vm.isVIAonline = '';
+		vm.isReCAP = false;
 		vm.isSKC = '';
 		vm.holding856='';
 		vm.eDelivery = {};
@@ -197,11 +198,15 @@ angular.module('viewCustom')
 				vm.hasTOC = 'true';
 			}
 			if (vm.itemPNX.pnx.display.source) {
+				console.log(vm.itemPNX.pnx.display.source[0]);
 				if (vm.itemPNX.pnx.display.source[0] == 'HVD_VIA') {
 					const numImages = vm.itemPNX.pnx.display.lds20 ? vm.itemPNX.pnx.display.lds20[0] : null;
 					if (numImages > 0) {
 						vm.isVIAonline=true;
 					}
+				}		
+				if (vm.itemPNX.pnx.display.source[0] == 'HVD_RECAP') {
+						vm.isReCAP=true;
 				}			
 			}
 			if (vm.itemPNX.pnx.display.lds62) {
@@ -209,15 +214,19 @@ angular.module('viewCustom')
 						vm.isSKC=true;
 					}
 			}
-			// if not already online, do openLib and hathi checks
+			//next line: evaluate to boolean true if any of the delivery categories is 'Alma-E' or 'Alma-D'			
 			var bibOnline = vm.itemPNX.delivery.deliveryCategory.some(deliveryCategory => 
 				deliveryCategory === 'Alma-E' || deliveryCategory === 'Alma-D'
 			);
 			// also test VE external resources for Online
-			if (vm.itemPNX.delivery.availabilityLinks.some(availabilityLinks => availabilityLinks === 'directlink')) {				
-				bibOnline = 'true';
+			// safe version from AI that won't throw error if avail Links doesn't exist
+			var delAvailLinks = vm.itemPNX &&
+					vm.itemPNX.delivery &&
+					vm.itemPNX.delivery.availabilityLinks;
+			if (Array.isArray(delAvailLinks) && delAvailLinks.some(l => l === 'directlink')) {
+				bibOnline = true;  
 			}
-			console.log(bibOnline);
+			// if not already online, do openLib and hathi checks
 			if (!bibOnline) {
 				vm.findOpenLib();
 				vm.hathiTrust=chts.validateHathiTrust(vm.itemPNX);
@@ -227,6 +236,7 @@ angular.module('viewCustom')
 				}
 			}
 			if (bibOnline && vm.itemPNX.delivery.holding) {vm.override856();}
+			//console.log("bibOnline " + bibOnline);
 		};
 		// end of onInit
 

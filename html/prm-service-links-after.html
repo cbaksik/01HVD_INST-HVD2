@@ -1,59 +1,139 @@
 <!-- for via record -->
 <div ng-if="vm.isVIArecord" class="spaced-rows">
-    <div>
-        <a class="arrow-link md-primoExplore-theme" href="http://nrs.harvard.edu/urn-3:hul.ois:portal_copyright_images" target="_blank">
-            <span>Copyright and Permissions</span> 
-        </a>
-    </div>
+	<div>
+		<a class="arrow-link md-primoExplore-theme"
+			href="http://nrs.harvard.edu/urn-3:hul.ois:portal_copyright_images" target="_blank">
+			<span>Copyright and Permissions</span>
+		</a>
+	</div>
 </div>
 
 <!-- search hathitrust link for books -->
 <div ng-if="vm.showHathiLink" class="spaced-rows">
-    <div ng-show="vm.searchHathiLink">
-        <a class="arrow-link md-primoExplore-theme" href="{{vm.searchHathiLink}}" target="_blank">
-            <span>Try HathiTrust (HarvardKey)</span>            
-        </a>
+	<div ng-show="vm.searchHathiLink">
+		<a class="arrow-link md-primoExplore-theme" href="{{vm.searchHathiLink}}" target="_blank">
+			<span>Try HathiTrust (HarvardKey)</span>
+		</a>
 
-    </div>
+	</div>
 </div>
 
 <!-- The html below is used for Digital Bookplates component -->
 <ul ng-if="vm.hasPlates" class="serviceLink">
-    <li ng-repeat="rec in vm.plateList track by $index">
-        <md-card class="serviceLinkBox">
-            <md-card-title-text class="serviceLinkSpace">
-                <a class="arrow-link md-primoExplore-theme" href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank">
-                    <span>Acquired by the {{rec.label}}</span>
-                </a>
-            </md-card-title-text>
-            <md-card-title-media>
-                <div layout="row" layout-align="start start" class="md-media-md card-media">
-                    <a href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank" class="serviceLinkImage">
-                        <img ng-src="https://nrs.harvard.edu/urn-3:hul.EBKPLT:{{rec.name}}" class="serviceLinkPhoto" />
-                    </a>
-                </div>
-            </md-card-title-media>
-        </md-card>
-    </li>
+	<li ng-repeat="rec in vm.plateList track by $index">
+		<md-card class="serviceLinkBox">
+			<md-card-title-text class="serviceLinkSpace">
+				<a class="arrow-link md-primoExplore-theme"
+					href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank">
+					<span>Acquired by the {{rec.label}}</span>
+				</a>
+			</md-card-title-text>
+			<md-card-title-media>
+				<div layout="row" layout-align="start start" class="md-media-md card-media">
+					<a href="https://nrs.harvard.edu/urn-3:hul.EBKPLL:{{rec.name}}" target="_blank"
+						class="serviceLinkImage">
+						<img ng-src="https://nrs.harvard.edu/urn-3:hul.EBKPLT:{{rec.name}}"
+							class="serviceLinkPhoto" />
+					</a>
+				</div>
+			</md-card-title-media>
+		</md-card>
+	</li>
 </ul>
 
 <!-- Alma-D auxilliary images -->
 
 <div class="hvd-embed-uv" ng-if="vm.almaDaux">
-    <div>
-        <div layout="row" class="layout-row" style="margin-bottom:5px;">
-            <h4 class="section-title md-title light-text" >Selected Content</h4>
-            <!-- <md-divider flex="" class="md-primoExplore-theme flex"></md-divider> -->
-        </div>
-    </div>
-    <div ng-if="vm.almaDaux">
-        <iframe
-            ng-src="{{vm.almaDauxEmbed}}"
-            sidebarOpen=" true" allowfullscreen fullscreenEnabled="true" textContent="true" frameborder="0">
-        </iframe>
-    </div>
+	<div>
+		<div layout="row" class="layout-row" style="margin-bottom:5px;">
+			<h4 class="section-title md-title light-text">Selected Content</h4>
+			<!-- <md-divider flex="" class="md-primoExplore-theme flex"></md-divider> -->
+		</div>
+	</div>
+	<div ng-if="vm.almaDaux">
+		<iframe ng-src="{{vm.almaDauxEmbed}}" sidebarOpen=" true" allowfullscreen fullscreenEnabled="true"
+			textContent="true" frameborder="0">
+		</iframe>
+	</div>
 </div>
 
 
 <!-- if VIA record, add div with custom class to use in css:has so we can hide online access link for via records  -->
 <div ng-if="vm.isVIArecord" class="hvd-hide-VIA-otb-online-button"></div>
+
+
+
+<!-- recap  -->
+
+<div class="hvd-recap-manual-GES-links" ng-if="vm.isReCAP">
+
+	<div layout="row" layout-align="center center" class="layout-align-center-center layout-row">
+		<h4 class="section-title md-title light-text">Access Options</h4>
+		<md-divider flex="" class="md-primoExplore-theme flex"></md-divider>
+	</div>
+	
+	<div class="section-body ">
+		
+		<div layout="column" layout-fill="" class="layout-fill layout-column">
+
+				<!-- sign-in reminder to mimic other GES links -->
+				<!-- <div role="alert" aria-live="assertive" layout-align="center center" class="layout-align-center-center">
+						<div layout="row" class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" layout-align="center center" >
+							<span class="bar-text margin-right-small">
+								<strong>Harvard affiliates:</strong> sign in to request pick up,
+								Interlibrary Loan, or Scan &amp; Deliver.
+							</span>
+						</div>
+				</div> -->
+
+				<div ng-if=vm.addata>
+
+					<div class="hvd-recap-link-area">
+						<a target="blank" href="http://rsezp.lib.harvard.edu/login?qurl=https%3A%2F%2Filliad.hul.harvard.edu%2Filliad%2FHUL%2Filliad.dll?Action=10%26Form=30%26rft.genre=bookitem%26
+							rft.isbn={{vm.addata.isbn[0]}}%26
+							rft.btitle={{vm.addata.btitle[0]}}%26
+							rft.au={{vm.addata.au[0]}}%26
+							rft.date={{vm.addata.date[0]}}%26
+							rft.edition={{vm.addata.edition[0]}}%26
+							rft.pub={{vm.addata.pub[0]}}%26
+							rft.pubdate={{vm.addata.date[0]}}%26
+							rft.publisher={{vm.addata.pub[0]}}%26
+							rft.place={{vm.addata.cop[0]}}%26
+							rft.doi={{vm.addata.doi[0]}}%26
+							rfe_dat={{vm.addata.oclcid[0]}}%26
+							rfr_id=info:sid/primo.exlibrisgroup.com-alma_local" ">Scan & Deliver (book chapter)</a>
+					</div>
+					<div class="hvd-recap-link-area">
+							<a target=" blank" href="http://rsezp.lib.harvard.edu/login?qurl=https%3A%2F%2Filliad.hul.harvard.edu%2Filliad%2FHUL%2Filliad.dll?Action=10%26Form=30%26rft.genre=book%26
+							rft.isbn={{vm.addata.isbn[0]}}%26
+							rft.btitle={{vm.addata.btitle[0]}}%26
+							rft.au={{vm.addata.au[0]}}%26
+							rft.date={{vm.addata.date[0]}}%26
+							rft.edition={{vm.addata.edition[0]}}%26
+							rft.pub={{vm.addata.pub[0]}}%26
+							rft.pubdate={{vm.addata.date[0]}}%26
+							rft.publisher={{vm.addata.pub[0]}}%26
+							rft.place={{vm.addata.cop[0]}}%26
+							rft.doi={{vm.addata.doi[0]}}%26
+							rfe_dat={{vm.addata.oclcid[0]}}%26
+							rfr_id=info:sid/primo.exlibrisgroup.com-alma_local" ">Interlibrary Loan (now includes Borrow Direct)</a>
+					</div>
+				</div>
+		</div>
+
+	</div>
+
+	<!-- example isbn for testing 9781477332894 -->
+	<!-- <div>au {{vm.addata.au[0]}}</div>
+	<div>isbn {{vm.addata.isbn[0]}}</div>
+	<div>title {{vm.addata.btitle[0]}}</div>
+	<div>ed {{vm.addata.edition[0]}}</div> 
+	<div>publisher {{vm.addata.pub[0]}}</div> 
+	<div>date {{vm.addata.date[0]}}</div>
+	<div>place of pub {{vm.addata.cop[0]}}</div>
+	<div>doi {{vm.addata.doi[0]}}</div>
+	<div>oclc num {{vm.addata.oclcid[0]}}</div>
+	also avail: addata.lccn, seriestitle, notes, abstract, addtitle -->
+
+
+</div>

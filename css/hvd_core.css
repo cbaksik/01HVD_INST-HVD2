@@ -620,6 +620,47 @@ prm-search-result-journal-indication-line {
 .search-result-availability-line-wrapper:has(.hvd-hide-VIA-otb-online-button) {
 	display:none;
 }
+/* hide recap otb check access button b/c of behavior problem - opens bib in new tab */
+.search-result-availability-line-wrapper:has(.hvd-hide-otb-recap-check-button) {
+	min-height:0px;
+}
+.search-result-availability-line-wrapper:has(.hvd-hide-otb-recap-check-button) .md-button.neutralized-button {
+	display:none;
+}
+.search-result-availability-line-wrapper:has(.hvd-hide-otb-recap-check-button) prm-search-result-availability-line:before {
+	height:0em;
+}
+.search-result-availability-line-wrapper:has(.hvd-hide-otb-recap-check-button) .hvd-grey-link {
+	margin-top:5px;
+}
+.hvd-recap-link {
+	color:#414141;
+	text-transform:uppercase;
+	font-weight:600;	
+	position:relative;
+	/* padding-bottom: 0.2em; */
+	display: inline-block;
+	line-height:21px;
+	margin-top: 10px;
+}
+.hvd-recap-link div:hover,
+.hvd-recap-link div:focus {
+	box-shadow: inset 0 -3px 0 0 rgba(43, 44, 44, 0.3);
+}
+.hvd-recap-manual-GES-links .alert-bar {
+	margin-top:20px;
+}
+.hvd-recap-link-area {
+	margin-top:30px;
+}
+.hvd-recap-link-area a {
+	font-weight: 600;
+	text-transform: uppercase;
+ }
+ /* this link is only here because I had to put something in delivery section of recap import profile */
+ prm-service-links a[href*="ask.library.harvard.edu/faq"] {
+	display:none;
+ }
 /* hide SKC otb online button */
 .search-result-availability-line-wrapper:has(.hvd-hide-SKC-otb-online-button) prm-search-result-availability-line button:has(span.not_restricted) {
 	display:none;

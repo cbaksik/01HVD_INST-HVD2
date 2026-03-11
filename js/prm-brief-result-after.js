@@ -8,6 +8,7 @@ angular.module('viewCustom')
 	vm.itemPNX={};
 	vm.hasTOC='';
 	vm.isVIAonline='';
+	vm.isReCAP='';
 	var sv=prmSearchService;
 
 	vm.$onInit=function() {
@@ -23,6 +24,9 @@ angular.module('viewCustom')
 				if (numImages > 0) {
 					vm.isVIAonline=true;
 				}
+			}
+			if (vm.itemPNX.pnx.display.source[0] === 'HVD_RECAP') {
+					vm.isReCAP=true;
 			}			
 		 }
    

@@ -3,6 +3,11 @@
 	<span>Includes Table of Contents</span>
 </div>
 
+<!-- ReCAP - hide OTB button b/c it opens in new page, use text instead so full page opens -->
+<div ng-if="vm.isReCAP" class="hvd-recap-link">
+	<div>Check access options</div>
+</div>
+
 <div ng-if="vm.isVIAonline" class="hvd-online-button hvd-via-online-button">
 	<span>
 		Online access
