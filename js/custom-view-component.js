@@ -61,35 +61,74 @@
 		  }
 		};
 
-	   /* example ajax call http://localhost:8003/primaws/rest/pub/pnxs/L/alma99158322666803941?vid=01HVD_INST:HVD2&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&lang=en */
+	   /* example ajax call to get pnx http://localhost:8003/primaws/rest/pub/pnxs/L/alma99158322666803941?vid=01HVD_INST:HVD2&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&lang=en */
 
-		// ajax call to get data
-		vm.getData=function () {
+		// getData = ajax call to get pnx data to populate metadata on component page
+		// this fx will first test if URL docid is the alma number or the via id from id.lib
+		// if it is via, fx needs to search primo first to find the alma number to get pnx
+
+		vm.getData = function () {
+
+			function fetchPnxByDocId(docid) {
+			console.log("fetchPnxByDocId ", docid);
 			//var url=vm.parentCtrl.searchService.cheetah.restBaseURLs.pnxBaseURL+'/L/'+vm.docid;
-			var urlVE ='/primaws/rest/pub/pnxs/L/' + vm.docid;
-			var params={'vid':'','lang':'','search_scope':'','adaptor':''};
-			params.vid='01HVD_INST:HVD2';
-			params.lang='en';
-			params.search_scope='MyInst_and_CI';
-			params.adaptor='Local%20Search%20Engine';
+			var urlVE = '/primaws/rest/pub/pnxs/L/' + docid;
+			var params = {
+				vid: '01HVD_INST:HVD2',
+				lang: 'en',
+				search_scope: 'MyInst_and_CI',
+				adaptor: 'Local%20Search%20Engine'
+			};
 
-			sv.getAjax(urlVE,params,'get')
+			return sv.getAjax(urlVE, params, 'get')
 				.then(function (result) {
-					vm.item=result.data; 
-					vm.itemData=vm.item.pnx.display;
-					vm.componentData=vm.item.pnx.display.lds65;
-					// console.log(vm.componentData);
-					if(vm.componentData) {
-						vm.total = vm.componentData.length;
-					} else {
-						console.log(error);
-					}
-					vm.displayPhoto();
-				},function (error) {
-						console.log(error);
+				vm.item = result.data;
+				vm.itemData = vm.item.pnx.display;
+				vm.componentData = vm.item.pnx.display.lds65;
+				// console.log(vm.componentData);
+				if (vm.componentData) {
+					vm.total = vm.componentData.length;
+				} else {
+					console.log('vm.componentData is missing or empty');
 				}
-			)
+				vm.displayPhoto();
+				}, function (error) {
+					console.log(error);
+				});
+
+			}
+
+			if (!vm.docid.startsWith("alma")) {
+				//console.log("does not start with alma");
+
+				var docIdSearchUrl = '/primaws/rest/pub/pnxs?acTriggered=false&blendFacetsSeparately=false&citationTrailFilterByAvailability=false&disableCache=false&getMore=0&inst=01HVD_INST&isCDSearch=false&lang=en&limit=10&newspapersActive=false&newspapersSearch=false&offset=0&otbRanking=false&pcAvailability=true&qExclude=&qInclude=&rapido=false&refEntryActive=false&rtaLinks=true&scope=MyInstitution&searchInFulltextUserSelection=true&skipDelivery=Y&sort=rank&tab=LibraryCatalog&vid=01HVD_INST:HVD_IMAGES&q=lds01,contains,' + vm.docid;
+				//&q=lds01,contains,olvwork612947
+				//alma99160434521703941
+				var docIdSearchParams = {};
+
+				sv.getAjax(docIdSearchUrl, docIdSearchParams, 'get')
+					.then(function (result) {
+					vm.item2 = result.data;
+					//console.log(vm.item2);
+
+					var newDocid = vm.item2.docs[0].pnx.control.recordid[0];
+					//console.log("new docid");
+					//console.log(newDocid);
+
+					vm.docid = newDocid;
+
+					// NOW call the second request, using the new docid
+					return fetchPnxByDocId(newDocid);
+					}, function (error) {
+					console.log(error);
+					});
+
+				} else {
+				// docid is already alma, go straight to fetch pnx
+				fetchPnxByDocId(vm.docid);
+				}
 		};
+		// end of getData function
 
 		// display component photo and component metadata
 		// function receives array of all components
