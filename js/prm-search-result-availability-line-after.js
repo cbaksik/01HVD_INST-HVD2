@@ -198,7 +198,7 @@ angular.module('viewCustom')
 				vm.hasTOC = 'true';
 			}
 			if (vm.itemPNX.pnx.display.source) {
-				console.log(vm.itemPNX.pnx.display.source[0]);
+				//console.log(vm.itemPNX.pnx.display.source[0]);
 				if (vm.itemPNX.pnx.display.source[0] == 'HVD_VIA') {
 					const numImages = vm.itemPNX.pnx.display.lds20 ? vm.itemPNX.pnx.display.lds20[0] : null;
 					if (numImages > 0) {
