@@ -3,7 +3,7 @@
  */
 
  angular.module('viewCustom')
- .controller('prmAdvancedSearchAfterCtrl',['$scope','$log','$mdDialog', '$timeout','languageService',function ($scope,$log,$mdDialog, $timeout,languageService) {
+ .controller('prmAdvancedSearchAfterCtrl',['$scope','$log','$mdDialog', '$timeout','languageService','pubplaceService',function ($scope,$log,$mdDialog, $timeout,languageService,pubplaceService) {
 		 var vm=this;
 
             vm.copyMessage = '';      // The feedback message
@@ -12,6 +12,7 @@
             vm.searchText = '';
 
 		  vm.languages = []; 
+		  vm.pubplaces = []; 
 
 		vm.tabs = [
 				{ id: 'advHelpTabGuide', title: 'Help with Advanced Search '},
@@ -27,6 +28,11 @@
                 $log.info('Loading language codes...');                
                 // Now we call the service to get the data.
                 vm.languages = languageService.getLanguages();
+            }
+            if (tab.id === 'advHelpTabPub' && !vm.pubplaces.length) {
+                $log.info('Loading codes...');                
+                // Now we call the service to get the data.
+                vm.pubplaces = pubplaceService.getPubplaces();
             }
 		};
 

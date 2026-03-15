@@ -12,10 +12,12 @@
 
 					<p>
 						<ul>
-							<li>You can use "starts with" for Title or Holding call number searches only.</li>
-							<li>Audience -- example: “People with visual disabilities” </li>
-							<li>Holding call number -- this will search all call number schemas (Library of Congress, Old Widener, ...); include spaces where appropriate (and if you don't find what you're looking for, try removing spaces) </li>
-							<li>Holding notes on binding, ownership -- search for copy-specific information such as "marbled boards"</li>
+							<li><strong>Language</strong>: Search for all titles in a language by entering the 3-character language code into the field named 'Code: MARC langauge' </li>
+							<li><strong>Place of publication</strong>: Search for all titles published in a particular place by entering the 3-character code into the field named 'Code: MARC place of pub' </li>
+							<li><strong>Starts with</strong>: The "starts with" option can only be used with Title or Holding call number searches</li>
+							<li><strong>Audience</strong>: Intended audience -- example: “People with visual disabilities” </li>
+							<li><strong>Call number</strong>: Use 'Holding call number' -- this will search all call number schemas (Library of Congress, Old Widener, ...); include spaces where appropriate (and if you don't find what you're looking for, try removing spaces) </li>
+							<li><strong>Binding, ownership</strong>: search for copy-specific information such as "marbled boards" by using the 'Holding notes on binding, ownership' field</li>
 						</ul>
 					</p>
 
@@ -23,6 +25,7 @@
 				 </div>
 				  <div ng-if="tab.id === 'advHelpTabLang'">
 
+						<!-- <span>Use a code below to search the field 'Code: MARC language' </span> -->
 						<!-- <span>Language code reference table</span>
 						<ol>
 							<li>Find the language by typing in the search box below and options will be presented to you</li>
@@ -48,7 +51,9 @@
 
 						<div>
 							<ul class="results-list" >
-								<li ng-repeat="language in vm.languages | filter:vm.searchText" >
+								<!-- <li ng-repeat="language in vm.languages | filter:vm.searchText" > -->
+									<!-- sort by name -->
+								<li ng-repeat="language in vm.languages | filter:vm.searchText | orderBy:'name'" >
 									<div class="lang-entry">
 										<span class="lang-name">{{ language.name }}</span>
 										<span class="lang-code" ng-click="vm.copyCodeToClipboard(language)">{{ language.code }}</span>
@@ -63,8 +68,37 @@
 					
 				 </div>
 				  <div ng-if="tab.id === 'advHelpTabPub'">
+					
+						<input 
+						type="text"
+						class="search-input"
+						placeholder="Type a place name to filter list"
+						ng-model="vm.searchText"
+						autocomplete="off" >
 
-					<p>Coming soon</p>
+						<span>Select a 3-character code to copy it to your clipboard</span>
+						
+
+						<div ng-if="vm.copyMessage" class="feedback-message"
+							ng-class="vm.copyStatus === 'success' ? 'feedback-success' : 'feedback-error'">
+							{{ vm.copyMessage }}
+						</div>
+
+						<div>
+							<ul class="results-list" >
+								<!-- <li ng-repeat="language in vm.languages | filter:vm.searchText" > -->
+									<!-- sort by name -->
+								<li ng-repeat="pubplace in vm.pubplaces | filter:vm.searchText | orderBy:'name'" >
+									<div class="lang-entry">
+										<span class="lang-name">{{ pubplace.name }}</span>
+										<span class="lang-code" ng-click="vm.copyCodeToClipboard(pubplace)">{{ pubplace.code }}</span>
+									</div> 
+								</li>
+								<li ng-if="(vm.pubplaces | filter:vm.searchText).length === 0">
+									No results found
+								</li>
+							</ul>
+						</div>
 					
 				 </div>
 			</md-tab-body>
