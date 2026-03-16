@@ -140,7 +140,7 @@
         // view all component metadata
         vm.viewAllComponentMetaData=function () {
 		//console.log("prm-alma-view-items-after.js viewAllComponentMetadata function");
-            var url='/discovery/viewallcomponentmetadata/L/' + vm.parentCtrl.item.pnx.control.recordid[0] + '?vid=01HVD_INST:HVD2';
+            var url='/discovery/viewallcomponentmetadata/L/' + vm.parentCtrl.item.pnx.control.recordid[0] + '?vid=01HVD_INST:HVD_IMAGES';
           //   url+='&tab='+vm.params.tab+'&search_scope='+vm.params.search_scope;
           //   url+='&adaptor='+vm.item.adaptor;
 		//console.log(url);
@@ -161,7 +161,7 @@
 		} else if(item._attr.componentID) {
 		    filename = item._attr.componentID._value;
 		}
-		var url='/discovery/viewcomponent/L/'+vm.parentCtrl.item.pnx.control.recordid[0]+'?vid=01HVD_INST:HVD2'+'&imageId='+filename;
+		var url='/discovery/viewcomponent/L/'+vm.parentCtrl.item.pnx.control.recordid[0]+'?vid=01HVD_INST:HVD_IMAGES'+'&imageId='+filename;
 		$window.open(url,'_blank');
 	 }	
 
