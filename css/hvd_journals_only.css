@@ -60,3 +60,8 @@ prm-alphabet-toolbar {
 	margin-left: -28px;
     margin-right: -28px;
  }
+ /* option2 bullet doesn't work, always displays 'option2' */
+
+ prm-journals md-card-content li[translate="nui.journalsearch.category.option2"] {
+	display:none;
+ }
