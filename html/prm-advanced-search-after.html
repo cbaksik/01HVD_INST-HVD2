@@ -76,7 +76,7 @@
 						ng-model="vm.searchText"
 						autocomplete="off" >
 
-						<span>Select a 3-character code to copy it to your clipboard</span>
+						<span>Select a code below to copy it to your clipboard</span>
 						
 
 						<div ng-if="vm.copyMessage" class="feedback-message"
@@ -95,6 +95,40 @@
 									</div> 
 								</li>
 								<li ng-if="(vm.pubplaces | filter:vm.searchText).length === 0">
+									No results found
+								</li>
+							</ul>
+						</div>
+					
+				 </div>
+				  <div ng-if="tab.id === 'advHelpTabLibloc'">
+					
+					<!-- Coming soon -->
+						<input 
+						type="text"
+						class="search-input"
+						placeholder="Type a library/location to filter list"
+						ng-model="vm.searchText"
+						autocomplete="off" >
+
+						<span>Select an entry below to display the search link</span>
+						
+
+						<div ng-if="vm.copyMessageLink" class="feedback-message display-url"
+							ng-class="vm.copyStatus === 'success' ? 'feedback-success' : 'feedback-error'">
+							{{vm.copyMessageLinkConfirmLoc}} 
+							<a href="{{ vm.copyMessageLink }}" target="_blank">SEARCH LINK TO COPY</a> 
+							
+						</div>
+
+						<div>
+							<ul class="results-list" >
+								<li ng-repeat="libloc in vm.liblocs | filter:vm.searchText | orderBy:'locName'" >
+									<div class="lang-entry">
+										<span class="lang-name" ng-click="vm.displayUrl(libloc)">{{ libloc.locName }}</span>
+									</div> 
+								</li>
+								<li ng-if="(vm.liblocs | filter:vm.searchText).length === 0">
 									No results found
 								</li>
 							</ul>

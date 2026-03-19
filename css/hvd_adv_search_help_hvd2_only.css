@@ -123,6 +123,23 @@ md-input-container:has(#advancedSearchLanguage) {
     color: #155724;
     border: 1px solid #c3e6cb;
 }
+#hvd-adv .feedback-success.display-url {
+    width:600px;
+    background-color: white;
+}
+#hvd-adv .display-url a {
+    width:30px;
+    background-color: #0579b8;
+    border-radius: 4px;
+    padding: 3px 8px;
+    color:white;
+    margin-left:30px;
+    font-weight: 600;
+}
+#hvd-adv .display-url a:hover,
+#hvd-adv .display-url a:focus {
+     background-color: #2a5280;
+}
 #hvd-adv .feedback-error {
     background-color: #f8d7da; /* Light red */
     color: #721c24;

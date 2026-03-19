@@ -3,7 +3,7 @@
  */
 
  angular.module('viewCustom')
- .controller('prmAdvancedSearchAfterCtrl',['$scope','$log','$mdDialog', '$timeout','languageService','pubplaceService',function ($scope,$log,$mdDialog, $timeout,languageService,pubplaceService) {
+ .controller('prmAdvancedSearchAfterCtrl',['$scope','$log','$mdDialog', '$timeout','languageService','pubplaceService','liblocService',function ($scope,$log,$mdDialog, $timeout,languageService,pubplaceService,liblocService) {
 		 var vm=this;
 
             vm.copyMessage = '';      // The feedback message
@@ -13,11 +13,15 @@
 
 		  vm.languages = []; 
 		  vm.pubplaces = []; 
-
+		  vm.liblocs = []; 
+		  vm.baseLiblocLink = 'https://hollis.harvard.edu/discovery/search?query=lds01,contains,(*),AND&tab=LibraryCatalog&search_scope='
+		  vm.moreLink = '&vid=01HVD_INST:HVD2&mode=advanced&offset=0&facet=location_code,include,3941';
+		 
 		vm.tabs = [
 				{ id: 'advHelpTabGuide', title: 'Help with Advanced Search '},
 				{ id: 'advHelpTabLang', title: 'Language Codes'},
 				{ id: 'advHelpTabPub', title: 'Place of publication codes'}
+				// { id: 'advHelpTabLibloc', title: 'Library + Location codes'}
 			];
 
 		vm.onTabSelected = function(tab) {
@@ -33,6 +37,11 @@
                 $log.info('Loading codes...');                
                 // Now we call the service to get the data.
                 vm.pubplaces = pubplaceService.getPubplaces();
+            }
+            if (tab.id === 'advHelpTabLibloc' && !vm.liblocs.length) {
+                $log.info('Loading codes...');                
+                // Now we call the service to get the data.
+                vm.liblocs = liblocService.getliblocs();
             }
 		};
 
@@ -66,6 +75,8 @@
 			// Stop the event from bubbling up and triggering other clicks if any exist.
 			// event.stopPropagation(); 
 
+			//console.log(language);
+
 			const codeToCopy = language.code;
 
 			// Use the modern Navigator Clipboard API.
@@ -79,7 +90,7 @@
 
 				$timeout(function() {
 					vm.copyStatus = 'success';
-					vm.copyMessage = `Copied code '${codeToCopy}' to clipboard`;
+					vm.copyMessage = codeToCopy;
 				});
 
 			}).catch(function(err) {
@@ -89,6 +100,39 @@
 				});
 				console.error('Could not copy text: ', err);
 			});
+		};
+
+		vm.displayUrl = function(libloc) {
+
+			const linkToCopy = vm.baseLiblocLink + libloc.lib + vm.moreLink + '-' + libloc.id;
+			console.log("test lib loc fx");
+			console.log(linkToCopy);
+
+
+			// Use the modern Navigator Clipboard API.
+			if (!navigator.clipboard) {
+				vm.copyStatus = 'error';
+				vm.copyMessage = 'Clipboard API not available in your browser.';
+				return;
+			}
+
+			navigator.clipboard.writeText(linkToCopy).then(function() {
+
+				$timeout(function() {
+					vm.copyStatus = 'success';
+					vm.copyMessageLink = linkToCopy;
+					vm.copyMessageLinkConfirmLoc = libloc.locName;
+				});
+
+			}).catch(function(err) {
+				$timeout(function() {
+					vm.copyStatus = 'error';
+					vm.copyMessage = 'Failed to copy link. See console for details.';
+				});
+				console.error('Could not copy text: ', err);
+			});			
+
+
 		};
 
  }]);
