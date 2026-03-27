@@ -41,7 +41,7 @@
 						ng-model="vm.searchText"
 						autocomplete="off" >
 
-						<span>Select a 3-character code to copy it to your clipboard</span>
+						<span>Select a 3-character code then search in field 'Code: MARC langauge'</span>
 						
 
 						<div ng-if="vm.copyMessage" class="feedback-message"
@@ -76,7 +76,7 @@
 						ng-model="vm.searchText"
 						autocomplete="off" >
 
-						<span>Select a code below to copy it to your clipboard</span>
+						<span>Select a code below then search in field 'Code: MARC place of pub'</span>
 						
 
 						<div ng-if="vm.copyMessage" class="feedback-message"
@@ -103,42 +103,71 @@
 				 </div>
 				  <div ng-if="tab.id === 'advHelpTabLibloc'">
 					
-					<!-- Coming soon -->
-						<input 
+					<div style="margin-left: 30px;">
+						Choose a library, then select a Location to generate a search link.
+						 </div>
+
+											
+						<!-- 1) Choose a library -->
+						<label class="hvd-lib-loc-label">
+						Library:
+							<select name= "Select a library" ng-model="vm.selectedLib"
+									ng-options="lib as lib.label for lib in vm.liblocs">
+								<option value="">-- Select a library --</option>
+							</select>
+						</label>
+
+						<!-- 2) Filter locations *within* that library -->
+						<!-- <input
 						type="text"
 						class="search-input"
-						placeholder="Type a library/location to filter list"
+						placeholder="Type a location to filter list"
 						ng-model="vm.searchText"
-						autocomplete="off" >
+						ng-disabled="!vm.selectedLib"
+						autocomplete="off"> -->
 
-						<span>Select an entry below to display the search link</span>
-						
+						<!-- <span>Select an entry below to display the search link</span> -->
 
-						<div ng-if="vm.copyMessageLink" class="feedback-message display-url"
+						<div ng-if="vm.copyMessageLink"
+							class="feedback-message display-url"
 							ng-class="vm.copyStatus === 'success' ? 'feedback-success' : 'feedback-error'">
-							{{vm.copyMessageLinkConfirmLoc}} 
-							<a href="{{ vm.copyMessageLink }}" target="_blank">SEARCH LINK TO COPY</a> 
-							
+						Your location: {{ vm.copyMessageLinkConfirmLoc }}
+						<a href="{{ vm.copyMessageLink }}" target="_blank">YOUR SEARCH LINK</a>
 						</div>
 
 						<div>
-							<ul class="results-list" >
-								<li ng-repeat="libloc in vm.liblocs | filter:vm.searchText | orderBy:'locName'" >
-									<div class="lang-entry">
-										<span class="lang-name" ng-click="vm.displayUrl(libloc)">{{ libloc.locName }}</span>
-									</div> 
-								</li>
-								<li ng-if="(vm.liblocs | filter:vm.searchText).length === 0">
-									No results found
-								</li>
-							</ul>
-						</div>
+						<ul class="results-list">
+
+							<li ng-if="!vm.selectedLib">
+							(Locations will display after you have selected a library.)
+							</li>
+
+							<li ng-repeat="loc in (vm.selectedLib.locations
+											| filter:vm.searchText
+											| orderBy:'locName')">
+							<div class="lang-entry" 
+									ng-click="vm.displayUrl(vm.selectedLib, loc)">
+								<span class="lang-name">
+								{{ vm.selectedLib.label }}: {{ loc.locName }}
+								</span>
+							</div>
+							</li>
+
+							<li ng-if="vm.selectedLib &&
+									(vm.selectedLib.locations | filter:vm.searchText).length === 0">
+							No results found
+							</li>
+
+						</ul>
+
 					
-				 </div>
+				 		</div>
+				</div>
 			</md-tab-body>
 		</md-tab>
 	</md-tabs>
-	<!-- 3. NEW BUTTON: This 'X' button appears to the right of the tabs. -->
+
+		<!-- 3. NEW BUTTON: This 'X' button appears to the right of the tabs. -->
         <md-button class="md-icon-button close-button" aria-label="Close tab"
                    ng-if="vm.selectedIndex !== -1"
                    ng-click="vm.closeActiveTab()">

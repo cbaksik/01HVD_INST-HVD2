@@ -14,14 +14,17 @@
 		  vm.languages = []; 
 		  vm.pubplaces = []; 
 		  vm.liblocs = []; 
+		  vm.selectedLib = null;
+		  vm.selectedLoc = null;
 		  vm.baseLiblocLink = 'https://hollis.harvard.edu/discovery/search?query=lds01,contains,(*),AND&tab=LibraryCatalog&search_scope='
-		  vm.moreLink = '&vid=01HVD_INST:HVD2&mode=advanced&offset=0&facet=location_code,include,3941';
+		  vm.moreLink = '&sortby=rank&vid=01HVD_INST:HVD2&facet=location_code,include,3941%E2%80%93';
+		  vm.moreLinkPostLoc = '&lang=en&mode=advanced&offset=0';
 		 
 		vm.tabs = [
 				{ id: 'advHelpTabGuide', title: 'Help with Advanced Search '},
 				{ id: 'advHelpTabLang', title: 'Language Codes'},
-				{ id: 'advHelpTabPub', title: 'Place of publication codes'}
-				// { id: 'advHelpTabLibloc', title: 'Library + Location codes'}
+				{ id: 'advHelpTabPub', title: 'Place of publication codes'},
+				{ id: 'advHelpTabLibloc', title: 'Library + Location codes'}
 			];
 
 		vm.onTabSelected = function(tab) {
@@ -102,12 +105,13 @@
 			});
 		};
 
-		vm.displayUrl = function(libloc) {
+		vm.displayUrl = function(lib, loc) {
 
-			const linkToCopy = vm.baseLiblocLink + libloc.lib + vm.moreLink + '-' + libloc.id;
 			console.log("test lib loc fx");
-			console.log(linkToCopy);
-
+			console.log(lib);
+			console.log(loc);
+			const linkToCopy = vm.baseLiblocLink + lib.lib + vm.moreLink + lib.id + '%E2%80%93' + loc.locCode + vm.moreLinkPostLoc;
+			
 
 			// Use the modern Navigator Clipboard API.
 			if (!navigator.clipboard) {
@@ -121,7 +125,7 @@
 				$timeout(function() {
 					vm.copyStatus = 'success';
 					vm.copyMessageLink = linkToCopy;
-					vm.copyMessageLinkConfirmLoc = libloc.locName;
+					vm.copyMessageLinkConfirmLoc = loc.locName;
 				});
 
 			}).catch(function(err) {
