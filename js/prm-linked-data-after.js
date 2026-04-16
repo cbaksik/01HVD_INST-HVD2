@@ -15,9 +15,17 @@ Purpose: linked open data - wait for it to load, then evaluate for entites and h
 
 		 // NARs for which we want to hide image
 		 const toHide = [
-			'n79130881'
+			'n79130881',
+			'nr89011547'
 		];
-		// Muḥammad, Prophet, -632"
+		// n79130881 Muḥammad, Prophet, -632
+		// nr89011547 Jesus Christ
+
+		//              !!!!!!!!!!!!!!!
+		//              IMPORTANT NOTE
+		//              you also have to hide image from person-entity page using css
+		//              see bottom of hvd_core.css
+		//              !!!!!!!!!!!!!!!
 
 		 vm.$onInit=function () {
 
