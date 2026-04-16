@@ -1,7 +1,12 @@
 /**
  * 
-UPDATE: we're not actually making use of this but can if necessary. 
-Instead, we're checking CSS for aria-label with name of interest
+NOTE - this hides all author images on page
+
+Also need to put this in css: 
+
+prm-linked-data:has(div.hvd-hide-lod-image) prm-linked-data-card md-card-avatar  {
+	display:none;
+}
 
 Purpose: linked open data - wait for it to load, then evaluate for entites and hide images for select control numbers
  */
@@ -16,7 +21,8 @@ Purpose: linked open data - wait for it to load, then evaluate for entites and h
 		 // NARs for which we want to hide image
 		 const toHide = [
 			'n79130881',
-			'nr89011547'
+			'nr89011547',
+			'n79084784'
 		];
 		// n79130881 Muḥammad, Prophet, -632
 		// nr89011547 Jesus Christ

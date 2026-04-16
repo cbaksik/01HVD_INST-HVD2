@@ -2726,10 +2726,10 @@ prm-opac prm-location-items p
 	font-size: 16px;
 }
 /* this hides the word 'available' or other status that appears in green after name of library, as well as the comma that appears after it */
-/* prm-opac prm-location p>span.availability-status,
+prm-opac prm-location p>span.availability-status,
 prm-opac prm-location p>span.availability-status+span {
 	display:none;
-} */
+}
 /* this hides the semicolon that appears between location and call number */
 /* in both list of libraries as well as in expanded display for single library */
 prm-opac prm-location-items p>span.availability-status+span+span+span,
@@ -2737,10 +2737,10 @@ prm-opac prm-location p>span.availability-status+span+span+span {
 	display:none;
 }
 /* avail text plus comma after */
-/* prm-opac prm-location-items h6+p>span.availability-status,
+prm-opac prm-location-items h6+p>span.availability-status,
 prm-opac prm-location-items h6+p>span.availability-status+span  {
 	display:none;
-} */
+}
 /*            BEGIN HOLDING NOTES              */
 
 /* HIDE OTB DISPLAY NOTES BECAUSE THEY ARE TRUNCATED - using js customziation to display whole notes */
@@ -2897,14 +2897,17 @@ prm-opac prm-service-button prm-icon {
 /************ END view it get it - formerly mash-up ****************/
 
 /************ Begin Linked Data author / person card, entities ****************/
-/* hide specific images -- this one broke within days b/c image name already changed */
-/* prm-linked-data img[src*='depiction_of_Muhammad'] {
-	display:none;
-} */
- /* hide wikidata birthdates per request of authors */
-div:has(span[translate="nui.personEntity.birthDate"]) {
+
+/* hide speciifc author images using js customization */
+prm-linked-data:has(div.hvd-hide-lod-image) prm-linked-data-card md-card-avatar  {
 	display:none;
 }
+ /* hide wikidata birthdates per request of authors */
+prm-linked-data-card div.person-data-grid-cont:has(span[translate="nui.personEntity.birthDate"]),
+prm-person-entity-page div.person-data-grid-cont:has(span[translate="nui.personEntity.birthDate"]) {
+	display:none;
+}
+/* hide specific people images on person page */
 prm-person-entity-page .person-full-view-cont:has(a[href="https://en.wikipedia.org/?curid=18934"]) .avatar-img {
 	display:none;
 }
