@@ -44,7 +44,7 @@ angular.module('viewCustom')
 			}
 		}
 		if (pnxItem.pnx.display.source) {
-			if (pnxItem.pnx.display.source[0] == 'HVD_VIA') {
+			if (pnxItem.pnx.display.source[0] == 'HVD_VIA'|| pnxItem.pnx.display.source[0] == 'HVD_RECAP') {
 				veExtRes = true;
 			}			
 		}
@@ -57,6 +57,14 @@ angular.module('viewCustom')
 				item.isbn=pnxItem.pnx.addata.isbn[0];
 			}
 		}
+		// don't send oclc for scsb because scsb numbers are being sent as oclc numbers
+		if (!online && veExtRes && pnxItem.pnx.display.source[0] == 'HVD_RECAP') {			
+			if(pnxItem.pnx.addata.isbn){
+				item.flag = true;
+				item.isbn=pnxItem.pnx.addata.isbn[0];
+			}
+		}
+		//console.log(item);
 		return item;
 	};
 
