@@ -58,13 +58,19 @@ angular.module('viewCustom')
 			}
 		}
 		// don't send oclc for scsb because scsb numbers are being sent as oclc numbers
-		if (!online && veExtRes && pnxItem.pnx.display.source[0] == 'HVD_RECAP') {			
-			if(pnxItem.pnx.addata.isbn){
+		if (!online && veExtRes && pnxItem.pnx.display.source[0] == 'HVD_RECAP') {	
+			if(pnxItem.pnx.addata.isbn) {
 				item.flag = true;
 				item.isbn=pnxItem.pnx.addata.isbn[0];
 			}
+			//console.log(pnxItem.pnx.addata.oclcid[0].substring(1,6) + '  :  '+ pnxItem.pnx.addata.oclcid[0]);
+			if(pnxItem.pnx.addata.oclcid && pnxItem.pnx.addata.oclcid[0].substring(1,6)=='ocolc') {
+				item.flag = true;
+				item.oclcid=pnxItem.pnx.addata.oclcid[0];
+				//console.log("oclc number");
+			}
 		}
-		//console.log(item);
+		
 		return item;
 	};
 
