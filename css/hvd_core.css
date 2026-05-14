@@ -139,12 +139,11 @@ prm-browse-search-bar md-select ._md-select-icon {
     prm-search-bar #searchBar {
         border: 2px solid grey;
     }
-    .lcs_slide_out { display: none;}
 }
-
-@media (max-width: 768px) {
+/* don't hide ask a lib per ux lab */
+/* @media (max-width: 768px) {
     .lcs_slide_out { display: none;}
-}
+} */
 
 /* changes to align with HL site and switch to VE adv search button placement change */
 prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm {
@@ -163,7 +162,8 @@ prm-search-bar .search-switch-buttons .md-button.switch-to-advanced,
 prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
 	font-weight: 600;
 }
-prm-search-bar .search-switch-buttons {
+prm-search-bar .search-switch-buttons,
+.__sm prm-search-bar .search-switch-buttons {
 	padding-top:0em;
 }
 prm-search-bar .search-switch-buttons .md-button.switch-to-advanced {
@@ -183,8 +183,18 @@ prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
 prm-search-bar .simple-search-wrapper .search-actions .md-button.button-confirm prm-icon {
 	display:none;
 }
-
+.__sm prm-search-bar .search-wrapper.prm-top-bar-container {
+	flex-direction:column;
+}
 @media (max-width: 599px) {
+	/* need this to override OTB hidingn of adv search button  */
+    prm-search-bar .hide-xs:not(.show-xs):not(.show), 
+    prm-search-bar .hide:not(.show-xs):not(.show) {
+        display: inline-block;
+    }
+    .search-wrapper.prm-top-bar-container {
+	flex-direction:column;
+   }
   prm-search-bar .search-element-inner {
     background: transparent;
   }
@@ -347,7 +357,16 @@ md-card-title-text .alumhat {
     vertical-align: bottom;    
 }
 /* MY FAVORITES */
+
+prm-search-bookmark-filter #back-to-top-button {
+    background-color: black;
+    color: white;
+}
 /* my favorites global action icons disabled */
+/* don't let favorites button be fixed - hiding here so it only shows at top with history button */
+prm-search-bookmark-filter #fixed-buttons-holder.fixed-to-top #favorites-button {
+	display:none;
+}
 prm-search-bookmark-filter .md-button {
     color:#187474;
 }
@@ -630,9 +649,9 @@ prm-search-result-journal-indication-line {
 .search-result-availability-line-wrapper:has(.hvd-hide-otb-recap-check-button) prm-search-result-availability-line:before {
 	height:0em;
 }
-.search-result-availability-line-wrapper:has(.hvd-hide-otb-recap-check-button) .hvd-grey-link {
+/* .search-result-availability-line-wrapper:has(.hvd-hide-otb-recap-check-button) .hvd-grey-link {
 	margin-top:5px;
-}
+} */
 .hvd-recap-link {
 	color:#414141;
 	text-transform:uppercase;
@@ -678,6 +697,13 @@ prm-search-result-availability-line:has(.hvd-856-override) button:has(.not_restr
 /* button changes per Feb 2022 redesign */
 prm-search-result-availability-line .md-button.neutralized-button {
     text-transform:uppercase;
+    margin-bottom: 0.6em;
+}
+/* added after VE accessibility review for OTB online button focus only  */
+prm-search-result-availability-line .md-button.neutralized-button:focus {
+    text-decoration: underline;
+    color:white;
+    font-weight:800;
 }
 prm-search-result-availability-line prm-icon {
     display:none;
@@ -765,15 +791,17 @@ prm-search-result-availability-line .md-button.neutralized-button:focus [class*=
 /* color of button and text when online, for alma content, separate lines below for content from CDI */
 prm-search-result-availability-line button.md-button.neutralized-button span[translate*="delivery.code.not_restricted"] {
     color:white;
-    padding: 3px 10px 2px 25px;
+    padding: 3px 10px 3px 25px;
     border-radius: 4px;
     font-weight: 600;
-    margin-top:5px;margin-top: 10px;
+    /* margin-top:5px;
+    margin-top: 10px; */
     display: inline-block;
     background-color:#0579b8;
     background-image: url('../img/link-icon.svg');
     background-repeat: no-repeat;
     background-position: bottom 4px left 6px;
+    background-position-y: center;
 }
 prm-search-result-availability-line button.md-button.neutralized-button svg {
     color:white;
@@ -798,6 +826,20 @@ prm-search-result-availability-line .fulltext_linktorsrc {
     background-image: url('../img/link-icon.svg');
     background-repeat: no-repeat;
     background-position: bottom 4px left 6px;
+    display: inline-block;
+    background-position-y: center;
+}
+prm-search-result-availability-line .fulltext:hover,
+prm-search-result-availability-line .fulltext:focus,
+prm-search-result-availability-line .fulltext_multiple:hover,
+prm-search-result-availability-line .fulltext_multiple:focus,
+prm-search-result-availability-line .ext_not_restricted:hover,
+prm-search-result-availability-line .ext_not_restricted:focus,
+prm-search-result-availability-line .fulltext_linktorsrc_topic:hover,
+prm-search-result-availability-line .fulltext_linktorsrc_topic:focus,
+prm-search-result-availability-line .fulltext_linktorsrc:hover,
+prm-search-result-availability-line .fulltext_linktorsrc:focus {
+    background-color:#2a5280;
 }
 prm-search-result-availability-line button span.button-content .fulltext:hover,
 prm-search-result-availability-line .fulltext_linktorsrc:hover,
@@ -862,9 +904,9 @@ div.hvd-online-button {
 	background-image: url('../img/folder_open_white_24dp.svg');
 	background-position: bottom 1px left 6px;
 }
-.hvd-grey-link {
+/* .hvd-grey-link {
 	margin-top:10px;
-}
+} */
 /* BEGIN cdi quicklinks */
 prm-quick-link {
     font-weight: 600;
@@ -884,6 +926,7 @@ prm-brief-result-container prm-quick-link a {
     padding: 3px 15px 3px 25px;
     box-shadow: none;
     height:26px;
+    background-position-y: center;
 }
 prm-brief-result-container prm-quick-link a:hover,
 prm-brief-result-container prm-quick-link a:focus {
@@ -961,6 +1004,8 @@ prm-search-result-availability-line a.unpaywall-manuscript-article-pdf-link {
     background-repeat: no-repeat;
     background-position: bottom 5px left 6px;
     padding:3px 38px 3px 38px;
+    display: inline-block;
+    background-position-y: center;
 }
 prm-search-result-availability-line a.browzine-direct-to-pdf-link svg, 
 prm-search-result-availability-line a.unpaywall-article-pdf-link svg,
@@ -993,6 +1038,7 @@ prm-search-result-availability-line a.browzine-web-link md-icon {
 /* snippet quotation mark */
 prm-snippet {
     margin-top: 5px;
+    margin-bottom: 7px; /* div is present whether or not there is a snippet in many records */
 }
 prm-snippet prm-icon.open-quote, prm-snippet prm-icon.close-quote {
     width:10px;
@@ -1786,6 +1832,10 @@ prm-account-overview md-input-container md-select {
     border-bottom: 1px solid #e4e4e4;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #fff, 0 1px 0 #fff;
 }
+/* link to other accounts in prm-... after*/
+#hvdMyAccountOtherAccounts a {
+	color:#187474;
+}
 /* my personal details after login, hide checkboxes since we don't allow changes */
 prm-personal-info md-card#personalDetails md-checkbox {
     display:none;
@@ -1814,11 +1864,17 @@ prm-account-overview md-tab-item.md-tab:hover {
 prm-account-overview md-input-container:after {
     height:0px;
 }
+prm-account-overview md-select:focus,
 prm-account-overview md-select:hover {
     border:2px solid #0579b8;
 }
 prm-account-overview md-checkbox .md-container:hover {
     border:1px solid #0579b8;
+}
+.__gt-xs prm-account-overview md-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper .md-tab {
+   overflow: visible; 
+   white-space: normal;
+   line-height:14px
 }
 /* adjustment for temporary Do I have to Renew link during COVID */
 div#hvdDoIHaveToRenew {
@@ -1937,6 +1993,17 @@ div.item-details-element div[ng-show="!value.isLinkable"] {
 md-dialog.md-transition-in {
     background-color: rgba(0,0,0,.2);
 }
+/* md-dialog.light-on-dark-dialog.full-cover-dialog {
+	background-color:pink;
+} */
+md-dialog.light-on-dark-dialog.full-cover-dialog:focus {
+	border:5px solid #0579b8;
+}
+prm-main-menu #mainMenuFullCloseButton:focus,
+prm-main-menu #mainMenuFullCloseButton:hover {
+	border-radius:50%;
+	border:3px solid #000;
+}
 /* learned in Oct '21 that refworks started appearing in mobile for some reason */
 prm-main-menu .my-refworks-ctm {
     display:none;
@@ -1946,6 +2013,9 @@ prm-main-menu .my-refworks-ctm {
 /* bx */
 prm-recomendations {
     background-color: #f3f3f3;
+}
+prm-recomendations .md-button.button-link {
+    color:#187474;
 }
 prm-recomendation-item div > a:focus {
     border:2px solid #c0c0c0;
