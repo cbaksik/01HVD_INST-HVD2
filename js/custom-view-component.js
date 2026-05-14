@@ -293,7 +293,7 @@
 		bindings: {item: '<',services:'<',params:'<',parentCtrl:'<'},
 		controller: 'customViewComponentController',
 		controllerAs:'vm',
-		'templateUrl':'/discovery/custom/01HVD_INST-HVD2/html/custom-view-component.html'
+		'templateUrl':'/discovery/custom/01HVD_INST-HVD_IMAGES/html/custom-view-component.html'
     });
 
 
