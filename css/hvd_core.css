@@ -892,7 +892,11 @@ div.hvd-online-button {
     background-repeat: no-repeat;
     background-position: bottom 4px left 6px;
 }
-.hvd-online-button a:hover, .hvd-online-button a:focus {
+.hvd-online-button a:hover, 
+.hvd-online-button a:focus,
+.hvd-via-online-button:hover,
+.hvd-via-online-button:focus
+{
     background-color:#2a5280;
 }
 /* finding aid link */
