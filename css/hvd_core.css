@@ -1011,6 +1011,12 @@ prm-search-result-availability-line a.unpaywall-manuscript-article-pdf-link {
     display: inline-block;
     background-position-y: center;
 }
+prm-search-result-availability-line div.libkey-link-optimizer:has(img[src*="browzine-retraction-watch"]) {
+	background-image: url('../img/browzine-retraction-watch-icon.svg');
+	background-repeat: no-repeat;
+	padding-left:3em;
+	position:relative;
+}
 prm-search-result-availability-line a.browzine-direct-to-pdf-link svg, 
 prm-search-result-availability-line a.unpaywall-article-pdf-link svg,
 prm-search-result-availability-line a.unpaywall-manuscript-article-pdf-link svg {
