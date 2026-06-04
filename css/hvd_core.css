@@ -1076,7 +1076,7 @@ prm-search-result-thumbnail-container .fan-img:nth-of-type(3) {
     background-color:#fff;
 }
 /* end browzine */
-/* hide map it link if book is on loan  */
+/* hide map it link in BRIEF if book is on loan; see also Map it in locations section  */
 prm-brief-result-container div.result-item-text:has(prm-search-result-availability-line button:first-of-type > span > span[class*="unavailable"]) p.SMsearchbtn-container {
     display:none;
 }
@@ -2515,6 +2515,39 @@ prm-alma-viewit-items h3+div.record-status-text a.item-title {
 prm-alma-viewit-items h3+div.record-status-text a.item-title:hover {
 	box-shadow:none;
 }
+ /* skc scanned key contnt in prm-alma-viewit-items-after */
+/* Container for all images */
+.skc-grid {
+  display: flex;
+  flex-wrap: wrap;        /* allow items to wrap to new rows */
+  gap: 1rem;              /* space between items */
+  justify-content: flex-start;
+  padding-left: 1em;
+}
+
+/* Individual image container */
+.skc-item {
+  flex: 1 1 15em;         /* base width ~15em, shrink/grow as needed */
+  max-width: 20em;        /* don’t get too wide */
+  text-align: center;
+}
+
+/* The images themselves */
+.skc-item img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;        /* scale with container width */
+  max-height: 20em;       /* your requested max height */
+  height: auto;           /* preserve aspect ratio */
+  object-fit: contain;    /* fit inside box without cropping */
+}
+
+/* Optional caption styling */
+.skc-caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+/* end skc  */
 /* end VIEW IT */
 /*                                                       */
 
@@ -2612,13 +2645,41 @@ prm-opac prm-alert-bar .bar.alert-bar {
 }
  /* list of libraries, incl item filter  */
  /* holding info area with 2 columns where left = notes and right = hours button */
-prm-opac prm-locations prm-location .layout-row>.flex-70 {
-	max-width:80%;
-	width:80%;
+ prm-opac prm-locations prm-location .layout-row> {
+	flex-direction:colummn;
 }
+prm-opac prm-locations prm-location .layout-row>.flex-70 {
+	max-width:100%;
+	width:100%;
+}
+/* use this flex-30 for the earlier design where hours and map it float to the right in the list of holdings */
+/* see below for newer design where they are below all location info */
+/* prm-opac prm-locations prm-location .layout-row>.flex-30 {
+	max-width:30%;
+	width:30%;
+	flex-direction: column;
+	align-items:center;
+	justify-content: flex-start;
+} */
 prm-opac prm-locations prm-location .layout-row>.flex-30 {
-	max-width:20%;
-	width:20%;
+	max-width:100%;
+	width:100%;
+	flex-direction: row-reverse;
+	align-items:start;
+	justify-content: space-between;
+	margin-bottom:1em;
+	margin-top:1em;
+}
+prm-opac prm-locations prm-location .layout-row>.flex-30 .SMsearchbtn-container button {
+	margin-right:1em;
+	/* max-width: 9em; */
+	margin-top: .5em;
+    text-align: left;
+}
+/* hide map it if Not in place */
+prm-location:has(span[class*="unavailable"]) .SMsearchbtn-container,
+prm-location-items:has(span[class*="unavailable"]) .SMsearchbtn-container {
+    display:none;
 }
 prm-opac prm-locations > .padding-left-medium {
 	padding-left:0em;
@@ -2659,6 +2720,10 @@ prm-opac prm-location > .md-button.neutralized-button:hover h3 {
 prm-opac prm-locations prm-location > .md-button.neutralized-button {
 	padding-left: 10px;
 }
+/* change container so that hours and map it are below location data instead of to the right */
+prm-opac prm-locations prm-location > .md-button.neutralized-button > div > .md-list-item-text {
+	flex-direction: column;
+}
 prm-opac prm-locations prm-location .md-list-item.md-2-line .md-list-item-text h3 + p {
 	margin-left:10px;
 }
@@ -2696,14 +2761,15 @@ prm-opac prm-location-items .tab-content-header .layout-row .layout-row:has(.exp
 prm-location prm-stack-map a.md-button {
 	min-height: 26px;
 	line-height: 28px;
+	padding: 0 6px;
 }
 /* hide map it button from appearing in hol list b/c it distorts alignment */
-prm-location>div.neutralized-button prm-stack-map+p.SMsearchbtn-container  {
+/* prm-location>div.neutralized-button prm-stack-map+p.SMsearchbtn-container  {
 	display:none;
  }
 prm-location>div.neutralized-button prm-stack-map+p.SMsearchbtn-container>button  {
 	display:none;
- }
+ } */
 /* hours button on expanded hol */
 prm-location-items .tab-content-header prm-stack-map a.md-button {
 	min-height: 30px;
@@ -2768,7 +2834,6 @@ prm-opac prm-location-items prm-locations-filter .filter-bar md-input-container 
 prm-opac prm-location .separate-list-items md-list-item .md-list-item-text {
 	padding: .75em 0em;
 }
-prm-opac h3,
 prm-opac h3 + p {
 	display:inline;
 }
@@ -2798,7 +2863,7 @@ prm-opac prm-location-items h6.md-title+p+p {
 /* location name and call number, from prm-location, doesn't work if you add prm-opac */
 md-list-item.md-2-line .md-list-item-text h3+p {
 	font-size: 16px;
-	margin-left: 15px;
+	/* margin-left: 15px; */
 }
 /* location name and call number */
 prm-opac prm-location-items p
@@ -2806,9 +2871,19 @@ prm-opac prm-location-items p
 	font-size: 16px;
 }
 /* this hides the word 'available' or other status that appears in green after name of library, as well as the comma that appears after it */
-prm-opac prm-location p>span.availability-status,
+/* prm-opac prm-location p>span.availability-status,
 prm-opac prm-location p>span.availability-status+span {
 	display:none;
+} */
+/* just hide comma */
+prm-opac prm-location p>span.availability-status+span {
+	display:none;
+}
+/* no color for different avail statuses  */
+prm-opac span[class*=check_],
+prm-opac span[class*=available],
+prm-opac span[class*=unavailable] {
+	color: #3a3a3a;
 }
 /* this hides the semicolon that appears between location and call number */
 /* in both list of libraries as well as in expanded display for single library */
@@ -2816,8 +2891,16 @@ prm-opac prm-location-items p>span.availability-status+span+span+span,
 prm-opac prm-location p>span.availability-status+span+span+span {
 	display:none;
 }
+/* this stops call number from breaking */
+prm-opac prm-location p>span.availability-status+span+span+span+span {
+	white-space: nowrap;
+ }
 /* avail text plus comma after */
-prm-opac prm-location-items h6+p>span.availability-status,
+/* prm-opac prm-location-items h6+p>span.availability-status,
+prm-opac prm-location-items h6+p>span.availability-status+span  {
+	display:none;
+} */
+ /* just hide comma */
 prm-opac prm-location-items h6+p>span.availability-status+span  {
 	display:none;
 }
@@ -2954,25 +3037,33 @@ prm-opac prm-service-button prm-icon {
 }
 /* begin custom holding note section */
 .hvd-holding-notes-wrapper {
+	display: flex;
+	flex-wrap: wrap;        /* allow items to wrap instead of overlap */
+	box-sizing: border-box;
+	/*gap: 1rem;*/              /* optional spacing without breaking widths */
 	flex: 1 1 100%;
 	/* padding-left: 42px; */
-	padding-right: 42px;
-	padding-bottom: 20px;
+	/* padding-right: 42px; */
+	/* padding-bottom: 20px; */
 }
 .hvd-holding-notes-key-value-pair {
     margin-bottom: 3px;
+    width: 100%;
 }
 .hvd-holding-notes-key {
 	font-weight:600;
-	flex: 1 1 100%;
-        max-width: 20%;
-        max-height: 100%;
+	/* flex: 1 1 100%; */
+        max-width: 30%;
+        width: 30%;
+        /* max-height: 100%; */
         box-sizing: border-box;
+    padding-right: .5em;
 }
-/* .hvd-holding-notes-value {
-	flex-direction: column;
-	display: flex;
-} */
+.hvd-holding-notes-value {
+        max-width: 70%;
+        width: 70%;
+    box-sizing: border-box;
+}
 
 /************ END view it get it - formerly mash-up ****************/
 
