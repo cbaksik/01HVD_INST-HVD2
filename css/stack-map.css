@@ -355,12 +355,12 @@
 .SMsearchbtn {
     background-color: transparent;
     font-family: 'Source Sans Pro', Arial, sans-serif;
-    font-size: 15px;
+    font-size: 1em;
     border-width: 0;
     border-radius: 0px;
     display: inline;
     line-height: 1em;
-    color:#414141;
+    color:#0579b8;
     text-transform: uppercase;
     font-weight: 600;
     padding:0 0 0.4em 0;
@@ -370,9 +370,16 @@
     margin: 0 5px 0 0
 }
 
+md-dialog md-list md-list-item button.SMsearchbtn:hover:not([disabled]) ,
+md-dialog md-list md-list-item button.SMsearchbtn:focus:not([disabled]) {
+	color: #0579b8;
+	background-color:transparent;
+}
 .SMsearchbtn:focus,
 .SMsearchbtn:hover {
-    box-shadow: inset 0 -3px 0 0 rgba(43, 44, 44, 0.3);
+    /* box-shadow: inset 0 -3px 0 0 rgba(43, 44, 44, 0.3); */
+    box-shadow: inset 0 -3px 0 0 rgba(5, 121, 184, 0.3);
+    color:#0579b8;
 }
 
 .SMsearchbtn-container {

@@ -49,7 +49,12 @@
 				//console.log("legacyKeyContent");
 				//console.log(vm.parentCtrl.services);
 			    vm.skcLinks = vm.parentCtrl.services.filter(function (item) {
-					return item.serviceType === 'GENERAL_ELECTRONIC';
+					return item.serviceType === 'GENERAL_ELECTRONIC' &&
+					item.serviceUrl &&              // guard against null/undefined
+					item.serviceUrl.indexOf('nrs.harvard.edu') !== -1 &&      // or: item.serviceUrl.includes('nrs.harvard.edu');
+					item.packageName.indexOf('entire work') === -1 &&
+					item.packageName.indexOf('fulldisplay') === -1 
+					;					
 					})
 					.map(function (item) {
 					return {
