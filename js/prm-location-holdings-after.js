@@ -9,7 +9,7 @@ angular.module('viewCustom')
         .controller('prmLocationHoldingsAfterCtrl',['$scope','$sce','$timeout','$element', '$compile',function($scope,$sce,$timeout,$element, $compile) {
             let vm = this;
 		  vm.holNotesreadyOpen = false;      // flag to control template rendering
-		  vm.holListOpen= null;       // will hold the array when ready
+		  vm.holListOpen = null;       // will hold the array when ready
 
 		 vm.$onInit=function () {
 
@@ -32,6 +32,11 @@ angular.module('viewCustom')
 						vm.holNotesreadyOpen = true;
 						//console.log('holListOpen (allLines):', vm.holListOpen);
 						//stopWatching();
+					} else {
+						// set array to null if the holding has no lines so that notes from other holdings won't display
+						vm.holListOpen = '';
+						vm.holNotesreadyOpen = true;
+						//console.log('holListOpen (allLines) empty:', vm.holListOpen);
 					}
 				}
 			);
