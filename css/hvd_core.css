@@ -2474,7 +2474,7 @@ prm-alma-viewit-items .md-button.button-link[translate="fulldisplay.representati
 background-color:red;
 } */
 prm-alma-viewit a[href*="hathitrust"]:after { content:" -- HathiTrust (partial coverage)"; }
-prm-alma-viewit a[href*="hdl.handle.net"]:after { content:" -- HathiTrust"; }
+prm-alma-viewit a[href*="hdl.handle.net/2027"]:after { content:" -- HathiTrust"; }
 prm-alma-viewit a[href*="urn.harvard.edu"]:after { content:" -- Harvard digital object"; }
 
 /* alma-d section */
