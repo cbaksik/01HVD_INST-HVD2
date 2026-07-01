@@ -2187,6 +2187,19 @@ prm-search-result-tool-bar md-toolbar .main-checkbox {
 prm-resource-recommender .main-banner-content {
 	display:none;
 }
+prm-resource-recommender .resource-header {
+    font-family: Lora, Source Sans Pro, Arial, sans-serif;
+    text-transform: none;
+    font-size: 1.3em;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: normal;
+    padding: .75em .75em 0em;
+}
+prm-resource-recommender  md-card {
+	background-color:#ebebeb;
+	border: 1px solid #b8b8b8;
+}
 md-dialog.prm-resource-recommendations-fullview.md-transition-in {
     background-color:#fff;
 }
@@ -2201,9 +2214,13 @@ prm-resource-recommender .md-button.button-as-link.link-alt-color:focus:not([dis
     background-color:#2a5280;
     border-radius: 4px;
 }
+prm-resource-recommender md-card md-card-content {
+	margin-bottom:.3em;
+}
 prm-resource-recommender-card-content a {
     color:#0579b8;
-    font-weight:bold;
+    font-weight:600;
+    font-size: 1.3em;
 }
 #resource-recommender img.shield {
     vertical-align: middle;
