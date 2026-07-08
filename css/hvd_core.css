@@ -3102,5 +3102,43 @@ prm-person-entity-page .person-full-view-cont:has(a[href="https://en.wikipedia.o
 prm-person-entity-page .person-full-view-cont:has(a[href="https://en.wikipedia.org/?curid=496253"]) .avatar-img {
 	display:none;
 }
-
+/************  ****************/
+/* services page for citation linker, openurl resolver no online items found */
+/* NB you get to this page even if a record exists in HOLLIS, and is not FT */
+prm-services-page-after {
+	margin-top: -10em;
+    display: block;
+    padding-bottom:10em;
+ }
+prm-services-page prm-save-to-favorites-button,
+prm-services-page prm-brief-result-container .media-content-images,
+prm-services-page prm-full-view div.full-view-container prm-full-view-service-container prm-search-result-availability-line,
+prm-services-page #action_list,
+prm-services-page #tags  {
+	display:none;
+}
+prm-services-page h4[translate="nui.getit.service_howtogetit"]:after {
+content:" (for valid citations)";
+}
+prm-services-page .full-view-inner-container {
+    padding-bottom: 0em;
+}
+prm-services-page alma-htgi-svc,
+prm-services-page #getit_link1_0,
+prm-services-page prm-chapters-results-line {
+	padding:0em;
+	margin:0em;
+}
+prm-services-page prm-brief-result-container:before {
+	content:"Citation information";
+    font-size: 2em;
+    font-weight: 300;
+    margin-left: 10%;
+    margin-bottom: .3em;
+}
+#hvdCiteNotFound {
+	text-align: center;
+    font-weight: 600;
+    display:block;
+}
 
