@@ -2416,9 +2416,10 @@ prm-alma-viewit:has(.via-alma-viewit) a.item-title {
 prm-alma-viewit-items:has(.via-alma-viewit) .separate-list-items md-list-item {
 	display:none;
 }
-prm-alma-viewit  prm-alert-bar .bar.alert-bar {
+/* don't hide alert bar here b/c it will hide it for digital reserves too */
+/* prm-alma-viewit  prm-alert-bar .bar.alert-bar {
 	display:none;	
-}
+} */
 prm-alma-viewit
 prm-alma-viewit-items .scrolling-area {
     max-height: 1000px;
